@@ -1,16 +1,185 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- =========================
+          BASIC PAGE INFORMATION
+    ============================== -->
+    <!-- PAGE TITLE -->
+    <title>RankHacker - The intelligent content strategy platform!</title>
+
+    <!-- WHAT'S YOUR PAGE ABOUT? -->
+    <meta name="description" content="Intelligently generate an actionable content strategy complete with publication calendar to beat your competition.">
+
+    <!-- KEYWORDS THAT DESCRIBES YOUR PAGE -->
+    <meta name="keywords" content="content strategy, content roadmap, content calendar">
+
+    <!-- HELP US SPREAD THE LOVE :-) -->
+    <meta name="author" content="fairmarketing.com">
+
+    <!-- ALLOW GOOGLE TO INDEX YOUR PAGE -->
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- =========================
+          FAV & TOUCH ICONS
+    ============================== -->
+    <!-- FAVICON FOR DESKTOPS
+        <link rel="icon" href="img/favicon/favicon.ico">
+        -->
+    <!-- SET OF FAVICONS FOR APPLE PRODUCTS
+        <link rel="apple-touch-icon" href="img/favicon/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-touch-icon-114x114.png">
+        -->
+
+    <!-- =========================
+         FONTS
+    ============================== -->
+    <!-- RALEWAY FONT FROM GOOGLE FONTS -->
+    <link href='http://fonts.googleapis.com/css?family=Rationale' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
+    <link href="http://fonts.googleapis.com/css?family=Cousine:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Anonymous+Pro:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css'>
+
+    <!-- ELEGANT ICON PACK -->
+    <link href="fonts/elegant/css/elegant.css" rel='stylesheet' type='text/css'>
+
+    <!-- ENTYPO ICON PACK -->
+    <link href="fonts/entypo/css/entypo.css" rel='stylesheet' type='text/css'>
+
+    <!-- =========================
+         STYLESHEETS
+    ============================== -->
+    <!-- BOOTSTRAP -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- POPOVERS -->
+    <link href="css/popovers.less" rel="stylesheet">
+
+    <!-- RANKHACKER! THEME -->
+    <link href="css/rankhacker.css" rel="stylesheet" id="theme-change">
+
+    <!-- ADDITIONAL STYLES -->
+    <link href="css/tiles.css" rel="stylesheet">
+    <!-- This is a comment -->
+
+    <!-- ANIMATIONS BASED ON ANIMATE.CSS -->
+    <link href="css/animations.css" rel="stylesheet" type="text/css">
+
+    <!-- =========================
+         INTERNET EXPLORER FIXES
+    ============================== -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- =========================
+         GOOGLE PLACES API
+    ============================== -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places,drawing,geometry"></script>
+
+    <script language="JavaScript" type="text/javascript" type="text/javascript">
+        function redirect(){
+            window.location = "index.jsp";
+        }
+    </script>
+    
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+    <script type="text/javascript">
+
+        // Load the Visualization API and the piechart package.
+        google.load('visualization', '1.0', {'packages': ['corechart']});
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.setOnLoadCallback(drawChart1);
+        google.setOnLoadCallback(drawChart2);
+
+        function drawChart1() {
+            // Some raw data (not necessarily accurate)
+            var data = google.visualization.arrayToDataTable([
+                ['Month', 'You', 'Competitors'],
+                ['Jun 14', 233, 1222],
+                ['Jul 14', 444, 1234],
+                ['Aug 14', 117, 876],
+                ['Sep 14', 43, 976],
+                ['Oct 14', 136, 1053],
+                ['Nov 14', 122, 1210],
+                ['Dec 14', 212, 938],
+                ['Jan 15', 135, 1120],
+                ['Feb 15', 157, 1167],
+                ['Mar 15', 139, 1110],
+                ['Apr 15', 136, 691],
+                ['May 15', 110, 345]
+            ]);
+            var options = {
+                vAxis: {title: "Pieces of Content"},
+                hAxis: {title: "Month"},
+                width: '1050',
+                height: '300',
+                colors: ['#a94442', '#3c763d'],
+                backgroundColor: {fill: 'transparent'},
+                seriesType: "area",
+                series: {
+                    0: {type: "area"},
+                    1: {type: "area"}
+                }
+            };
+
+            var chart1 = new google.visualization.ComboChart(document.getElementById('chart_div1'));
+
+            chart1.draw(data, options);
+
+        }
+
+        function drawChart2() {
+            // Some raw data (not necessarily accurate)
+            var data = google.visualization.arrayToDataTable([
+                ['Month', 'You', 'Competitors'],
+                ['Jun 14', 23, 45],
+                ['Jul 14', 45, 43],
+                ['Aug 14', 23, 41],
+                ['Sep 14', 32, 48],
+                ['Oct 14', 32, 38],
+                ['Nov 14', 34, 36],
+                ['Dec 14', 45, 32],
+                ['Jan 15', 67, 38],
+                ['Feb 15', 58, 42],
+                ['Mar 15', 89, 47],
+                ['Apr 15', 92, 45],
+                ['May 15', 110, 53]
+            ]);
+            var options = {
+                vAxis: {title: "Pieces of Content"},
+                hAxis: {title: "Month"},
+                width: '1050',
+                height: '300',
+                colors: ['#a94442', '#3c763d'],
+                backgroundColor: {fill: 'transparent'},
+                seriesType: "area",
+                series: {
+                    0: {type: "area"},
+                    1: {type: "area"}
+                }
+            };
+
+            var chart2 = new google.visualization.ComboChart(document.getElementById('chart_div2'));
+
+            chart2.draw(data, options);
+
+        }
+
+    </script>
+
+
+</head>
+<body onload="redirect()"></body>
 </html>
