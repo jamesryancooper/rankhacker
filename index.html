@@ -44,7 +44,8 @@
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
     <link href="http://fonts.googleapis.com/css?family=Cousine:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Anonymous+Pro:400,700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
 
     <!-- ELEGANT ICON PACK -->
     <link href="fonts/elegant/css/elegant.css" rel='stylesheet' type='text/css'>
@@ -176,7 +177,7 @@
 
 </head>
 
-<body id="body" class="page-loading home">
+<body id="body" class="page-loading home noisy">
 
 <!-- =========================
      PRELOADER
@@ -203,7 +204,7 @@
     <div class="container">
 
         <!-- LOGO CONTAINER -->
-        <div class="logo-cont"><a class="navbar-brand glitch" data-text="RANKHACKER" href="#header">RANK<span>HACKER</span></a></div>
+        <div class="logo-cont"><a class="navbar-brand" data-text="RANKHACKER" href="#header">RANK<span>HACKER</span></a></div>
 
         <!-- MAIN MENU BUTTONS CONTAINER -->
         <div class="buttons-cont">
@@ -227,11 +228,11 @@
                 <ul class="nav navbar-nav">
 
                     <!-- MAIN MENU POSITIONS -->
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="pricing.html">Pricing</a></li>
-                    <li><a href="#team">Team</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Team</a></li>
+                    <li><a href="#">Contact</a></li>
 
                 </ul>
             </div>
@@ -878,33 +879,43 @@
     </div>
 </div>
 
+
+
 <!-- =========================
      HEADER
 ============================== -->
 <section id="header" class="blurable">
-    <div id="googlemaps" class="animated fadeIn"></div>
+
+    <div id="googlemaps" class="noopacity"></div>
     <!-- FOR COLOR OVERLAY, CHANGE CLASS TO color-overlay -->
+
+    <div class="piece scanlines noclick"></div>
+    <div id="hacker-text" class="piece glow noclick"></div>
+    <div id="crt-output" class="piece output noopacity"></div>
+    <img src="" id="crt-glitch" class="glitch noopacity" />
+
+
     <div class="overlay">
         <div class="container">
             <div class="row">
 
                 <!-- HEADER CONTENT -->
-                <div class="header-cont col-md-12 header-centred fadeable">
+                <div class="header-cont col-md-12 header-centred">
 
                     <!-- MARGIN FROM TOP -->
                     <div class="header-margin-more"></div>
 
                     <!-- HEADER TEXT -->
-                    <header class="anim-fade-down">
+                    <header id="intro-titles">
 
                         <!-- HEADER TITLE -->
-                        <h1 class="header-txt-color">The Intelligent Content Strategy Platform</h1>
+                        <h1 id="statement" class="header-txt-color"></h1>
 
-                        <h1 class="header-txt-small">We help you make sense of the data</h1>
+                        <h1 id="problem-solution" class="header-txt-small"></h1>
 
 
                     </header>
-                    <form class="form-inline" role="form" autocomplete="off" data-toggle="validator">
+                    <form id="intro-form" class="form-inline" role="form" autocomplete="off" data-toggle="validator">
                         <div class="form-group col-sm-5 col-xs-12">
 
                             <!-- KEYWORD INPUT -->
@@ -951,8 +962,8 @@
             </div>
         </div>
     </div>
-</section>
 
+</section>
 <!-- =========================
      LOCALISATION & OTHER CONTACT DATA
 ============================== -->
@@ -1017,7 +1028,6 @@
         </div>
     </div>
 </div>
-</section>
 
 <!-- =========================
      FOOTER
@@ -1104,11 +1114,14 @@
 <!-- COUTNUP -->
 <script type="text/javascript" src="js/countUp.min.js"></script>
 
+<!-- THEATER TYPE TOOL -->
+<script type="text/javascript" src="js/theater.min.js"></script>
+
 <!--CUSTOM THEME SCRIPTS & SETTINGS -->
 <script type="text/javascript" src="js/rankhacker.scripts.js"></script>
 
 <script type="text/javascript">
-    $(window).on("throttledresize", function (event) {
+    $(window).on("throttledresize", function () {
         drawChart1();
     });
 </script>
