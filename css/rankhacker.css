@@ -63,7 +63,7 @@ URL:        http://www.rankhacker.com
 ------------------------------------------------------------------*/
 body {
     background: #ffffff;
-    color: #333333;
+    color: #ffffff;
     font-family: 'Source Code Pro', sans-serif;
     font-weight: 400;
     font-size: 16px;
@@ -133,9 +133,9 @@ h5 {
 }
 
 h6 {
-    color: #333333;
+    color: #ffffff;
     font-size: 1.125em;
-    font-weight: 700;
+    font-weight: 300;
 }
 
 ::selection {
@@ -745,6 +745,18 @@ fieldset[disabled] .btn {
 }
 
 /*     3.7. Modal windows     */
+
+
+
+.modal-backdrop.in {
+    filter: alpha(opacity=30);
+    opacity: .3;
+}
+
+.modal-backdrop {
+    background-color: #05324F;
+}
+
 .modal-dialog {
     margin-top: 20vh;
     max-width: 500px;
@@ -1290,12 +1302,21 @@ fieldset[disabled] .btn {
  [3.8 Custom Modals]
 
 ------------------------------------------------------------------*/
+
+.modal#signUp {
+    z-index: 10001;
+}
+
 #selectCompetitor .form-group {
     margin: 15px 0;
 }
 
 .modal.transparent .close {
     font-size: 80px;
+}
+
+.modal.transparent #data-attribution {
+    color: #fff;
 }
 
 .modal.transparent .border-bottom {
@@ -1353,8 +1374,9 @@ fieldset[disabled] .btn {
     border: none;
 }
 
+.modal.transparent .list-group-item.checked,
 .modal.transparent .list-group-item:hover {
-    background-color: rgba(245, 245, 245, 1);
+    background-color: rgba(255, 255, 255, 1);
 }
 
 .modal.transparent h1 {
@@ -1370,6 +1392,57 @@ fieldset[disabled] .btn {
     text-shadow: 3px 3px 0 #3D3D3C, -1px -1px 0 #3D3D3C, 1px -1px 0 #3D3D3C, -1px 1px 0 #3D3D3C, 1px 1px 0 #3D3D3C;
 }
 
+.modal.transparent h6.text-glow {
+    -webkit-animation: text-glow 2s ease-in-out infinite alternate;
+    animation: text-glow 2s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes text-glow {
+    from {
+        text-shadow: 0 0 10px #fff,
+        0 0 20px  #fff,
+        0 0 30px  #fff,
+        0 0 40px  #228DFF,
+        0 0 50px  #228DFF,
+        0 0 60px  #228DFF,
+        0 0 70px #228DFF,
+        0 0 80px #228DFF;
+    }
+    to {
+        text-shadow: 0 0 2px #fff,
+        0 0 4px #fff,
+        0 0 6px #fff,
+        0 0 8px #228DFF,
+        0 0 10px #228DFF,
+        0 0 12px #228DFF,
+        0 0 14px #228DFF,
+        0 0 16px #228DFF;
+    }
+}
+
+@keyframes text-glow {
+    from {
+        text-shadow: 0 0 10px #fff,
+        0 0 20px  #fff,
+        0 0 30px  #fff,
+        0 0 40px  #228DFF,
+        0 0 50px  #228DFF,
+        0 0 60px  #228DFF,
+        0 0 70px #228DFF,
+        0 0 80px #228DFF;
+    }
+    to {
+        text-shadow: 0 0 2px #fff,
+        0 0 4px #fff,
+        0 0 6px #fff,
+        0 0 8px #228DFF,
+        0 0 10px #228DFF,
+        0 0 12px #228DFF,
+        0 0 14px #228DFF,
+        0 0 16px #228DFF;
+    }
+}
+
 .modal.transparent .header-txt-small {
     font-size: .5em !important;
     -webkit-text-stroke: 1px #3D3D3C;
@@ -1382,8 +1455,7 @@ fieldset[disabled] .btn {
 
 .modal.transparent .header-txt-color {
     font-size: .4em !important;
-    color: #3D3D3C;
-    -webkit-text-stroke: 1px white;
+    color: #ffffff;
     text-shadow: 3px 3px 0 #3D3D3C,
     -1px -1px 0 #3D3D3C,
     1px -1px 0 #3D3D3C,
@@ -1406,12 +1478,12 @@ fieldset[disabled] .btn {
 }
 
 .modal.transparent .list-group-item {
-    background: rgba(245, 245, 245, .6);
+    background: rgba(255, 255, 255, .5);
     -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
     margin-bottom: 4px;
-    border-left: 67px solid #3D3D3C;
+    border-left: 67px solid #000000;
     -webkit-transition: all 300ms ease-in-out;
     -moz-transition: all 300ms ease-in-out;
     -o-transition: all 300ms ease-in-out;
@@ -1582,7 +1654,7 @@ fieldset[disabled] .btn {
 
 .percentage {
     position: absolute;
-    top: 4px;
+    top: 8px;
     right: 5px;
     font-weight: bold;
     font-size: 28px;
@@ -1602,10 +1674,6 @@ fieldset[disabled] .btn {
 }
 
 /*** LOADED ***/
-#loading span {
-    text-shadow: 0 1px 0 #fff;
-}
-
 #loading .loading-text .letter {
     -webkit-animation-duration: 3s;
     -moz-animation-duration: 3s;
@@ -1886,120 +1954,87 @@ fieldset[disabled] .btn {
 }
 
 .loading-analyze {
-    height: 120px;
-    overflow: hidden;
+    margin: 10% auto;
+    border-bottom: 30px solid #fff;
+    border-left: 30px solid #fff;
+    border-right: 30px solid rgba(80,80,80,.8);
+    border-top: 30px solid rgba(80,80,80,.8);
+    border-radius: 100%;
+    height: 150px;
+    width: 150px;
+    -webkit-animation: spin .6s infinite linear;
+    -moz-animation: spin .6s infinite linear;
+    -ms-animation: spin .6s infinite linear;
+    -o-animation: spin .6s infinite linear;
+    animation: spin .6s infinite linear;
+    opacity: .6;
 }
 
-.line {
-    display: inline-block;
-    width: 30px;
-    height: 15px;
-    border-radius: 15px;
-    background-color: #ecf0f1;
-    border-left: 1px solid #fff;
-    border-right: 1px solid #999;
+@keyframes spin {
+    from {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(359deg);
+        -moz-transform: rotate(359deg);
+        -o-transform: rotate(359deg);
+        -ms-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+
 }
 
-.loading-analyze .line:nth-last-child(1) {
-    -webkit-animation: loadingAnalyze 1.5s 2s infinite;
-    -moz-animation: loadingAnalyze 1.5s 2s infinite;
-    -ms-animation: loadingAnalyze 1.5s 2s infinite;
-    -o-animation: loadingAnalyze 1.5s 2s infinite;
-    animation: loadingAnalyze 1.5s 2s infinite;
+@-moz-keyframes spin {
+    from {
+        -moz-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -moz-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+
 }
 
-.loading-analyze .line:nth-last-child(2) {
-    -webkit-animation: loadingAnalyze 1.5s 1.5s infinite;
-    -moz-animation: loadingAnalyze 1.5s 1.5s infinite;
-    -ms-animation: loadingAnalyze 1.5s 1.5s infinite;
-    -o-animation: loadingAnalyze 1.5s 1.5s infinite;
-    animation: loadingAnalyze 1.5s 1.5s infinite;
+@-webkit-keyframes spin {
+    from {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+
 }
 
-.loading-analyze .line:nth-last-child(3) {
-    -webkit-animation: loadingAnalyze 1.5s 1s infinite;
-    -moz-animation: loadingAnalyze 1.5s 1s infinite;
-    -ms-animation: loadingAnalyze 1.5s 1s infinite;
-    -o-animation: loadingAnalyze 1.5s 1s infinite;
-    animation: loadingAnalyze 1.5s 1s infinite;
+@-ms-keyframes spin {
+    from {
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -ms-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+
 }
 
-.loading-analyze .line:nth-last-child(4) {
-    -webkit-animation: loadingAnalyze 1.5s .5s infinite;
-    -moz-animation: loadingAnalyze 1.5s .5s infinite;
-    -ms-animation: loadingAnalyze 1.5s .5s infinite;
-    -o-animation: loadingAnalyze 1.5s .5s infinite;
-    animation: loadingAnalyze 1.5s .5s infinite;
-}
+@-o-keyframes spin {
+    from {
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -o-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
 
-.loading-analyze .line:nth-last-child(5) {
-    -webkit-animation: loadingAnalyze 1.5s 0s infinite;
-    -moz-animation: loadingAnalyze 1.5s 0s infinite;
-    -ms-animation: loadingAnalyze 1.5s 0s infinite;
-    -o-animation: loadingAnalyze 1.5s 0s infinite;
-    animation: loadingAnalyze 1.5s 0s infinite;
 }
-
-@-webkit-keyframes loadingAnalyze {
-    0% {
-        height: 15px;
-    }
-    50% {
-        height: 120px;
-    }
-    100% {
-        height: 30px;
-    }
-}
-
-@-moz-keyframes loadingAnalyze {
-    0% {
-        height: 15px;
-    }
-    50% {
-        height: 120px;
-    }
-    100% {
-        height: 30px;
-    }
-}
-
-@-ms-keyframes loadingAnalyze{
-    0% {
-        height: 15px;
-    }
-    50% {
-        height: 120px;
-    }
-    100% {
-        height: 30px;
-    }
-}
-
-@-o-keyframes loadingAnalyze{
-    0% {
-        height: 15px;
-    }
-    50% {
-        height: 120px;
-    }
-    100% {
-        height: 30px;
-    }
-}
-
-@keyframes loadingAnalyze {
-    0% {
-        height: 15px;
-    }
-    50% {
-        height: 120px;
-    }
-    100% {
-        height: 30px;
-    }
-}
-
 
 /*------------------------------------------------------------------
 
@@ -2223,29 +2258,29 @@ fieldset[disabled] .btn {
 }
 
 /*     5.2. Layout-2 styles     */
-.header-centred {
+.header-centered {
     text-align: center;
 }
 
-.header-centred h1 {
+.header-centered h1 {
     font-size: 3.9em !important;
 }
 
-.results .header-centred h1,
-.compare .header-centred h1 {
+.results .header-centered h1,
+.compare .header-centered h1 {
     font-size: 5.5em !important;
 }
 
-.header-centred .header-txt-small {
+.header-centered .header-txt-small {
     font-size: 1.8em !important;
 }
 
-.header-centred .header-margin-more {
+.header-centered .header-margin-more {
     height: 25% !important;
 }
 
-.results .header-centred .header-margin-more,
-.compare .header-centred .header-margin-more {
+.results .header-centered .header-margin-more,
+.compare .header-centered .header-margin-more {
     height: 15% !important;
 }
 
@@ -2468,10 +2503,18 @@ body.modal-open {
 
 ------------------------------------------------------------------*/
 .blur {
-    -webkit-filter: blur(6px) grayscale(100%);
-    filter: blur(6px) grayscale(100%);
+    -webkit-filter: blur(5px);
+    filter: blur(5px);
 }
-
+.transparency-25 {
+   opacity: .25;
+}
+.transparency-50 {
+    opacity: .5;
+}
+.transparency-75 {
+    opacity: .75;
+}
 .versus {
     margin-top: 18%;
 }
@@ -2557,7 +2600,7 @@ body.modal-open {
         min-height: 650px;
     }
 
-    .header-centred .header-margin-more {
+    .header-centered .header-margin-more {
         height: 20% !important;
     }
 
@@ -2609,7 +2652,7 @@ body.modal-open {
         opacity: 1 !important;
     }
 
-    .anim-fade,
+    .anim-fade-in,
     .anim-fade-out,
     .anim-fade-down {
         opacity: 1 !important;
@@ -2621,7 +2664,7 @@ body.modal-open {
 
     .anim-from-right,
     .anim-from-left,
-    .anim-fade,
+    .anim-fade-in,
     .anim-fade-out,
     .anim-fade-down {
         -moz-transition-property: none;
@@ -2692,7 +2735,7 @@ body.modal-open {
     .anim-from-left,
     .anim-fade-down,
     .anim-fade-up,
-    .anim-fade,
+    .anim-fade-in,
     .anim-fade-out,
     .anim-bounce,
     .anim-bounce-left,

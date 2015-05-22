@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 .page-loading {
   overflow: hidden !important;
 }
@@ -82,7 +84,7 @@ footer .sm,
 .anim-from-left,
 .anim-fade-down,
 .anim-fade-up,
-.anim-fade,
+.anim-fade-in,
 .anim-fade-out,
 .anim-bounce,
 .anim-bounce-left,
@@ -194,14 +196,7 @@ footer .sm,
   animation-name: swingOutX;
   backface-visibility: visible !important;
 }
-/*****  ANIMATE.CSS ANIMATIONS   *****/
-/*!
-Animate.css - http://daneden.me/animate
-Licensed under the MIT license - http://opensource.org/licenses/MIT
 
-Copyright (c) 2014 Daniel Eden
-*/
-@charset "UTF-8";
 .animated {
   -webkit-animation-duration: 1s;
   animation-duration: 1s;

@@ -1,25 +1,17 @@
 <!doctype html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- =========================
           BASIC PAGE INFORMATION
     ============================== -->
-    <!-- PAGE TITLE -->
     <title>RankHacker - The intelligent content strategy platform!</title>
-
-    <!-- WHAT'S YOUR PAGE ABOUT? -->
     <meta name="description" content="Intelligently generate an actionable content strategy complete with publication calendar to beat your competition.">
-
-    <!-- KEYWORDS THAT DESCRIBES YOUR PAGE -->
     <meta name="keywords" content="content strategy, content roadmap, content calendar">
-
-    <!-- HELP US SPREAD THE LOVE :-) -->
     <meta name="author" content="fairmarketing.com">
-
-    <!-- ALLOW GOOGLE TO INDEX YOUR PAGE -->
     <meta name="robots" content="noindex, nofollow">
 
     <!-- =========================
@@ -37,39 +29,17 @@
     <!-- =========================
          FONTS
     ============================== -->
-    <!-- RALEWAY FONT FROM GOOGLE FONTS -->
-    <link href='http://fonts.googleapis.com/css?family=Rationale' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
-    <link href="http://fonts.googleapis.com/css?family=Cousine:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Anonymous+Pro:400,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
-
-    <!-- ELEGANT ICON PACK -->
     <link href="fonts/elegant/css/elegant.css" rel='stylesheet' type='text/css'>
-
-    <!-- ENTYPO ICON PACK -->
     <link href="fonts/entypo/css/entypo.css" rel='stylesheet' type='text/css'>
 
     <!-- =========================
          STYLESHEETS
     ============================== -->
-    <!-- BOOTSTRAP -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- POPOVERS -->
-    <link href="css/popovers.less" rel="stylesheet">
-
-    <!-- RANKHACKER! THEME -->
     <link href="css/rankhacker.css" rel="stylesheet" id="theme-change">
-
-    <!-- ADDITIONAL STYLES -->
     <link href="css/tiles.css" rel="stylesheet">
-    <!-- This is a comment -->
-
-    <!-- ANIMATIONS BASED ON ANIMATE.CSS -->
     <link href="css/animations.css" rel="stylesheet" type="text/css">
 
     <!-- =========================
@@ -85,95 +55,7 @@
          GOOGLE PLACES API
     ============================== -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places,drawing,geometry"></script>
-
-    <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-
-    <script type="text/javascript">
-
-        // Load the Visualization API and the piechart package.
-        google.load('visualization', '1.0', {'packages': ['corechart']});
-
-        // Set a callback to run when the Google Visualization API is loaded.
-        google.setOnLoadCallback(drawChart1);
-        google.setOnLoadCallback(drawChart2);
-
-        function drawChart1() {
-            // Some raw data (not necessarily accurate)
-            var data = google.visualization.arrayToDataTable([
-                ['Month', 'You', 'Competitors'],
-                ['Jun 14', 233, 1222],
-                ['Jul 14', 444, 1234],
-                ['Aug 14', 117, 876],
-                ['Sep 14', 43, 976],
-                ['Oct 14', 136, 1053],
-                ['Nov 14', 122, 1210],
-                ['Dec 14', 212, 938],
-                ['Jan 15', 135, 1120],
-                ['Feb 15', 157, 1167],
-                ['Mar 15', 139, 1110],
-                ['Apr 15', 136, 691],
-                ['May 15', 110, 345]
-            ]);
-            var options = {
-                vAxis: {title: "Pieces of Content"},
-                hAxis: {title: "Month"},
-                width: '1050',
-                height: '300',
-                colors: ['#a94442', '#3c763d'],
-                backgroundColor: {fill: 'transparent'},
-                seriesType: "area",
-                series: {
-                    0: {type: "area"},
-                    1: {type: "area"}
-                }
-            };
-
-            var chart1 = new google.visualization.ComboChart(document.getElementById('chart_div1'));
-
-            chart1.draw(data, options);
-
-        }
-
-        function drawChart2() {
-            // Some raw data (not necessarily accurate)
-            var data = google.visualization.arrayToDataTable([
-                ['Month', 'You', 'Competitors'],
-                ['Jun 14', 23, 45],
-                ['Jul 14', 45, 43],
-                ['Aug 14', 23, 41],
-                ['Sep 14', 32, 48],
-                ['Oct 14', 32, 38],
-                ['Nov 14', 34, 36],
-                ['Dec 14', 45, 32],
-                ['Jan 15', 67, 38],
-                ['Feb 15', 58, 42],
-                ['Mar 15', 89, 47],
-                ['Apr 15', 92, 45],
-                ['May 15', 110, 53]
-            ]);
-            var options = {
-                vAxis: {title: "Pieces of Content"},
-                hAxis: {title: "Month"},
-                width: '1050',
-                height: '300',
-                colors: ['#a94442', '#3c763d'],
-                backgroundColor: {fill: 'transparent'},
-                seriesType: "area",
-                series: {
-                    0: {type: "area"},
-                    1: {type: "area"}
-                }
-            };
-
-            var chart2 = new google.visualization.ComboChart(document.getElementById('chart_div2'));
-
-            chart2.draw(data, options);
-
-        }
-
-    </script>
-
 
 </head>
 
@@ -442,9 +324,9 @@
                     <h6 class="loading">We are currently finding your competitors.</h6>
 
                     <!-- COMPETITOR TITLE -->
-                    <h1 class="competitor noopacity nodisplay"><span class="header-txt-color">Select Your Competitors</span></h1>
+                    <h1 class="competitor noopacity nodisplay"><span class="header-txt-color">Top Ten Google Competitors</span></h1>
                     <!-- COMPETITOR SUBTITLE -->
-                    <h6 class="competitor noopacity nodisplay">Choose one or more competitors to hack their content strategy.</h6>
+                    <h6 class="competitor text-glow noopacity nodisplay">Choose one or more competitors to hack their content strategy.</h6>
                 </div>
 
                 <form class="form-horizontal" role="form" autocomplete="off" data-toggle="validator">
@@ -454,14 +336,14 @@
                         <div class="input-group inline col-xs-12 col-md-6">
                             <ul id="competitor-list-1" class="list-group">
                                 <!-- CHECKBOX -->
-                                <li class="list-group-item noopacity"><span class="rank text-center">1</span>
+                                <li class="list-group-item noopacity checked"><span class="rank text-center">1</span>
                                     <label>
-                                        <input type="checkbox" name="competitorURL" value="www.abacusplumbing.net" class="styled">
-                                        <span class="lbl padding-8 list-txt"><i class="entypo-flag text-success" data-toggle="popover" title="Likely Competitor" data-content="Considering various factors this is a likely competitor of your website."></i>abacusplumbing.net</span> </label>
+                                        <input type="checkbox" name="competitorURL" value="www.abacusplumbing.net" class="styled" checked>
+                                        <span class="lbl padding-8 list-txt"><i class="entypo-flag text-success"></i>abacusplumbing.net</span> </label>
                                 </li>
-                                <li class="list-group-item noopacity"><span class="rank text-center">2</span>
+                                <li class="list-group-item noopacity checked"><span class="rank text-center">2</span>
                                     <label>
-                                        <input type="checkbox" name="competitorURL" value="www.rotorooter.com/houston/" class="styled">
+                                        <input type="checkbox" name="competitorURL" value="www.rotorooter.com/houston/" class="styled" checked>
                                         <span class="lbl padding-8 list-txt"><i class="entypo-flag text-success"></i>rotorooter.com</span> </label>
                                 </li>
                                 <li class="list-group-item noopacity"><span class="rank text-center">3</span>
@@ -474,45 +356,50 @@
                                         <input type="checkbox" name="competitorURL" value="en.wikipedia.org/wiki/Plumbing" class="styled">
                                         <span class="lbl padding-8 list-txt"><i class="entypo-flag text-danger"></i>wikipedia.org</span> </label>
                                 </li>
-                                <li class="list-group-item noopacity"><span class="rank text-center">5</span>
+                                <li class="list-group-item noopacity checked"><span class="rank text-center">5</span>
                                     <label>
-                                        <input type="checkbox" name="competitorURL" value="www.villageplumbing.com" class="styled">
+                                        <input type="checkbox" name="competitorURL" value="www.villageplumbing.com" class="styled" checked>
                                         <span class="lbl padding-8 list-txt"><i class="entypo-flag text-success"></i>villageplumbing.com</span> </label>
                                 </li>
                             </ul>
                         </div>
                         <div class="input-group inline col-xs-12 col-md-6">
                             <ul id="competitor-list-2" class="list-group">
-                                <li class="list-group-item noopacity"><span class="rank text-center">6</span>
+                                <li class="list-group-item noopacity checked"><span class="rank text-center">6</span>
                                     <label>
-                                        <input type="checkbox" name="competitorURL" value="www.yellowpages.com/houston-tx/plumbers" class="styled">
+                                        <input type="checkbox" name="competitorURL" value="www.yellowpages.com/houston-tx/plumbers" class="styled" checked>
                                         <span class="lbl padding-8 list-txt"><i class="entypo-flag text-success"></i>yellowpages.com</span> </label>
                                 </li>
-                                <li class="list-group-item noopacity"><span class="rank text-center">7</span>
+                                <li class="list-group-item noopacity checked"><span class="rank text-center">7</span>
                                     <label>
-                                        <input type="checkbox" name="competitorURL" value="theplumbingsolution.net" class="styled">
+                                        <input type="checkbox" name="competitorURL" value="theplumbingsolution.net" class="styled" checked>
                                         <span class="lbl padding-8 list-txt"><i class="entypo-flag text-success"></i>theplumbingsolution.net</span> </label>
                                 </li>
-                                <li class="list-group-item noopacity"><span class="rank text-center">8</span>
+                                <li class="list-group-item noopacity checked"><span class="rank text-center">8</span>
                                     <label>
-                                        <input type="checkbox" name="competitorURL" value="www.happyplumber.com/services/" class="styled">
+                                        <input type="checkbox" name="competitorURL" value="www.happyplumber.com/services/" class="styled" checked>
                                         <span class="lbl padding-8 list-txt"><i class="entypo-flag text-success"></i>happyplumber.com</span> </label>
                                 </li>
-                                <li class="list-group-item noopacity"><span class="rank text-center">9</span>
+                                <li class="list-group-item noopacity checked"><span class="rank text-center">9</span>
                                     <label>
-                                        <input type="checkbox" name="competitorURL" value="localplumbing.com" class="styled">
+                                        <input type="checkbox" name="competitorURL" value="localplumbing.com" class="styled" checked>
                                         <span class="lbl padding-8 list-txt"><i class="entypo-flag text-success"></i>localplumbing.com</span> </label>
                                 </li>
-                                <li class="list-group-item noopacity"><span class="rank text-center">10</span>
+                                <li class="list-group-item noopacity checked"><span class="rank text-center">10</span>
                                     <label>
-                                        <input type="checkbox" name="competitorURL" value="www.houstonplumbing.com" class="styled">
+                                        <input type="checkbox" name="competitorURL" value="www.houstonplumbing.com" class="styled" checked>
                                         <span class="lbl padding-8 list-txt"><i class="entypo-flag text-success"></i>houstonplumbing.com</span> </label>
                                 </li>
                             </ul>
                         </div>
                         <!-- ERROR MESSAGE BOX -->
                         <div class="help-block with-errors"></div>
-                        <div id="data-attribution" class="col-xs-12 text-right noopacity nodisplay"><p><sup>*</sup> Competitor data based on page 1 listing from Google.</p></div>
+                        <div id="legend" class="col-xs-5 noopacity nodisplay">
+                            <span><i class="entypo-flag text-success"></i>Likely competitor </span>
+                            <span><i class="entypo-flag text-danger"></i>Unlikely competitor</span>
+                        </div>
+                        <div id="data-attribution" class="col-xs-7 text-right noopacity nodisplay"><p><sup>*</sup> Competitor data based on page 1 listing from Google.</p></div>
+
                     </div>
 
                     <!--LOADING -->
@@ -559,7 +446,7 @@
 
                             <!-- SUBMIT BUTTON -->
                             <button id="gotoInventory" type="button" class="btn btn-success btn-black col-xs-12 noopacity nodisplay">
-                                <a href="#"> Start Rank Hacking </a>
+                                <a href="#">Initiate Rank Hack</a>
                             </button>
 
                         </div>
@@ -625,7 +512,7 @@
                     <!-- INVENTORY TITLE -->
                     <h1><span class="header-txt-color">Competitive Content Inventory</span></h1>
                     <!-- INVENTORY SUBTITLE -->
-                    <h6>This is the total amount of content your competitor's have published over the last 12 months.</h6>
+                    <h6>Total amount of content your competitor's have published over the last 12 months.</h6>
                 </div>
 
                 <div class="col-xs-12">
@@ -634,9 +521,7 @@
                         <div class="tile-stats tile-white">
                             <div class="icon icon-flip"><i class="entypo-rss"></i></div>
                             <div id="inventory-count01" class="num count"></div>
-                            <h3>Onsite Inventory</h3>
-
-                            <p>The total pieces of onsite content posted over last 12 months.</p>
+                            <h3>Published Onsite Inventory</h3>
                         </div>
                     </div>
 
@@ -644,19 +529,13 @@
                         <div class="tile-stats tile-white">
                             <div class="icon icon-flip"><i class="entypo-link"></i></div>
                             <div id="inventory-count02" class="num count"></div>
-                            <h3>Offsite Inventory</h3>
-
-                            <p>The total pieces of offsite content posted over last 12 months.</p>
+                            <h3>Published Offsite Inventory</h3>
                         </div>
                     </div>
 
                 </div>
 
             </div>
-
-            <br/>
-            <br/>
-            <br/>
 
             <!-- USER -->
             <div id="user" class="user modal-body col-xs-12 col-md-10 col-md-offset-1 noopacity nodisplay row">
@@ -691,7 +570,7 @@
 
                             <!-- SUBMIT BUTTON -->
                             <button id="gotoComparison" type="button" class="btn btn-success btn-black col-xs-12">
-                                <a href="#"> Compare </a>
+                                <a href="#">Initiate Comparison</a>
                             </button>
 
                         </div>
@@ -710,16 +589,10 @@
                 </div>
 
                 <div class="text-center row">
-                    <div class="loading-analyze">
-                        <div class="line"></div>
-                        <div class="line"></div>
-                        <div class="line"></div>
-                        <div class="line"></div>
-                        <div class="line"></div>
-                    </div>
+                    <div class="loading-analyze"></div>
 
                     <h6>
-                <span class="loading-text text-center">
+                    <span class="loading-text text-center">
                     <span class="l-1 letter">A</span>
                     <span class="l-2 letter">n</span>
                     <span class="l-3 letter">a</span>
@@ -762,8 +635,8 @@
                         <div class="input-group col-xs-12">
 
                             <!-- OFFSITE COMPARISONS -->
-                            <div class="data-card col-xs-12">
-                                <h5 class="data-card-title header-txt-white ">
+                            <div class="col-xs-12">
+                                <h5 class="header-txt-white ">
                                     <span class="icon icon-flip"><i class="entypo-rss"></i></span>
                                     OFFSITE CONTENT POSTED OVER THE LAST 12 MONTHS
                                 </h5>
@@ -772,9 +645,9 @@
                                     <div class="tile-stats tile-red">
                                         <div class="icon icon-flip"><i class="entypo-chart-line"></i></div>
                                         <div id="count01" class="num count"></div>
-                                        <h3>Total Annual Deficiency</h3>
+                                        <h3>Annual Content Deficiency</h3>
 
-                                        <p>The total pieces of offsite content you are deficient over the last 12 months.</p>
+                                        <p>The pieces of offsite content you are deficient over the last 12 months.</p>
                                     </div>
                                 </div>
 
@@ -782,9 +655,9 @@
                                     <div class="tile-stats tile-red">
                                         <div class="icon icon-flip"><i class="entypo-chart-line"></i></div>
                                         <div id="count02" class="num count"></div>
-                                        <h3>Average Monthly Deficiency</h3>
+                                        <h3>Monthly Content Deficiency</h3>
 
-                                        <p>The average pieces of offsite content you are deficient each month.</p>
+                                        <p>The pieces of offsite content you are deficient each month.</p>
                                     </div>
                                 </div>
 
@@ -792,9 +665,9 @@
                                     <div class="tile-stats tile-red">
                                         <div class="icon icon-flip"><i class="entypo-chart-line"></i></div>
                                         <div id="count03" class="num count"></div>
-                                        <h3>Average Monthly Deficiency</h3>
+                                        <h3>Daily Content Deficiency</h3>
 
-                                        <p>The average pieces of offsite content you are deficient each day.</p>
+                                        <p>The pieces of offsite content you are deficient each day.</p>
                                     </div>
                                 </div>
 
@@ -808,8 +681,8 @@
                             </div>
 
                             <!-- ONSITE COMPARISONS -->
-                            <div class="data-card col-xs-12">
-                                <h5 class="data-card-title header-txt-white ">
+                            <div class="col-xs-12">
+                                <h5 class="header-txt-white ">
                                     <span class="icon icon-flip"><i class="entypo-link"></i></span>
                                     ONSITE CONTENT POSTED OVER THE LAST 12 MONTHS
                                 </h5>
@@ -818,9 +691,9 @@
                                     <div class="tile-stats tile-green">
                                         <div class="icon"><i class="entypo-chart-line"></i></div>
                                         <div id="count04" class="num count"></div>
-                                        <h3>Total Annual Surplus</h3>
+                                        <h3>Annual Content Surplus</h3>
 
-                                        <p>The total surplus of onsite content you have built over the last 12 months.</p>
+                                        <p>The surplus of onsite content you have built over the last 12 months.</p>
                                     </div>
                                 </div>
 
@@ -828,9 +701,9 @@
                                     <div class="tile-stats tile-green">
                                         <div class="icon"><i class="entypo-chart-line"></i></div>
                                         <div id="count05" class="num count"></div>
-                                        <h3>Average Monthly Surplus</h3>
+                                        <h3>Monthly Content Surplus</h3>
 
-                                        <p>The average surplus of onsite content you are building monthly.</p>
+                                        <p>The surplus of onsite content you are building monthly.</p>
                                     </div>
                                 </div>
 
@@ -838,9 +711,9 @@
                                     <div class="tile-stats tile-green">
                                         <div class="icon"><i class="entypo-chart-line"></i></div>
                                         <div id="count06" class="num count"></div>
-                                        <h3>Average Monthly Surplus</h3>
+                                        <h3>Daily Content Surplus</h3>
 
-                                        <p>The average surplus of onsite content you are building daily.</p>
+                                        <p>The surplus of onsite content you are building daily.</p>
                                     </div>
                                 </div>
 
@@ -869,7 +742,7 @@
                         <div class="input-group col-xs-12 col-md-4 col-md-offset-4">
                             <!-- SUBMIT BUTTON -->
                             <button id="chosenCompetitor" type="button" class="btn btn-success btn-black col-xs-12">
-                                <a href="http://23.239.30.92/~contentschema/admin"> SIGN UP </a>
+                                <a href="http://23.239.30.92/~contentschema/admin"> ACTIVATE </a>
                             </button>
                         </div>
                     </div>
@@ -900,7 +773,7 @@
             <div class="row">
 
                 <!-- HEADER CONTENT -->
-                <div class="header-cont col-md-12 header-centred">
+                <div class="header-cont col-md-12 header-centered fadeable">
 
                     <!-- MARGIN FROM TOP -->
                     <div class="header-margin-more"></div>
@@ -915,7 +788,7 @@
 
 
                     </header>
-                    <form id="intro-form" class="form-inline" role="form" autocomplete="off" data-toggle="validator">
+                    <form id="intro-form" class="form-inline anim-fade-in" role="form" autocomplete="off" data-toggle="validator">
                         <div class="form-group col-sm-5 col-xs-12">
 
                             <!-- KEYWORD INPUT -->
@@ -952,7 +825,7 @@
                         <div class="form-group col-sm-2 col-xs-12 inline-input buttons-cont">
 
                             <!-- GET STARTED BUTTON -->
-                            <div class="btn btn-lg btn-success btn-black anim-bounce-right">
+                            <div class="btn btn-lg btn-success btn-black">
                                 <a href="#" data-toggle="modal" data-target="#data">GET STARTED</a>
                             </div>
 

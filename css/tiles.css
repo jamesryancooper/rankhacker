@@ -1,17 +1,17 @@
 .tile-stats.stat-tile {
-  padding: 0px;
+  padding: 0;
   height: 155px;
   border: none !important;
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 .tile-stats.tile-neon-red {
   background: #ff4e50;
 }
 .tile-stats.stat-tile h3 {
-  padding: 20px 20px 0px 20px;
+  padding: 20px 20px 0 20px;
 }
 .tile-stats.stat-tile p {
-  padding: 0px 20px 20px 20px;
+  padding: 0 20px 20px 20px;
   margin-bottom: 20px;
 }
 .pie-chart {
@@ -21,7 +21,7 @@
 }
 .tile-group-2 {
   background: #FFF !important;
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 .tile-group-2 .tile-white {
   background: #FFF !important;
@@ -40,7 +40,7 @@
   color: rgba(0, 0, 0, 0.4);
 }
 .tile-group-2 .tile-right .map {
-  margin: 0px !important;
+  margin: 0 !important;
 }
 @-moz-document url-prefix() {
   .page-container .tile-group .tile-left .map,
@@ -69,6 +69,8 @@
   -o-transition: all 300ms ease-in-out;
   -webkit-transition: all 300ms ease-in-out;
   transition: all 300ms ease-in-out;
+  -webkit-box-shadow: 0 5px 15px rgba(0,0,0,.5);
+  box-shadow: 0 5px 15px rgba(0,0,0,.5);
 }
 .tile-stats:hover {
   background: #252a32;
@@ -778,7 +780,6 @@
   border-radius: 5px;
   background-clip: padding-box;
   margin-bottom: 20px;
-  background-color: #000000;
   color: #ffffff;
 }
 .tile-block:before,
@@ -1098,20 +1099,6 @@
 .tile-block.tile-gray .tile-content .todo-list .neon-cb-replacement .cb-wrapper .checked {
   background: #dcdcdc;
 }
-  background: #00a65b;
-  margin-bottom: 20px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  -webkit-border-radius: 3px;
-  -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px;
-  -moz-background-clip: padding;
-  border-radius: 3px;
-  background-clip: padding-box;
-  background-color: #000000;
-  color: #ffffff;
-}
 .tile-progress:before,
 .tile-progress:after {
   content: " ";
@@ -1149,7 +1136,7 @@
 .tile-progress .tile-progressbar span {
   display: block;
   background: #ffffff;
-  width: 0%;
+  width: 0;
   height: 100%;
   -moz-transition: all 1.5s cubic-bezier(0.230, 1.000, 0.320, 1.000);
   -o-transition: all 1.5s cubic-bezier(0.230, 1.000, 0.320, 1.000);
@@ -1422,9 +1409,6 @@
   color: #ffffff;
   margin-bottom: 20px;
   overflow: hidden;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
   display: table;
   width: 100%;
   -webkit-border-radius: 3px;
@@ -1510,7 +1494,7 @@
   opacity: 1;
   filter: alpha(opacity=100);
 }
-.tile-group div > tile-entry:last-child {
+.tile-group div > .tile-entry:last-child {
   border-bottom: 0;
 }
 .tile-group .jvectormap-zoomin,
