@@ -125,7 +125,7 @@
 <!-- =========================
      REGISTER MODAL
 ============================== -->
-<div class="modal fade" id="signUp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="signUp" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -134,14 +134,18 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
                 <!-- MODAL TITLE -->
-                <h5 class="modal-title" id="myModalLabel">Start Rank Hacking Today!</h5>
+                <h5 class="modal-title login-register">Start Rank Hacking</h5>
+
+                <h5 class="modal-title remind noopacity nodisplay">Recover Password</h5>
 
                 <!-- MODAL SUBTITLE -->
-                <h6>Register an account or login now</h6>
+                <h6  class="login-register">Register an account or login now</h6>
+
+                <h6 class="remind noopacity nodisplay">We will send an email with instructions.</h6>
             </div>
 
             <!-- LOGIN FORM -->
-            <div class="modal-body" id="login">
+            <div id="login" class="modal-body noopacity nodisplay">
                 <form class="form-horizontal" role="form" autocomplete="off" data-toggle="validator">
                     <div class="form-group">
 
@@ -187,12 +191,12 @@
                     </div>
 
                     <!--CHANGE FORM TO PASSWORD REMINDER-->
-                    <p class="other" id="gotoRemind">forgot your password?</p>
+                    <p class="other gotoRemind">forgot your password?</p>
                 </form>
             </div>
 
             <!-- REGISTRATION FORM -->
-            <div class="modal-body noopacity nodisplay" id="register">
+            <div id="register" class="modal-body noopacity nodisplay">
                 <form class="form-horizontal" role="form" autocomplete="off" data-toggle="validator">
                     <div class="form-group">
 
@@ -257,7 +261,7 @@
             </div>
 
             <!-- PASSWORD REMINDER FORM -->
-            <div class="modal-body noopacity nodisplay" id="remind">
+            <div id="remind" class="modal-body noopacity nodisplay">
                 <form class="form-horizontal" role="form" autocomplete="off" data-toggle="validator">
                     <div class="form-group">
 
@@ -284,7 +288,7 @@
                                 <span class="icon_profile"></span>
 
                                 <!-- BUTTON TEXT -->
-                                Send me new password
+                                Recover Password
                             </button>
                         </div>
                     </div>
@@ -295,10 +299,11 @@
             <div class="modal-footer">
 
                 <!-- LOGIN & PASSWORD REMINDER FOOTER -->
-                <p id="gotoRegister">Need an account? <span>Register here.</span></p>
+                <p class="gotoRegister noopacity nodisplay">Need an account? <span>Register here.</span></p>
 
                 <!-- REGISTRATION FOOTER -->
-                <p id="gotoLogin" class="noopacity nodisplay">Already have an account? <span>Login here.</span></p>
+                <p class="gotoLogin noopacity nodisplay">Already have an account? <span>Login here.</span></p>
+
             </div>
         </div>
     </div>
@@ -307,32 +312,35 @@
 <!-- =========================
      DATA MODAL
 ============================== -->
-<div id="data" class="modal fadeable transparent container" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="data" class="modal fadeable transparent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content container">
 
             <!-- CLOSE MODAL BUTTON -->
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div class="row">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
 
             <!--COMPETITORS -->
-            <div id="competitor" class="modal-body col-xs-12 row competitor">
+            <div id="competitor" class="modal-body row competitor">
 
-                <div class="modal-header text-center row">
-                    <!-- LOADING TITLE -->
-                    <h1 class="loading"><span class="header-txt-color">Finding Your Competitors</span></h1>
-                    <!-- LOADING SUBTITLE -->
-                    <h6 class="loading">We are currently finding your competitors.</h6>
+                <div class="col-xs-12">
 
-                    <!-- COMPETITOR TITLE -->
-                    <h1 class="competitor noopacity nodisplay"><span class="header-txt-color">Top Ten Google Competitors</span></h1>
-                    <!-- COMPETITOR SUBTITLE -->
-                    <h6 class="competitor text-glow noopacity nodisplay">Choose one or more competitors to hack their content strategy.</h6>
-                </div>
+                    <div class="modal-header form-group text-center row">
+                        <!-- LOADING TITLE -->
+                        <h1 class="loading"><span class="header-txt-color">Finding Your Competitors</span></h1>
+                        <!-- LOADING SUBTITLE -->
+                        <h6 class="loading">We are currently finding your competitors.</h6>
 
-                <form class="form-horizontal" role="form" autocomplete="off" data-toggle="validator">
-                    <div class="form-group">
+                        <!-- COMPETITOR TITLE -->
+                        <h1 class="competitor noopacity nodisplay"><span class="header-txt-color">Top Ten Google Competitors</span></h1>
+                        <!-- COMPETITOR SUBTITLE -->
+                        <h6 class="competitor text-glow noopacity nodisplay">Choose one or more competitors to hack their content strategy.</h6>
+                    </div>
 
-                        <!-- KEYWORD INPUT -->
+                    <form class="form-horizontal form-group row" role="form" autocomplete="off" data-toggle="validator">
+
+                        <!-- COMPETITOR LIST 1-5 -->
                         <div class="input-group inline col-xs-12 col-md-6">
                             <ul id="competitor-list-1" class="list-group">
                                 <!-- CHECKBOX -->
@@ -363,6 +371,9 @@
                                 </li>
                             </ul>
                         </div>
+
+
+                        <!-- COMPETITOR LIST 6-10 -->
                         <div class="input-group inline col-xs-12 col-md-6">
                             <ul id="competitor-list-2" class="list-group">
                                 <li class="list-group-item noopacity checked"><span class="rank text-center">6</span>
@@ -392,7 +403,8 @@
                                 </li>
                             </ul>
                         </div>
-                        <!-- ERROR MESSAGE BOX -->
+
+                        <!-- MESSAGES -->
                         <div class="help-block with-errors"></div>
                         <div id="legend" class="col-xs-5 noopacity nodisplay">
                             <span><i class="entypo-flag text-success"></i>Likely competitor </span>
@@ -400,71 +412,71 @@
                         </div>
                         <div id="data-attribution" class="col-xs-7 text-right noopacity nodisplay"><p><sup>*</sup> Competitor data based on page 1 listing from Google.</p></div>
 
-                    </div>
+                    </form>
 
                     <!--LOADING -->
-                    <div id="loading" class="loading modal-body col-xs-12 text-center row">
-
-                        <div class="loader">
-                            <div class="progress-bar">
-                                <div class="progress-stripes"></div>
-                                <div class="percentage">0%</div>
+                    <div id="loading" class="loading modal-body row">
+                        <div class="input-group col-xs-12 text-center">
+                            <div class="loader">
+                                <div class="progress-bar">
+                                    <div class="percentage">0%</div>
+                                </div>
                             </div>
+
+                            <h6>
+                                <span class="loading-text text-center">
+                        <span class="l-1 letter">F</span>
+                        <span class="l-2 letter">i</span>
+                        <span class="l-3 letter">n</span>
+                        <span class="l-4 letter">d</span>
+                        <span class="l-5 letter">i</span>
+                        <span class="l-6 letter">n</span>
+                        <span class="l-7 letter">g</span>
+                        <span class="l-8 letter">&nbsp;</span>
+                        <span class="l-9 letter">C</span>
+                        <span class="l-10 letter">o</span>
+                        <span class="l-11 letter">m</span>
+                        <span class="l-12 letter">p</span>
+                        <span class="l-13 letter">e</span>
+                        <span class="l-14 letter">t</span>
+                        <span class="l-15 letter">i</span>
+                        <span class="l-16 letter">t</span>
+                        <span class="l-17 letter">o</span>
+                        <span class="l-18 letter">r</span>
+                        <span class="l-19 letter">s</span>
+                        <span class="l-20 letter">.</span>
+                        <span class="l-21 letter">.</span>
+                        <span class="l-22 letter">.</span>
+                    </span>
+                            </h6>
                         </div>
-
-                        <h6>
-                <span class="loading-text text-center">
-                    <span class="l-1 letter">F</span>
-                    <span class="l-2 letter">i</span>
-                    <span class="l-3 letter">n</span>
-                    <span class="l-4 letter">d</span>
-                    <span class="l-5 letter">i</span>
-                    <span class="l-6 letter">n</span>
-                    <span class="l-7 letter">g</span>
-                    <span class="l-8 letter">&nbsp;</span>
-                    <span class="l-9 letter">C</span>
-                    <span class="l-10 letter">o</span>
-                    <span class="l-11 letter">m</span>
-                    <span class="l-12 letter">p</span>
-                    <span class="l-13 letter">e</span>
-                    <span class="l-14 letter">t</span>
-                    <span class="l-15 letter">i</span>
-                    <span class="l-16 letter">t</span>
-                    <span class="l-17 letter">o</span>
-                    <span class="l-18 letter">r</span>
-                    <span class="l-19 letter">s</span>
-                    <span class="l-20 letter">.</span>
-                    <span class="l-21 letter">.</span>
-                    <span class="l-22 letter">.</span>
-                </span>
-                        </h6>
-
                     </div>
 
-                    <div class="form-group">
+                    <!--INITIATE -->
+                    <div class="row">
                         <div class="input-group col-xs-12 col-md-4 col-md-offset-4">
-
                             <!-- SUBMIT BUTTON -->
                             <button id="gotoInventory" type="button" class="btn btn-success btn-black col-xs-12 noopacity nodisplay">
                                 <a href="#">Initiate Rank Hack</a>
                             </button>
-
                         </div>
                     </div>
-                </form>
+
+                </div>
+
             </div>
 
             <!--ANALYZING COMPETITOR -->
-            <div id="competitor-analyzer" class="modal-body col-xs-12 noopacity nodisplay row">
+            <div id="competitor-analyzer" class="modal-body noopacity nodisplay row">
 
-                <div class="modal-header text-center row">
+                <div class="modal-header text-center form-group">
                     <!-- COMPETITOR ANALYSIS TITLE -->
                     <h1><span class="header-txt-color">Competitor Analysis</span></h1>
                     <!-- COMPETITOR ANALYSIS SUBTITLE -->
                     <h6>Analyzing the content publication schedule of your competitors.</h6>
                 </div>
 
-                <div class="text-center row">
+                <div class="text-center">
                     <div class="loading-analyze">
                         <div class="line"></div>
                         <div class="line"></div>
@@ -474,62 +486,64 @@
                     </div>
 
                     <h6>
-                <span class="loading-text text-center">
-                    <span class="l-1 letter">A</span>
-                    <span class="l-2 letter">n</span>
-                    <span class="l-3 letter">a</span>
-                    <span class="l-4 letter">l</span>
-                    <span class="l-5 letter">y</span>
-                    <span class="l-6 letter">z</span>
-                    <span class="l-7 letter">i</span>
-                    <span class="l-8 letter">n</span>
-                    <span class="l-9 letter">g</span>
-                    <span class="l-10 letter">&nbsp;</span>
-                    <span class="l-11 letter">C</span>
-                    <span class="l-12 letter">o</span>
-                    <span class="l-13 letter">m</span>
-                    <span class="l-14 letter">p</span>
-                    <span class="l-15 letter">e</span>
-                    <span class="l-16 letter">t</span>
-                    <span class="l-17 letter">i</span>
-                    <span class="l-18 letter">t</span>
-                    <span class="l-19 letter">o</span>
-                    <span class="l-20 letter">r</span>
-                    <span class="l-21 letter">s</span>
-                    <span class="l-22 letter">.</span>
-                    <span class="l-23 letter">.</span>
-                    <span class="l-24 letter">.</span>
-                </span>
+                        <span class="loading-text text-center">
+                            <span class="l-1 letter">A</span>
+                            <span class="l-2 letter">n</span>
+                            <span class="l-3 letter">a</span>
+                            <span class="l-4 letter">l</span>
+                            <span class="l-5 letter">y</span>
+                            <span class="l-6 letter">z</span>
+                            <span class="l-7 letter">i</span>
+                            <span class="l-8 letter">n</span>
+                            <span class="l-9 letter">g</span>
+                            <span class="l-10 letter">&nbsp;</span>
+                            <span class="l-11 letter">C</span>
+                            <span class="l-12 letter">o</span>
+                            <span class="l-13 letter">m</span>
+                            <span class="l-14 letter">p</span>
+                            <span class="l-15 letter">e</span>
+                            <span class="l-16 letter">t</span>
+                            <span class="l-17 letter">i</span>
+                            <span class="l-18 letter">t</span>
+                            <span class="l-19 letter">o</span>
+                            <span class="l-20 letter">r</span>
+                            <span class="l-21 letter">s</span>
+                            <span class="l-22 letter">.</span>
+                            <span class="l-23 letter">.</span>
+                            <span class="l-24 letter">.</span>
+                        </span>
                     </h6>
                 </div>
 
             </div>
 
             <!-- INVENTORY -->
-            <div id="inventory" class="modal-body col-xs-12 col-md-10 col-md-offset-1 noopacity nodisplay row">
+            <div id="inventory" class="inventory modal-body noopacity nodisplay row form-group">
 
-                <div class="modal-header text-center row">
+                <div class="modal-header text-center form-group">
                     <!-- INVENTORY TITLE -->
                     <h1><span class="header-txt-color">Competitive Content Inventory</span></h1>
                     <!-- INVENTORY SUBTITLE -->
                     <h6>Total amount of content your competitor's have published over the last 12 months.</h6>
                 </div>
 
-                <div class="col-xs-12">
+                <div class="col-xs-12 form-group">
 
-                    <div class="col-sm-6">
-                        <div class="tile-stats tile-white">
-                            <div class="icon icon-flip"><i class="entypo-rss"></i></div>
-                            <div id="inventory-count01" class="num count"></div>
-                            <h3>Published Onsite Inventory</h3>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="tile-stats tile-white">
+                                <div class="icon icon-flip"><i class="entypo-rss"></i></div>
+                                <div id="inventory-count01" class="num count"></div>
+                                <h3>Published Onsite Inventory</h3>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-sm-6">
-                        <div class="tile-stats tile-white">
-                            <div class="icon icon-flip"><i class="entypo-link"></i></div>
-                            <div id="inventory-count02" class="num count"></div>
-                            <h3>Published Offsite Inventory</h3>
+                        <div class="col-sm-6">
+                            <div class="tile-stats tile-white">
+                                <div class="icon icon-flip"><i class="entypo-link"></i></div>
+                                <div id="inventory-count02" class="num count"></div>
+                                <h3>Published Offsite Inventory</h3>
+                            </div>
                         </div>
                     </div>
 
@@ -538,26 +552,27 @@
             </div>
 
             <!-- USER -->
-            <div id="user" class="user modal-body col-xs-12 col-md-10 col-md-offset-1 noopacity nodisplay row">
+            <div id="user" class="user modal-body noopacity nodisplay row">
 
-                <div class="modal-header text-center row">
+                <div class="modal-header text-center form-group">
                     <!-- USER TITLE -->
                     <h1><span class="header-txt-color">How do you stack up?</span></h1>
                     <!-- USER SUBTITLE -->
                     <h6>Compare your content strategy to your competitors'.</h6>
                 </div>
 
-                <form class="form-horizontal" role="form" autocomplete="off" data-toggle="validator">
-                    <div class="form-group">
+                <form class="form-horizontal col-xs-12" role="form" autocomplete="off" data-toggle="validator">
+                    <div class="form-group row">
 
                         <!-- DOMAIN INPUT -->
-                        <div class="input-group col-xs-12">
+                        <div class="input-group col-xs-12 col-md-10 col-md-offset-1">
 
                             <!-- ICON -->
                             <div class="input-group-addon"><span class="elegant icon_link"></span></div>
 
                             <!-- INPUT -->
                             <input type="url" class="form-control" id="userUrl" placeholder="Enter your website URL to compare" autocomplete="off" required>
+
                         </div>
 
                         <!-- ERROR MESSAGE BOX -->
@@ -565,187 +580,178 @@
 
                     </div>
 
-                    <div class="form-group">
-                        <div class="input-group col-xs-12 col-md-4 col-md-offset-4">
+                    <div class="form-group row">
 
-                            <!-- SUBMIT BUTTON -->
-                            <button id="gotoComparison" type="button" class="btn btn-success btn-black col-xs-12">
-                                <a href="#">Initiate Comparison</a>
-                            </button>
+                        <!-- SUBMIT BUTTON -->
+                        <button id="gotoComparison" type="button" class="btn btn-success btn-black col-xs-12 col-md-4 col-md-offset-4">
+                            <a href="#">Initiate Comparison</a>
+                        </button>
 
-                        </div>
                     </div>
                 </form>
             </div>
 
             <!--ANALYZING USER -->
-            <div id="user-analyzer" class="user-analyzer modal-body col-xs-12 noopacity nodisplay row">
+            <div id="user-analyzer" class="user-analyzer modal-body noopacity nodisplay row">
 
-                <div class="modal-header text-center row">
+                <div class="modal-header text-center form-group">
                     <!-- USER ANALYSIS TITLE -->
                     <h1 class="user-analyzer"><span class="header-txt-color">Content Analysis</span></h1>
                     <!-- USER ANALYSIS SUBTITLE -->
                     <h6 class="user-analyzer">Analyzing your content publication schedule.</h6>
                 </div>
 
-                <div class="text-center row">
+                <div class="text-center">
                     <div class="loading-analyze"></div>
 
                     <h6>
-                    <span class="loading-text text-center">
-                    <span class="l-1 letter">A</span>
-                    <span class="l-2 letter">n</span>
-                    <span class="l-3 letter">a</span>
-                    <span class="l-4 letter">l</span>
-                    <span class="l-5 letter">y</span>
-                    <span class="l-6 letter">z</span>
-                    <span class="l-7 letter">i</span>
-                    <span class="l-8 letter">n</span>
-                    <span class="l-9 letter">g</span>
-                    <span class="l-10 letter">&nbsp;</span>
-                    <span class="l-11 letter">C</span>
-                    <span class="l-12 letter">o</span>
-                    <span class="l-13 letter">n</span>
-                    <span class="l-14 letter">t</span>
-                    <span class="l-15 letter">e</span>
-                    <span class="l-16 letter">n</span>
-                    <span class="l-17 letter">t</span>
-                    <span class="l-18 letter">.</span>
-                    <span class="l-19 letter">.</span>
-                    <span class="l-20 letter">.</span>
-                </span>
+                        <span class="loading-text text-center">
+                            <span class="l-1 letter">A</span>
+                            <span class="l-2 letter">n</span>
+                            <span class="l-3 letter">a</span>
+                            <span class="l-4 letter">l</span>
+                            <span class="l-5 letter">y</span>
+                            <span class="l-6 letter">z</span>
+                            <span class="l-7 letter">i</span>
+                            <span class="l-8 letter">n</span>
+                            <span class="l-9 letter">g</span>
+                            <span class="l-10 letter">&nbsp;</span>
+                            <span class="l-11 letter">C</span>
+                            <span class="l-12 letter">o</span>
+                            <span class="l-13 letter">n</span>
+                            <span class="l-14 letter">t</span>
+                            <span class="l-15 letter">e</span>
+                            <span class="l-16 letter">n</span>
+                            <span class="l-17 letter">t</span>
+                            <span class="l-18 letter">.</span>
+                            <span class="l-19 letter">.</span>
+                            <span class="l-20 letter">.</span>
+                        </span>
                     </h6>
+
                 </div>
 
             </div>
 
             <!-- COMPARISONS -->
-            <div id="comparison" class="modal-body col-xs-12 noopacity nodisplay row">
+            <div id="comparison" class="modal-body noopacity nodisplay row">
 
-                <div class="modal-header text-center row">
+                <div class="modal-header text-center form-group">
                     <!-- COMPARISON TITLE -->
                     <h1 class="comparison"><span class="header-txt-color">Content Publication Comparison</span></h1>
                     <!-- COMPARISON SUBTITLE -->
                     <h6 class="comparison">How your content publication compares to your competitors'.</h6>
                 </div>
 
-                <form class="form-horizontal" role="form" autocomplete="off" data-toggle="validator">
-                    <div class="form-group">
+                <form class="form-horizontal col-xs-12" role="form" autocomplete="off" data-toggle="validator">
 
-                        <div class="input-group col-xs-12">
+                    <div class="form-group row">
 
-                            <!-- OFFSITE COMPARISONS -->
-                            <div class="col-xs-12">
-                                <h5 class="header-txt-white ">
-                                    <span class="icon icon-flip"><i class="entypo-rss"></i></span>
-                                    OFFSITE CONTENT POSTED OVER THE LAST 12 MONTHS
-                                </h5>
+                        <!-- OFFSITE COMPARISONS -->
+                        <h5 class="header-txt-white ">
+                            <span class="icon icon-flip"><i class="entypo-rss"></i></span>
+                            OFFSITE CONTENT POSTED OVER THE LAST 12 MONTHS
+                        </h5>
 
-                                <div class="col-sm-4">
-                                    <div class="tile-stats tile-red">
-                                        <div class="icon icon-flip"><i class="entypo-chart-line"></i></div>
-                                        <div id="count01" class="num count"></div>
-                                        <h3>Annual Content Deficiency</h3>
-
-                                        <p>The pieces of offsite content you are deficient over the last 12 months.</p>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-4">
-                                    <div class="tile-stats tile-red">
-                                        <div class="icon icon-flip"><i class="entypo-chart-line"></i></div>
-                                        <div id="count02" class="num count"></div>
-                                        <h3>Monthly Content Deficiency</h3>
-
-                                        <p>The pieces of offsite content you are deficient each month.</p>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-4">
-                                    <div class="tile-stats tile-red">
-                                        <div class="icon icon-flip"><i class="entypo-chart-line"></i></div>
-                                        <div id="count03" class="num count"></div>
-                                        <h3>Daily Content Deficiency</h3>
-
-                                        <p>The pieces of offsite content you are deficient each day.</p>
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-12">
-                                    <div class="tile-stats tile-white">
-                                        <h6 class="text-center">Pieces of offsite content posted over the last 12 months</h6>
-
-                                        <div id="chart_div1" class="chart"></div>
-                                    </div>
-                                </div>
+                        <div class="col-sm-4">
+                            <div class="tile-stats tile-red">
+                                <div class="icon icon-flip"><i class="entypo-chart-line"></i></div>
+                                <div id="count01" class="num count"></div>
+                                <h3>Annual Content Deficiency</h3>
+                                <p>Pieces of offsite content you are deficient over the last 12 months.</p>
                             </div>
-
-                            <!-- ONSITE COMPARISONS -->
-                            <div class="col-xs-12">
-                                <h5 class="header-txt-white ">
-                                    <span class="icon icon-flip"><i class="entypo-link"></i></span>
-                                    ONSITE CONTENT POSTED OVER THE LAST 12 MONTHS
-                                </h5>
-
-                                <div class="col-sm-4">
-                                    <div class="tile-stats tile-green">
-                                        <div class="icon"><i class="entypo-chart-line"></i></div>
-                                        <div id="count04" class="num count"></div>
-                                        <h3>Annual Content Surplus</h3>
-
-                                        <p>The surplus of onsite content you have built over the last 12 months.</p>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-4">
-                                    <div class="tile-stats tile-green">
-                                        <div class="icon"><i class="entypo-chart-line"></i></div>
-                                        <div id="count05" class="num count"></div>
-                                        <h3>Monthly Content Surplus</h3>
-
-                                        <p>The surplus of onsite content you are building monthly.</p>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-4">
-                                    <div class="tile-stats tile-green">
-                                        <div class="icon"><i class="entypo-chart-line"></i></div>
-                                        <div id="count06" class="num count"></div>
-                                        <h3>Daily Content Surplus</h3>
-
-                                        <p>The surplus of onsite content you are building daily.</p>
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-12">
-                                    <div class="tile-stats tile-white">
-                                        <h6 class="text-center">Pieces of onsite content posted over the last 12 months</h6>
-
-                                        <div id="chart_div2" class="chart"></div>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
 
-                        <!-- ERROR MESSAGE BOX -->
-                        <div class="help-block with-errors"></div>
-                    </div>
-                    <br/>
-                    <br/>
+                        <div class="col-sm-4">
+                            <div class="tile-stats tile-red">
+                                <div class="icon icon-flip"><i class="entypo-chart-line"></i></div>
+                                <div id="count02" class="num count"></div>
+                                <h3>Monthly Content Deficiency</h3>
+                                <p>Pieces of offsite content you are deficient each month.</p>
+                            </div>
+                        </div>
 
-                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <div class="tile-stats tile-red">
+                                <div class="icon icon-flip"><i class="entypo-chart-line"></i></div>
+                                <div id="count03" class="num count"></div>
+                                <h3>Daily Content Deficiency</h3>
+                                <p>Pieces of offsite content you are deficient each day.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12">
+                            <div class="tile-stats tile-white">
+                                <h6 class="text-center">Pieces of offsite content posted over the last 12 months</h6>
+                                <div id="chart_div1" class="chart"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group row">
+
+                        <!-- ONSITE COMPARISONS -->
+                        <h5 class="header-txt-white ">
+                            <span class="icon icon-flip"><i class="entypo-link"></i></span>
+                            ONSITE CONTENT POSTED OVER THE LAST 12 MONTHS
+                        </h5>
+
+                        <div class="col-sm-4">
+                            <div class="tile-stats tile-green">
+                                <div class="icon"><i class="entypo-chart-line"></i></div>
+                                <div id="count04" class="num count"></div>
+                                <h3>Annual Content Surplus</h3>
+
+                                <p>The surplus of onsite content you have built over the last 12 months.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="tile-stats tile-green">
+                                <div class="icon"><i class="entypo-chart-line"></i></div>
+                                <div id="count05" class="num count"></div>
+                                <h3>Monthly Content Surplus</h3>
+
+                                <p>The surplus of onsite content you are building monthly.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="tile-stats tile-green">
+                                <div class="icon"><i class="entypo-chart-line"></i></div>
+                                <div id="count06" class="num count"></div>
+                                <h3>Daily Content Surplus</h3>
+
+                                <p>The surplus of onsite content you are building daily.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12">
+                            <div class="tile-stats tile-white">
+                                <h6 class="text-center">Pieces of onsite content posted over the last 12 months</h6>
+
+                                <div id="chart_div2" class="chart"></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row">
+
                         <div class="modal-header text-center">
                             <h1><span class="header-txt-color">Now let's beat your competitors!</span></h1>
                             <h6>Build a custom content publication schedule that will push your content marketing efforts beyond your competition.</h6>
                         </div>
+
                         <div class="input-group col-xs-12 col-md-4 col-md-offset-4">
                             <!-- SUBMIT BUTTON -->
                             <button id="chosenCompetitor" type="button" class="btn btn-success btn-black col-xs-12">
                                 <a href="http://23.239.30.92/~contentschema/admin"> ACTIVATE </a>
                             </button>
                         </div>
+
                     </div>
+
                 </form>
             </div>
         </div>
@@ -760,8 +766,6 @@
 <section id="header" class="blurable">
 
     <div id="googlemaps" class="noopacity"></div>
-    <!-- FOR COLOR OVERLAY, CHANGE CLASS TO color-overlay -->
-
     <div class="piece scanlines noclick"></div>
     <div id="hacker-text" class="piece glow noclick"></div>
     <div id="crt-output" class="piece output noopacity"></div>

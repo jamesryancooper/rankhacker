@@ -1313,6 +1313,16 @@ fieldset[disabled] .btn {
 
 .modal.transparent .close {
     font-size: 80px;
+    color: #fff;
+    font-weight: 200;
+}
+
+.modal.transparent .close:hover {
+    opacity: .5;
+}
+
+.modal.transparent .btn {
+    margin-top: 30px;
 }
 
 .modal.transparent #data-attribution {
@@ -2376,6 +2386,44 @@ fieldset[disabled] .btn {
 .interior #header {
     background: none;
     background-color: #f3f3f3;
+}
+
+/*------------------------------------------------------------------
+
+ [15. Contact]
+
+------------------------------------------------------------------*/
+/*     15.2. Addonial contact informations     */
+#contact-more {
+    /*background: rgba(61, 61, 61, 0.08);*/
+    background: rgba(255, 255, 255, 0.08);
+    /*margin: 40px 0 0;*/
+    margin: 0;
+    padding: 25px 0 30px;
+    color: #666666;
+    font-size: .875em;
+    line-height: 1.5em;
+}
+.home #contact-more {
+    margin: 0;
+}
+#contact-more h6 {
+    margin-bottom: .33em;
+}
+#contact-more a {
+    color: rgba(61,61,60,.6) !important;
+}
+#contact-more a:hover {
+    color: #000000 !important;
+}
+#contact-more ul {
+    list-style: none;
+    padding-left: 0px;
+}
+#contact-more ul li span {
+    width: 12%;
+    margin: 5px 0;
+    float: left;
 }
 
 /*------------------------------------------------------------------
