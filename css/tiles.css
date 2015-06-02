@@ -123,7 +123,7 @@
   margin-top: 5px;
 }
 .tile-stats.tile-red {
-  background: #a94442;
+  background: rgba(169,68,66,.85);
 }
 .tile-stats.tile-red:hover {
   background: #872623;
@@ -277,7 +277,7 @@
   color: #8f8f8f;
 }
 .tile-stats.tile-white {
-  background: #ffffff;
+  background: rgba(255,255,255,.95);
   border: 1px solid #ebebeb;
 }
 .tile-stats.tile-white:hover {

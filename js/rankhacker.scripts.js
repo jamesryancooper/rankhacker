@@ -38,9 +38,152 @@ function glitch() {
 }
 
 //////////////////////////////////////////////////////  //
-//    CREATE MAP                                        //
+//    BAR CHART                                         //
 //////////////////////////////////////////////////////  //
-function createMap() {
+(function () {
+	"use strict";
+
+	// Load the Visualization API and the piechart package.
+	google.load('visualization', '1.0', {'packages': ['corechart']});
+
+	// Set a callback to run when the Google Visualization API is loaded.
+	google.setOnLoadCallback(drawChart1);
+	//google.setOnLoadCallback(drawChart2);
+
+	function drawChart1() {
+		// Some raw data (not necessarily accurate)
+		var data = google.visualization.arrayToDataTable([
+			['Month', 'You', 'Competitors'],
+			['Jun 14', 233, 1222],
+			['Jul 14', 444, 1234],
+			['Aug 14', 117, 876],
+			['Sep 14', 43, 976],
+			['Oct 14', 136, 1053],
+			['Nov 14', 122, 1210],
+			['Dec 14', 212, 938],
+			['Jan 15', 135, 1120],
+			['Feb 15', 157, 1167],
+			['Mar 15', 139, 1110],
+			['Apr 15', 136, 691],
+			['May 15', 110, 345]
+		]);
+		var options = {
+			vAxis: {title: "Pieces of Content"},
+			hAxis: {title: "Month"},
+			width: '1050',
+			height: '300',
+			colors: ['#14fdce', '#CBC7C7'],
+			backgroundColor: {fill: 'transparent'},
+			seriesType: "area",
+			series: {
+				0: {type: "area"},
+				1: {type: "area"}
+			}
+		};
+
+		var chart1 = new google.visualization.ComboChart(document.getElementById('chart_div1'));
+
+		chart1.draw(data, options);
+
+	}
+
+	function drawChart2() {
+		// Some raw data (not necessarily accurate)
+		var data = google.visualization.arrayToDataTable([
+			['Month', 'You', 'Competitors'],
+			['Jun 14', 23, 45],
+			['Jul 14', 45, 43],
+			['Aug 14', 23, 41],
+			['Sep 14', 32, 48],
+			['Oct 14', 32, 38],
+			['Nov 14', 34, 36],
+			['Dec 14', 45, 32],
+			['Jan 15', 67, 38],
+			['Feb 15', 58, 42],
+			['Mar 15', 89, 47],
+			['Apr 15', 92, 45],
+			['May 15', 110, 53]
+		]);
+		var options = {
+			vAxis: {title: "Pieces of Content"},
+			hAxis: {title: "Month"},
+			width: '1050',
+			height: '300',
+			colors: ['#14fdce', '#CBC7C7'],
+			backgroundColor: {fill: 'transparent'},
+			seriesType: "area",
+			series: {
+				0: {type: "area"},
+				1: {type: "area"}
+			}
+		};
+
+		//var chart2 = new google.visualization.ComboChart(document.getElementById('chart_div2'));
+
+		//chart2.draw(data, options);
+
+	}
+})();
+
+//////////////////////////////////////////////////////  //
+//    THEATER TYPE TOOL                                 //
+//////////////////////////////////////////////////////  //
+(function () {
+	"use strict";
+
+	var theater = new TheaterJS();
+	var current;
+
+	theater
+		.describe("statement", { speed: .8, accuracy: .8, invincibility: 4 }, "#statement")
+		.describe("problem-solution",{ speed: 2, accuracy: .8, invincibility: 4 }, "#problem-solution");
+
+	theater
+		.on("say:start, erase:start", function () {
+			var self    = this,
+				current = self.current.voice;
+
+			self.utils.addClass(current, "saying");
+
+		})
+		.on("say:end, erase:end", function () {
+			var self    = this,
+				current = self.current.voice;
+
+			self.utils.removeClass(current, "saying");
+		});
+
+	theater
+		.write(2000)
+		.write("problem-solution:uncover your competitor's offite content strategy", 400, " to out rank them!")
+		.write("statement:The Content Intelligence Platform", 900);
+
+
+	function kill () {
+		var self    = this,
+			delay   = 300,
+			i       = 0,
+			timeout = setTimeout(function blink () {
+				if (++i < 6) timeout = setTimeout(blink, delay);
+				else self.next();
+			}, delay);
+
+		return self;
+	}
+
+	window.theater = theater;
+
+})();
+
+//////////////////////////////////////////////////////  //
+//    EVENTS ON DOCUMENT READY                          //
+//////////////////////////////////////////////////////  //
+$(document).ready(function() {
+	"use strict";
+
+	//////////////////////////////////////////////////////  //
+	//    CREATE MAP                                        //
+	//////////////////////////////////////////////////////  //
 
 	var mapCanvas = document.getElementById('googlemaps');
 	var markers = [];
@@ -295,10 +438,10 @@ function createMap() {
 
 			glitchCount++;
 
-			if (glitchCount > 40 ) {
+			if (glitchCount > 30 ) {
 				clearInterval(myGlitch);
-				$('#crt-glitch, #crt-output').addClass('noopacity');
-				console.log("done with glitch");
+				$('#crt-glitch,#crt-output').addClass('noopacity');
+				console.log('glitch done');
 			}
 
 			glitch();
@@ -331,156 +474,6 @@ function createMap() {
 		searchBox.setBounds(bounds);
 	});
 
-}
-
-//////////////////////////////////////////////////////  //
-//    BAR CHART                                         //
-//////////////////////////////////////////////////////  //
-(function () {
-	"use strict";
-
-	// Load the Visualization API and the piechart package.
-	google.load('visualization', '1.0', {'packages': ['corechart']});
-
-	// Set a callback to run when the Google Visualization API is loaded.
-	google.setOnLoadCallback(drawChart1);
-	google.setOnLoadCallback(drawChart2);
-
-	function drawChart1() {
-		// Some raw data (not necessarily accurate)
-		var data = google.visualization.arrayToDataTable([
-			['Month', 'You', 'Competitors'],
-			['Jun 14', 233, 1222],
-			['Jul 14', 444, 1234],
-			['Aug 14', 117, 876],
-			['Sep 14', 43, 976],
-			['Oct 14', 136, 1053],
-			['Nov 14', 122, 1210],
-			['Dec 14', 212, 938],
-			['Jan 15', 135, 1120],
-			['Feb 15', 157, 1167],
-			['Mar 15', 139, 1110],
-			['Apr 15', 136, 691],
-			['May 15', 110, 345]
-		]);
-		var options = {
-			vAxis: {title: "Pieces of Content"},
-			hAxis: {title: "Month"},
-			width: '1050',
-			height: '300',
-			colors: ['#00DFFC', '#CBC7C7'],
-			backgroundColor: {fill: 'transparent'},
-			seriesType: "area",
-			series: {
-				0: {type: "area"},
-				1: {type: "area"}
-			}
-		};
-
-		var chart1 = new google.visualization.ComboChart(document.getElementById('chart_div1'));
-
-		chart1.draw(data, options);
-
-	}
-
-	function drawChart2() {
-		// Some raw data (not necessarily accurate)
-		var data = google.visualization.arrayToDataTable([
-			['Month', 'You', 'Competitors'],
-			['Jun 14', 23, 45],
-			['Jul 14', 45, 43],
-			['Aug 14', 23, 41],
-			['Sep 14', 32, 48],
-			['Oct 14', 32, 38],
-			['Nov 14', 34, 36],
-			['Dec 14', 45, 32],
-			['Jan 15', 67, 38],
-			['Feb 15', 58, 42],
-			['Mar 15', 89, 47],
-			['Apr 15', 92, 45],
-			['May 15', 110, 53]
-		]);
-		var options = {
-			vAxis: {title: "Pieces of Content"},
-			hAxis: {title: "Month"},
-			width: '1050',
-			height: '300',
-			colors: ['#00DFFC', '#CBC7C7'],
-			backgroundColor: {fill: 'transparent'},
-			seriesType: "area",
-			series: {
-				0: {type: "area"},
-				1: {type: "area"}
-			}
-		};
-
-		var chart2 = new google.visualization.ComboChart(document.getElementById('chart_div2'));
-
-		chart2.draw(data, options);
-
-	}
-})();
-
-//////////////////////////////////////////////////////  //
-//    THEATER TYPE TOOL                                 //
-//////////////////////////////////////////////////////  //
-(function () {
-	"use strict";
-
-	var theater = new TheaterJS();
-	var current;
-
-	theater
-		.describe("statement", { speed: .8, accuracy: .8, invincibility: 4 }, "#statement")
-		.describe("problem-solution",{ speed: 2, accuracy: .8, invincibility: 4 }, "#problem-solution");
-
-	theater
-		.on("say:start, erase:start", function () {
-			var self    = this,
-				current = self.current.voice;
-
-			self.utils.addClass(current, "saying");
-
-		})
-		.on("say:end, erase:end", function () {
-			var self    = this,
-				current = self.current.voice;
-
-			self.utils.removeClass(current, "saying");
-		});
-
-	theater
-		.write(2000)
-		.write("problem-solution:have mounds of competitor data?", 900)
-		.write("problem-solution:don't know what to do with it?", 900)
-		.write({ name: "call", args: [kill, true] })
-		.write("problem-solution:start making sense of that data...", 900)
-		.write("statement:The", 600)
-		.write(-3)
-		.write("statement:Your Intelligent Content Strategy Platform", 900)
-		.write("problem-solution:a clear and actionable strategy", 400, " to out rank your competitors!");
-
-	function kill () {
-		var self    = this,
-			delay   = 300,
-			i       = 0,
-			timeout = setTimeout(function blink () {
-				if (++i < 6) timeout = setTimeout(blink, delay);
-				else self.next();
-			}, delay);
-
-		return self;
-	}
-
-	window.theater = theater;
-
-})();
-
-//////////////////////////////////////////////////////  //
-//    EVENTS ON DOCUMENT READY                          //
-//////////////////////////////////////////////////////  //
-$(document).ready(function() {
-	"use strict";
 
 	//////////////////////////////////////////////////////  //
 	//    SHOW MAP					                        //
@@ -492,7 +485,6 @@ $(document).ready(function() {
 		if (event.which == 13) {
 			$('#googlemaps, #crt-glitch, #crt-output').removeClass('noopacity');
 			$('#googlemaps').addClass('turn-on');
-			createMap();
 		} else {
 			if ($('#googlemaps').hasClass('turn-on')) {
 				$('#googlemaps').removeClass('turn-on').addClass('turn-off');
@@ -572,23 +564,19 @@ $(document).ready(function() {
 		suffix : ''
 	};
 
-	var inventoryCount01 = new countUp("inventory-count01", 10579, 10954, 0, 3, options);
-	var inventoryCount02 = new countUp("inventory-count02", 30435, 30679, 0, 3, options);
+	var inventoryCount01 = new countUp("inventory-count01", 456, 487, 0, 3, options);
+	var inventoryCount02 = new countUp("inventory-count02", 1645, 1723, 0, 3, options);
+	var inventoryCount03 = new countUp("inventory-count03", 23432, 23586, 0, 3, options);
 	var count01 = new countUp("count01", -3259, -3289, 0, 3, options);
 	var count02 = new countUp("count02", -432, -486, 0, 3, options);
 	var count03 = new countUp("count03", -12, -6, 0, 3, options);
-	var count04 = new countUp("count04", 43, 67, 0, 3, options);
-	var count05 = new countUp("count05", 5, 8, 0, 3, options);
-	var count06 = new countUp("count06", 0, 1, 0, 3, options);
 
 	$('#inventory-count01').on('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {inventoryCount01.start();} return false;});
 	$('#inventory-count02').on('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {inventoryCount02.start();} return false;});
+	$('#inventory-count03').on('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {inventoryCount03.start();} return false;});
 	$('#count01').on('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {count01.start();} return false;});
 	$('#count02').on('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {count02.start();} return false;});
 	$('#count03').on('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {count03.start();} return false;});
-	$('#count04').on('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {count04.start();} return false;});
-	$('#count05').on('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {count05.start();} return false;});
-	$('#count06').on('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {count06.start();} return false;});
 
 	//////////////////////////////////////////////////////  //
 	//    LOADER			  		            		    //
@@ -793,22 +781,54 @@ $(document).ready(function() {
 	//////////////////////////////////////////////////////  //
 	//    HEADER + MODAL ANIMATIONS				            //
 	//////////////////////////////////////////////////////  //
+	//    IS HOMEPAGE DATA ENTERED?      		            //
+	//////////////////////////////////////////////////////  //
+	$('#keyword').focusout(function() {
+
+		if ($(this).val() != "" && $('#location').val() != "") {
+			//$('#get-started').removeClass('no-modal');
+		} else {
+			//$('#get-started').addClass('no-modal');
+		}
+	});
+
+	$('#location').focusout(function() {
+
+		if ($(this).val() != "" && $('#keyword').val() != "") {
+			//$('#get-started').removeClass('no-modal');
+		} else {
+			//$('#get-started').addClass('no-modal');
+		}
+	});
+
+	//////////////////////////////////////////////////////  //
 	// SHOW MODAL
 	//////////////////////////////////////////////////////  //
-	$('#data.modal').on('show.bs.modal', function () {
+	$('#data.modal').on('show.bs.modal', function (e) {
 
-		$('.blurable').addClass('blur');
+		var button = e.relatedTarget;
 
-		$('#crt-output').removeClass('output');
-		$('#crt-glitch').removeClass('glitch');
+		//if($('#data').hasClass('no-modal')) {
+			//console.log("here");
+			//e.stopPropegation();
+			//$('intro-form').validator('validate');
 
-		$('.modal.fadeable')
-			.removeClass('animated fadeOut')
-			.addClass('animated fadeIn');
+		//} else {
 
-		$('.header-centered.fadeable')
-			.removeClass('animated fadeIn')
-			.addClass('animated fadeOut');
+			$('.blurable').addClass('blur');
+
+			$('#crt-output').removeClass('output');
+			$('#crt-glitch').removeClass('glitch');
+
+			$('.modal.fadeable')
+				.removeClass('animated fadeOut')
+				.addClass('animated fadeIn');
+
+			$('.header-centered.fadeable')
+				.removeClass('animated fadeIn')
+				.addClass('animated fadeOut');
+
+		//}
 
 	});
 
@@ -1028,10 +1048,59 @@ $(document).ready(function() {
 		});
 
 		//////////////////////////////////////////////////////  //
+		//    COMPETITOR         	  		            		//
+		//////////////////////////////////////////////////////  //
+		var competitor = $("#competitor");
+		var gotoCompetitor = $("#gotoCompetitor");
+		var inventory = $("#inventory");
+		var user = $("#user");
+
+		$(gotoCompetitor).on("click", function() {
+
+			$(document)
+
+				.queue('competitor', function(next) {
+
+					$(user).addClass("animated fadeOut");
+					$(inventory).addClass("animated fadeOut");
+					clearMe1 = setTimeout(next, 300); // delay
+
+				})
+
+				.queue('competitor', function(next) {
+
+					$(user).addClass("noopacity nodisplay");
+					$(inventory).addClass("noopacity nodisplay");
+					clearMe2 = setTimeout(next, 300); // delay
+
+				})
+
+				.queue('competitor', function(next) {
+
+					$(competitor).addClass("animated fadeIn");
+					clearMe3 = setTimeout(next, 300); // delay
+
+				})
+
+				.queue('competitor', function(next) {
+
+					$(competitor).removeClass("noopacity nodisplay");
+					clearMe4 = setTimeout(next, 300); // delay
+
+				})
+
+				.queue('competitor', function(){
+					stopTimer();
+				})
+
+				.dequeue('competitor');
+
+		});
+
+		//////////////////////////////////////////////////////  //
 		//    INVENTORY         	  		            		//
 		//////////////////////////////////////////////////////  //
 		var inventory = $("#inventory");
-		var showInventory= $(".showInventory");
 		var gotoInventory = $("#gotoInventory");
 		var user = $("#user");
 		var competitor = $(".competitor");

@@ -72,12 +72,12 @@ body {
 
 a {
     outline: 0 !important;
-    color: #ffffff;
+    color: rgba(255,255,255,.6);
     text-decoration: none !important;
 }
 
 a:visited {
-    color: #ffffff;
+    color: rgba(255,255,255,.6);
 }
 
 button a:visited {
@@ -85,7 +85,7 @@ button a:visited {
 }
 
 a:hover {
-    color: #3d3d3d;
+    color: rgba(255,255,255,1);
 }
 
 button a:hover {
@@ -141,14 +141,14 @@ h6 {
 ::selection {
     /* webkit */
 
-    background: #37afd7;
+    background: #14fdce;
     color: #ffffff;
 }
 
 ::-moz-selection {
     /* gecko */
 
-    background: #37afd7;
+    background: #14fdce;
     color: #ffffff;
 }
 
@@ -1395,14 +1395,17 @@ fieldset[disabled] .btn {
     font-weight: 700;
     line-height: 0.5em;
 }
-
+.modal.transparent h6.chart-title {
+    color: #000000;
+}
 .modal.transparent .modal-header h6 {
-    font-size: 1.75em;
+    font-size: 1.4em;
     color: #fff;
     text-shadow: 3px 3px 0 #3D3D3C, -1px -1px 0 #3D3D3C, 1px -1px 0 #3D3D3C, -1px 1px 0 #3D3D3C, 1px 1px 0 #3D3D3C;
 }
 
-.modal.transparent h6.text-glow {
+.modal.transparent .modal-header h6.text-glow,
+.text-glow {
     -webkit-animation: text-glow 2s ease-in-out infinite alternate;
     animation: text-glow 2s ease-in-out infinite alternate;
 }
@@ -1412,21 +1415,21 @@ fieldset[disabled] .btn {
         text-shadow: 0 0 10px #fff,
         0 0 20px  #fff,
         0 0 30px  #fff,
-        0 0 40px  #228DFF,
-        0 0 50px  #228DFF,
-        0 0 60px  #228DFF,
-        0 0 70px #228DFF,
-        0 0 80px #228DFF;
+        0 0 40px  #14fdce,
+        0 0 50px  #14fdce,
+        0 0 60px  #14fdce,
+        0 0 70px #14fdce,
+        0 0 80px #14fdce;
     }
     to {
         text-shadow: 0 0 2px #fff,
         0 0 4px #fff,
         0 0 6px #fff,
-        0 0 8px #228DFF,
-        0 0 10px #228DFF,
-        0 0 12px #228DFF,
-        0 0 14px #228DFF,
-        0 0 16px #228DFF;
+        0 0 8px #14fdce,
+        0 0 10px #14fdce,
+        0 0 12px #14fdce,
+        0 0 14px #14fdce,
+        0 0 16px #14fdce;
     }
 }
 
@@ -1435,21 +1438,21 @@ fieldset[disabled] .btn {
         text-shadow: 0 0 10px #fff,
         0 0 20px  #fff,
         0 0 30px  #fff,
-        0 0 40px  #228DFF,
-        0 0 50px  #228DFF,
-        0 0 60px  #228DFF,
-        0 0 70px #228DFF,
-        0 0 80px #228DFF;
+        0 0 40px  #14fdce,
+        0 0 50px  #14fdce,
+        0 0 60px  #14fdce,
+        0 0 70px #14fdce,
+        0 0 80px #14fdce;
     }
     to {
         text-shadow: 0 0 2px #fff,
         0 0 4px #fff,
         0 0 6px #fff,
-        0 0 8px #228DFF,
-        0 0 10px #228DFF,
-        0 0 12px #228DFF,
-        0 0 14px #228DFF,
-        0 0 16px #228DFF;
+        0 0 8px #14fdce,
+        0 0 10px #14fdce,
+        0 0 12px #14fdce,
+        0 0 14px #14fdce,
+        0 0 16px #14fdce;
     }
 }
 
@@ -1967,8 +1970,8 @@ fieldset[disabled] .btn {
     margin: 10% auto;
     border-bottom: 30px solid #fff;
     border-left: 30px solid #fff;
-    border-right: 30px solid rgba(80,80,80,.8);
-    border-top: 30px solid rgba(80,80,80,.8);
+    border-right: 30px solid rgba(255,255,255, .7);
+    border-top: 30px solid rgba(255,255,255, .7);
     border-radius: 100%;
     height: 150px;
     width: 150px;
@@ -1977,7 +1980,7 @@ fieldset[disabled] .btn {
     -ms-animation: spin .6s infinite linear;
     -o-animation: spin .6s infinite linear;
     animation: spin .6s infinite linear;
-    opacity: .6;
+    opacity: .7;
 }
 
 @keyframes spin {
@@ -2192,6 +2195,7 @@ fieldset[disabled] .btn {
 
 #header .header-txt-color {
     font-size: .5em;
+    font-weight: 400;
     text-transform: uppercase;
     color: #ffffff;
     line-height: 1em;
@@ -2273,7 +2277,7 @@ fieldset[disabled] .btn {
 }
 
 .header-centered h1 {
-    font-size: 3.9em !important;
+    font-size: 3.6em !important;
 }
 
 .results .header-centered h1,
@@ -2282,7 +2286,7 @@ fieldset[disabled] .btn {
 }
 
 .header-centered .header-txt-small {
-    font-size: 1.8em !important;
+    font-size: 1.6em !important;
 }
 
 .header-centered .header-margin-more {
