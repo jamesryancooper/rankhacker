@@ -47,10 +47,11 @@ function glitch() {
 	google.load('visualization', '1.0', {'packages': ['corechart']});
 
 	// Set a callback to run when the Google Visualization API is loaded.
-	google.setOnLoadCallback(drawChart1);
-	//google.setOnLoadCallback(drawChart2);
+	google.setOnLoadCallback(drawAnnualChart);
+	google.setOnLoadCallback(drawMonthlyChart);
+	google.setOnLoadCallback(drawWeeklyChart);
 
-	function drawChart1() {
+	function drawAnnualChart() {
 		// Some raw data (not necessarily accurate)
 		var data = google.visualization.arrayToDataTable([
 			['Month', 'You', 'Competitors'],
@@ -81,32 +82,24 @@ function glitch() {
 			}
 		};
 
-		var chart1 = new google.visualization.ComboChart(document.getElementById('chart_div1'));
+		var chartAnnual = new google.visualization.ComboChart(document.getElementById('chart-annual'));
 
-		chart1.draw(data, options);
+		chartAnnual.draw(data, options);
 
 	}
 
-	function drawChart2() {
+	function drawMonthlyChart() {
 		// Some raw data (not necessarily accurate)
 		var data = google.visualization.arrayToDataTable([
-			['Month', 'You', 'Competitors'],
-			['Jun 14', 23, 45],
-			['Jul 14', 45, 43],
-			['Aug 14', 23, 41],
-			['Sep 14', 32, 48],
-			['Oct 14', 32, 38],
-			['Nov 14', 34, 36],
-			['Dec 14', 45, 32],
-			['Jan 15', 67, 38],
-			['Feb 15', 58, 42],
-			['Mar 15', 89, 47],
-			['Apr 15', 92, 45],
-			['May 15', 110, 53]
+			['Week', 'You', 'Competitors'],
+			['Week 1', 123, 345],
+			['Week 2', 213, 345],
+			['Week 3', 117, 324],
+			['Week 4', 145, 435]
 		]);
 		var options = {
 			vAxis: {title: "Pieces of Content"},
-			hAxis: {title: "Month"},
+			hAxis: {title: "Week"},
 			width: '1050',
 			height: '300',
 			colors: ['#14fdce', '#CBC7C7'],
@@ -118,11 +111,187 @@ function glitch() {
 			}
 		};
 
-		//var chart2 = new google.visualization.ComboChart(document.getElementById('chart_div2'));
+		var chartMonthly = new google.visualization.ComboChart(document.getElementById('chart-month'));
 
-		//chart2.draw(data, options);
+		chartMonthly.draw(data, options);
 
 	}
+
+	function drawWeeklyChart() {
+		// Some raw data (not necessarily accurate)
+		var data = google.visualization.arrayToDataTable([
+			['Day', 'You', 'Competitors'],
+			['Day 1', 7, 12],
+			['Day 2', 8, 20],
+			['Day 3', 4, 17],
+			['Day 4', 10, 18],
+			['Day 5', 3, 25],
+			['Day 6', 13, 16],
+			['Day 7', 8, 16]
+		]);
+		var options = {
+			vAxis: {title: "Pieces of Content"},
+			hAxis: {title: "Day"},
+			width: '1050',
+			height: '300',
+			colors: ['#14fdce', '#CBC7C7'],
+			backgroundColor: {fill: 'transparent'},
+			seriesType: "area",
+			series: {
+				0: {type: "area"},
+				1: {type: "area"}
+			}
+		};
+
+		var chartWeekly = new google.visualization.ComboChart(document.getElementById('chart-week'));
+
+		chartWeekly.draw(data, options);
+
+	}
+
+
+	//////////////////////////////////////////////////////  //
+	//    DYNAMIC CHART SWAP                                //
+	//////////////////////////////////////////////////////  //
+
+		//////////////////////////////////////////////////////  //
+		//    CLEAR TIMEOUTS	  		            		    //
+		//////////////////////////////////////////////////////  //
+		var clearChart1;
+		var clearChart2;
+		var clearChart3;
+
+		function stopTimer() {
+			clearTimeout(clearChart1);
+			clearTimeout(clearChart2);
+			clearTimeout(clearChart3);
+		}
+
+		//////////////////////////////////////////////////////  //
+		//    REGISTRATION  & LOGIN MODAL		  		        //
+		//////////////////////////////////////////////////////  //
+		var annualBox = $("#box-annual");
+		var monthBox = $("#box-month");
+		var weekBox = $("#box-week");
+		var annualChart = $(".chart-annual");
+		var monthChart = $(".chart-month");
+		var weekChart = $(".chart-week");
+
+		//////////////////////////////////////////////////////  //
+		//    ANNUAL			  		            		    //
+		//////////////////////////////////////////////////////  //
+		$(annualBox).on("mouseover", function() {
+
+			$(document)
+
+				.queue('annualSwap', function(next) {
+					console.log("annual hover");
+					$(monthChart).addClass("noopacity");
+					$(weekChart).addClass("noopacity");
+					clearChart1 = setTimeout(next, 50); // delay
+
+				})
+
+				.queue('annualSwap', function(next) {
+
+					$(monthChart).addClass("nodisplay");
+					$(weekChart).addClass("nodisplay");
+					$(annualChart).removeClass("nodisplay");
+					clearChart2 = setTimeout(next, 50); // delay
+
+				})
+
+				.queue('annualSwap', function(next) {
+
+					$(annualChart).removeClass("noopacity");
+					clearChart3 = setTimeout(next, 50); // delay
+
+				})
+
+				.queue('annualSwap', function(){
+					stopTimer();
+				})
+
+				.dequeue('annualSwap');
+
+		});
+
+		//////////////////////////////////////////////////////  //
+		//    MONTHLY			  		            		    //
+		//////////////////////////////////////////////////////  //
+		$(monthBox).on("mouseover", function() {
+
+			$(document)
+
+				.queue('monthSwap', function(next) {
+					console.log("month hover");
+					$(annualChart).addClass("noopacity");
+					$(weekChart).addClass("noopacity");
+					clearChart1 = setTimeout(next, 50); // delay
+
+				})
+
+				.queue('monthSwap', function(next) {
+
+					$(annualChart).addClass("nodisplay");
+					$(weekChart).addClass("nodisplay");
+					$(monthChart).removeClass("nodisplay");
+					clearChart2 = setTimeout(next, 50); // delay
+
+				})
+
+				.queue('monthSwap', function(next) {
+
+					$(monthChart).removeClass("noopacity");
+					clearChart3 = setTimeout(next, 50); // delay
+
+				})
+
+				.queue('monthSwap', function(){
+					stopTimer();
+				})
+
+				.dequeue('monthSwap');
+
+		});
+
+		//////////////////////////////////////////////////////  //
+		//    WEEKLY			  		            		    //
+		//////////////////////////////////////////////////////  //
+		$(weekBox).on("mouseover", function() {
+
+			$(document)
+
+				.queue('weekSwap', function(next) {
+					console.log("week hover");
+					$(monthChart).addClass("noopacity");
+					$(annualChart).addClass("noopacity");
+					clearChart1 = setTimeout(next, 50); // delay
+				})
+
+				.queue('weekSwap', function(next) {
+
+					$(monthChart).addClass("nodisplay");
+					$(annualChart).addClass("nodisplay");
+					$(weekChart).removeClass("nodisplay");
+					clearChart2 = setTimeout(next, 50); // delay
+
+				})
+
+				.queue('weekSwap', function(next) {
+
+					$(weekChart).removeClass("noopacity");
+					clearChart3 = setTimeout(next, 50); // delay
+				})
+
+				.queue('weekSwap', function(){
+					stopTimer();
+				})
+
+				.dequeue('weekSwap');
+
+		});
+
 })();
 
 //////////////////////////////////////////////////////  //
@@ -882,9 +1051,11 @@ $(document).ready(function() {
 		var login = $("#login");
 		var remind = $("#remind");
 		var register = $("#register");
+		var email = $("#email");
 		var gotoRegister = $(".gotoRegister");
 		var gotoLogin = $(".gotoLogin");
-		var gotoRemind= $(".gotoRemind");
+		var gotoRemind = $(".gotoRemind");
+		var gotoEmailReport = $("#gotoEmailReport");
 
 		//////////////////////////////////////////////////////  //
 		//    REGISTER			  		            		    //
@@ -895,6 +1066,8 @@ $(document).ready(function() {
 
 				.queue('register', function(next) {
 
+					$(email).addClass("noopacity");
+					$(".email").addClass("noopacity");
 					$(login).addClass("noopacity");
 					$(remind).addClass("noopacity");
 					$(".remind").addClass("noopacity");
@@ -904,6 +1077,8 @@ $(document).ready(function() {
 
 				.queue('register', function(next) {
 
+					$(email).addClass("nodisplay");
+					$(".email").addClass("nodisplay");
 					$(login).addClass("nodisplay");
 					$(remind).addClass("nodisplay");
 					$(".remind").addClass("nodisplay");
@@ -950,6 +1125,8 @@ $(document).ready(function() {
 
 				.queue('login', function(next) {
 
+					$(email).addClass("noopacity");
+					$(".email").addClass("noopacity");
 					$(register).addClass("noopacity");
 					$(remind).addClass("noopacity");
 					$(".remind").addClass("noopacity");
@@ -959,6 +1136,8 @@ $(document).ready(function() {
 
 				.queue('login', function(next) {
 
+					$(email).addClass("nodisplay");
+					$(".email").addClass("nodisplay");
 					$(register).addClass("nodisplay");
 					$(remind).addClass("nodisplay");
 					$(".remind").addClass("nodisplay");
@@ -1003,6 +1182,8 @@ $(document).ready(function() {
 
 				.queue('remind', function(next) {
 
+					$(email).addClass("noopacity");
+					$(".email").addClass("noopacity");
 					$(register).addClass("noopacity");
 					$(login).addClass("noopacity");
 					$(".login-register").addClass("noopacity");
@@ -1012,21 +1193,23 @@ $(document).ready(function() {
 
 				.queue('remind', function(next) {
 
+					$(email).addClass("nodisplay");
+					$(".email").addClass("nodisplay");
 					$(register).addClass("nodisplay");
 					$(login).addClass("nodisplay");
 					$(".login-register").addClass("nodisplay");
+					$("p.gotoLogin").addClass("noopacity");
 					$(remind).removeClass("nodisplay");
 					$(".remind").removeClass("nodisplay");
-					$("p.gotoLogin").addClass("noopacity");
 					clearMe2 = setTimeout(next, 300); // delay
 
 				})
 
 				.queue('remind', function(next) {
 
+					$("p.gotoLogin").addClass("nodisplay");
 					$(remind).removeClass("noopacity");
 					$(".remind").removeClass("noopacity");
-					$("p.gotoLogin").addClass("nodisplay");
 					$("p.gotoRegister").removeClass("nodisplay");
 					clearMe3 = setTimeout(next, 300); // delay
 
@@ -1044,6 +1227,63 @@ $(document).ready(function() {
 				})
 
 				.dequeue('remind');
+
+		});
+
+		//////////////////////////////////////////////////////  //
+		//    EMAIL         	  		            		    //
+		//////////////////////////////////////////////////////  //
+		$(gotoEmailReport).on("click", function() {
+
+			$(document)
+
+				.queue('email', function(next) {
+
+					$(register).addClass("noopacity");
+					$(login).addClass("noopacity");
+					$(remind).addClass("noopacity");
+					$(".remind").addClass("noopacity");
+					$(".login-register").addClass("noopacity");
+					clearMe1 = setTimeout(next, 300); // delay
+
+				})
+
+				.queue('email', function(next) {
+
+					$(register).addClass("nodisplay");
+					$(login).addClass("nodisplay");
+					$(remind).addClass("nodisplay");
+					$(".remind").addClass("nodisplay");
+					$(".login-register").addClass("nodisplay");
+					$("p.gotoLogin").addClass("noopacity");
+					$(email).removeClass("nodisplay");
+					$(".email").removeClass("nodisplay");
+					clearMe2 = setTimeout(next, 300); // delay
+
+				})
+
+				.queue('email', function(next) {
+
+					$("p.gotoLogin").addClass("nodisplay");
+					$(email).removeClass("noopacity");
+					$(".email").removeClass("noopacity");
+					$("p.gotoRegister").removeClass("nodisplay");
+					clearMe3 = setTimeout(next, 300); // delay
+
+				})
+
+				.queue('email', function(next) {
+
+					$("p.gotoRegister").removeClass("noopacity");
+					clearMe4 = setTimeout(next, 300); // delay
+
+				})
+
+				.queue('email', function(){
+					stopTimer();
+				})
+
+				.dequeue('email');
 
 		});
 

@@ -138,10 +138,14 @@
 
                 <h5 class="modal-title remind noopacity nodisplay">Recover Password</h5>
 
+                <h5 class="modal-title email noopacity nodisplay">Email Report</h5>
+
                 <!-- MODAL SUBTITLE -->
                 <h6  class="login-register">Register an account or login now</h6>
 
                 <h6 class="remind noopacity nodisplay">We will send an email with instructions.</h6>
+
+                <h6 class="email noopacity nodisplay">We will email this report to you.</h6>
             </div>
 
             <!-- LOGIN FORM -->
@@ -289,6 +293,41 @@
 
                                 <!-- BUTTON TEXT -->
                                 Recover Password
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- EMAIL REPORT -->
+            <div id="email" class="modal-body noopacity nodisplay">
+                <form class="form-horizontal" role="form" autocomplete="off" data-toggle="validator">
+                    <div class="form-group">
+
+                        <!-- E-MAIL INPUT -->
+                        <div class="input-group col-xs-12">
+
+                            <!-- ICON -->
+                            <div class="input-group-addon"><span class="elegant icon_mail_alt"></span></div>
+
+                            <!-- INPUT -->
+                            <input type="email" class="form-control" id="report-to-email" placeholder="e-mail adress" autocomplete="off" required>
+                        </div>
+
+                        <!-- ERROR MESSAGE BOX -->
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group col-xs-12">
+
+                            <!-- SUBMIT BUTTON -->
+                            <button type="submit" class="btn btn-success btn-black col-xs-12">
+
+                                <!-- ICON -->
+                                <span class="icon_profile"></span>
+
+                                <!-- BUTTON TEXT -->
+                                Send Report
                             </button>
                         </div>
                     </div>
@@ -657,7 +696,7 @@
                         </h5>-->
 
                         <div class="col-sm-4">
-                            <div class="tile-stats tile-red">
+                            <div id="box-annual" class="tile-stats tile-red">
                                 <div class="icon icon-flip"><i class="entypo-chart-line"></i></div>
                                 <div id="count01" class="num count"></div>
                                 <h3>Annual Deficiency</h3>
@@ -666,7 +705,7 @@
                         </div>
 
                         <div class="col-sm-4">
-                            <div class="tile-stats tile-red">
+                            <div id="box-month" class="tile-stats tile-red">
                                 <div class="icon icon-flip"><i class="entypo-chart-line"></i></div>
                                 <div id="count02" class="num count"></div>
                                 <h3>Monthly Deficiency</h3>
@@ -675,7 +714,7 @@
                         </div>
 
                         <div class="col-sm-4">
-                            <div class="tile-stats tile-red">
+                            <div id="box-week" class="tile-stats tile-red">
                                 <div class="icon icon-flip"><i class="entypo-chart-line"></i></div>
                                 <div id="count03" class="num count"></div>
                                 <h3>Weekly Deficiency</h3>
@@ -685,9 +724,18 @@
 
                         <div class="col-xs-12">
                             <div class="tile-stats tile-white">
-                                <h6 class="text-center chart-title">Pieces of offsite content posted over the last 12 months</h6>
-                                <div id="chart_div1" class="chart"></div>
+                                <h6 class="text-center chart-title chart-annual">Average pieces of offsite content posted over the last 12 months</h6>
+                                <h6 class="text-center chart-title chart-month noopacity nodisplay">Average pieces of offsite content posted over the last month</h6>
+                                <h6 class="text-center chart-title chart-week noopacity nodisplay">Average pieces of offsite content posted over the last week</h6>
+                                <div id="chart-annual" class="chart chart-annual"></div>
+                                <div id="chart-month" class="chart chart-month noopacity nodisplay"></div>
+                                <div id="chart-week" class="chart chart-week noopacity nodisplay"></div>
                             </div>
+                        </div>
+
+
+                        <div class="col-xs-12">
+                            <a href="#" id="gotoEmailReport" data-toggle="modal" data-target="#signUp"><span>Send this report to your email.</span></a>
                         </div>
 
                     </div>

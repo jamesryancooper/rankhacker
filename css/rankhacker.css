@@ -259,7 +259,10 @@ h6 {
 .btn-primary:focus,
 .btn-success:hover,
 .btn-success:active,
-.btn-success:focus {
+.btn-success:focus,
+.btn-success.disabled:hover,
+.btn-success.disabled:active,
+.btn-success.disabled:focus {
     background: #000;
     border-color: #ffffff;
     outline: 0;
