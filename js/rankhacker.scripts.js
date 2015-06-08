@@ -324,7 +324,7 @@ function glitch() {
 
 	theater
 		.write(2000)
-		.write("problem-solution:uncover your competitor's offite content strategy", 400, " to out rank them!")
+		.write("problem-solution:uncover your competitor's offsite content strategy", 400, " to out rank them!")
 		.write("statement:The Content Intelligence Platform", 900);
 
 
