@@ -1,4 +1,4 @@
-var restURL = "http://fairmarketing.cloudapp.net/RankHackerAPI/rest.jsp?"
+var restURL = "http://fairmarketing.cloudapp.net/RankHackerAPI/rest1.0/endpoint.jsp?"
 
 function detectIP()
 {
