@@ -23,7 +23,11 @@ function detectIP()
             var clientIP = ipInfo.client_ip;
             var xForwarder = ipInfo.http_forwarded_for;
             
-            logUserIP(clientIP,xForwarder);
+            //Set a cookie initially; we'll log it to the database once they try to submit a competitor request
+            document.cookie = "client_ip="+clientIP;
+            document.cookie = "x_forwarder="+xForwarder;
+            
+            //logUserIP(clientIP,xForwarder);
             
             //alert("Your IP is: "+clientIP);
             //alert("Forwarded by: "+xForwarder);
@@ -34,8 +38,23 @@ function detectIP()
     xmlhttp.send();
 }
 
-function logUserIP(clientIP,xForwarder)
+function getCookie(paramName)
 {
+    var name = paramName + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
+}
+
+function logUserIP()
+{
+    var clientIP = getCookie("client_ip");
+    var xForwarder = getCookie("x_forwarder");
+    
     var targetURL = restURL + "command=logIP&clientIP="+clientIP+"&xForwarder="+xForwarder+"&z=" + Math.random();
     if (window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -51,6 +70,7 @@ function logUserIP(clientIP,xForwarder)
         if (xmlhttp.readyState==4 && xmlhttp.status==200)
         {
             var response = xmlhttp.responseText;
+            alert(response);
         }
     }
     
