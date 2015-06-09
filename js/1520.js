@@ -1,8 +1,17 @@
-var restURL = "http://fairmarketing.cloudapp.net/RankHackerAPI/rest1.0/endpoint.jsp?"
+//var restURL = "http://fairmarketing.cloudapp.net/rest1.0/endpoint.jsp?"
+var restURL = "http://localhost:8084/rest1.0/endpoint.jsp?"
+
+function userInfoCallback(data)
+{
+    //alert(data["ip_address"]);
+    //console.dir(data);
+    var clientIP = data["ip_address"];
+    document.cookie = "client_ip="+clientIP;
+}
 
 function detectIP()
 {
-    var snifferURL = "http://1520holdings.com/ipinfo/index.php?z=" + Math.random();
+    var snifferURL = "http://api.hostip.info/get_json.php";
     if (window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
         xmlhttp=new XMLHttpRequest();
@@ -20,12 +29,12 @@ function detectIP()
             
             //Initiate AJAX call to log IP
             var ipInfo = JSON.parse(ip);
-            var clientIP = ipInfo.client_ip;
-            var xForwarder = ipInfo.http_forwarded_for;
+            var clientIP = ipInfo.ip;
+            //var xForwarder = ipInfo.http_forwarded_for;
             
             //Set a cookie initially; we'll log it to the database once they try to submit a competitor request
             document.cookie = "client_ip="+clientIP;
-            document.cookie = "x_forwarder="+xForwarder;
+            //document.cookie = "x_forwarder="+xForwarder;
             
             //logUserIP(clientIP,xForwarder);
             
@@ -53,7 +62,8 @@ function getCookie(paramName)
 function logUserIP()
 {
     var clientIP = getCookie("client_ip");
-    var xForwarder = getCookie("x_forwarder");
+    //var xForwarder = getCookie("x_forwarder");
+    var xForwarder = "0.0.0.0";
     
     var targetURL = restURL + "command=logIP&clientIP="+clientIP+"&xForwarder="+xForwarder+"&z=" + Math.random();
     if (window.XMLHttpRequest)
@@ -67,7 +77,7 @@ function logUserIP()
     
     xmlhttp.onreadystatechange=function()
     {
-        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        if (xmlhttp.readyState===4 && xmlhttp.status===200)
         {
             var response = xmlhttp.responseText;
             alert(response);
@@ -76,4 +86,51 @@ function logUserIP()
     
     xmlhttp.open("POST",targetURL,true);
     xmlhttp.send();
+}
+
+function runGeoRankerReport(keyword,location)
+{
+    var targetURL = restURL + "command=logIP&clientIP="+clientIP+"&xForwarder="+xForwarder+"&z=" + Math.random();
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState===4 && xmlhttp.status===200)
+        {
+            var response = xmlhttp.responseText;
+            alert(response);
+        }
+    }
+    
+    xmlhttp.open("POST",targetURL,true);
+    xmlhttp.send();
+}
+
+$('#get-started').click(validateGetStarted);
+function validateGetStarted(e)
+{
+    var valid = true;
+    var keyword = $('#keyword');
+    var location = $('#location');
+
+    if(!keyword.val() || !location.val())
+    {
+        e.preventDefault();
+        $('#intro-form').addClass('has-error');
+        return false;
+    }
+    else
+    {
+        $('#intro-form').removeClass('has-error').addClass('has-success');
+        alert("Going to log this request now...");
+        //logUserIP();
+        //runGeoRankerReport(keyword,location);
+    }
 }

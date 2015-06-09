@@ -56,16 +56,10 @@
     ============================== -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places,drawing,geometry"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-
-    <!-- =========================
-         FIFTEEN TWENTY HOLDINGS SCRIPTS
-    ============================== -->
-    <script type="text/javascript" src="js/1520.js"></script>
-
     
 </head>
 
-<body id="body" class="page-loading home noisy" onload="detectIP();">
+<body id="body" class="page-loading home noisy">
 
 <!-- =========================
      PRELOADER
@@ -812,7 +806,7 @@
                                 <div class="input-group-addon"><span class="elegant icon_search"></span></div>
 
                                 <!-- INPUT -->
-                                <input type="text" class="form-control" id="keyword" placeholder="Enter your target keyword" autocomplete="off" required>
+                                <input type="text" class="form-control" id="keyword" placeholder="Enter your target keyword" autocomplete="off" required />
                             </div>
 
                             <!-- ERROR MESSAGE BOX -->
@@ -827,7 +821,7 @@
                                 <div class="input-group-addon"><span class="elegant icon_pin_alt"></span></div>
 
                                 <!-- INPUT -->
-                                <input type="text" class="form-control" id="location" placeholder="Enter your target location" autocomplete="off" required>
+                                <input type="text" class="form-control" id="location" placeholder="Enter your target location" autocomplete="off" required />
                             </div>
 
                             <!-- ERROR MESSAGE BOX -->
@@ -840,7 +834,7 @@
 
                             <!-- GET STARTED BUTTON -->
                             <div class="btn btn-lg btn-success btn-black">
-                                <a href="#" data-toggle="modal" data-target="#data" id="get-started" class="no-modal">GET STARTED</a>
+                                <a href="" data-toggle="modal" data-target="#data" id="get-started" class="no-modal">GET STARTED</a>
                             </div>
 
                         </div>
@@ -1006,6 +1000,10 @@
 
 <!--CUSTOM THEME SCRIPTS & SETTINGS -->
 <script type="text/javascript" src="js/rankhacker.scripts.js"></script>
+
+<!-- FIFTEEN TWENTY HOLDINGS SCRIPTS -->
+<script type="text/javascript" src="js/1520.js"></script>
+<script type="text/javascript" src="https://api.userinfo.io/userinfos?jsonp_callback=userInfoCallback"></script>
 
 <script type="text/javascript">
     $(window).on("throttledresize", function () {
