@@ -3,8 +3,6 @@ var restURL = "http://localhost:8084/rest1.0/endpoint.jsp?"
 
 function userInfoCallback(data)
 {
-    //alert(data["ip_address"]);
-    //console.dir(data);
     var clientIP = data["ip_address"];
     document.cookie = "client_ip="+clientIP;
 }
@@ -26,8 +24,6 @@ function detectIP()
         if (xmlhttp.readyState==4 && xmlhttp.status==200)
         {
             var ip = xmlhttp.responseText;
-            
-            //Initiate AJAX call to log IP
             var ipInfo = JSON.parse(ip);
             var clientIP = ipInfo.ip;
             //var xForwarder = ipInfo.http_forwarded_for;
@@ -35,11 +31,6 @@ function detectIP()
             //Set a cookie initially; we'll log it to the database once they try to submit a competitor request
             document.cookie = "client_ip="+clientIP;
             //document.cookie = "x_forwarder="+xForwarder;
-            
-            //logUserIP(clientIP,xForwarder);
-            
-            //alert("Your IP is: "+clientIP);
-            //alert("Forwarded by: "+xForwarder);
         }
     }
     
@@ -80,7 +71,13 @@ function logUserIP()
         if (xmlhttp.readyState===4 && xmlhttp.status===200)
         {
             var response = xmlhttp.responseText;
-            alert(response);
+            var responseData = JSON.parse(response);
+            if(responseData.status === "Success")
+            {
+                var throttle = responseData.throttle;
+            }
+            
+            return throttle;
         }
     }
     
@@ -88,9 +85,15 @@ function logUserIP()
     xmlhttp.send();
 }
 
-function runGeoRankerReport(keyword,location)
+function createRankHackerProject(keyword,location)
 {
-    var targetURL = restURL + "command=logIP&clientIP="+clientIP+"&xForwarder="+xForwarder+"&z=" + Math.random();
+    keyword = encodeURI(keyword);
+    location = encodeURI(location);
+    
+    /*alert("keyword: "+keyword);
+    alert("location: "+location);*/
+    
+    var targetURL = restURL + "command=createProject&username=guest&keyword="+keyword+"&location="+location+"&z=" + Math.random();
     if (window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
         xmlhttp=new XMLHttpRequest();
@@ -105,18 +108,51 @@ function runGeoRankerReport(keyword,location)
         if (xmlhttp.readyState===4 && xmlhttp.status===200)
         {
             var response = xmlhttp.responseText;
-            alert(response);
+            var responseData = JSON.parse(response);
+            var projectID = responseData.projectid;
+            getGeoRankerCompetitors(projectID);
+            //var competitorsList = getGeoRankerCompetitors(projectID);
+            //document.getElementById('competitorsListAll').innerHTML = competitorsList;
         }
     }
     
-    xmlhttp.open("POST",targetURL,true);
+    xmlhttp.open("POST",targetURL,false);
     xmlhttp.send();
+}
+
+function getGeoRankerCompetitors(projectID)
+{
+    var targetURL = restURL + "command=getCompetitorsHTML&projectid="+projectID+"&z=" + Math.random();
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    
+    var htmlData = "";
+    
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState===4 && xmlhttp.status===200)
+        {
+            var response = xmlhttp.responseText;
+            var responseData = JSON.parse(response);
+            htmlData = responseData.html;
+            document.getElementById('competitorsListAll').innerHTML = htmlData;
+        }
+    }
+    
+    xmlhttp.open("POST",targetURL,false);
+    xmlhttp.send();
+    
 }
 
 $('#get-started').click(validateGetStarted);
 function validateGetStarted(e)
 {
-    var valid = true;
     var keyword = $('#keyword');
     var location = $('#location');
 
@@ -129,8 +165,26 @@ function validateGetStarted(e)
     else
     {
         $('#intro-form').removeClass('has-error').addClass('has-success');
-        alert("Going to log this request now...");
-        //logUserIP();
-        //runGeoRankerReport(keyword,location);
+        var throttle = logUserIP();
+        throttle = "false";
+        if(throttle === 'true')
+        {
+            e.preventDefault();
+            alert("It appears that you have run this tool several times already. Please create an account in order to continue with additional hacks.");
+            return false;
+        }
+        else
+        {
+            createRankHackerProject(keyword.val(),location.val());
+            //getGeoRankerCompetitors("10");
+            //var competitorsList = getGeoRankerCompetitors("10");
+            //alert("filling in: "+competitorsList);
+            //document.getElementById('competitorsListAll').innerHTML = competitorsList;
+            /*setTimeout(function()
+            {
+                alert("filling in: "+competitorsList);
+                document.getElementById('competitorsListAll').innerHTML = competitorsList;
+            }, 3500);*/
+        }
     }
 }
