@@ -2918,3 +2918,73 @@ body.modal-open {
 .breakit {
     word-break: break-all;
 }
+
+.delay-1 {
+    -webkit-animation-delay: 0.10s;
+    -moz-animation-delay: 0.10s;
+    -o-animation-delay: 0.10s;
+    animation-delay: 0.10s;
+}
+
+.delay-2 {
+    -webkit-animation-delay: 0.20s;
+    -moz-animation-delay: 0.20s;
+    -o-animation-delay: 0.20s;
+    animation-delay: 0.20s;
+}
+
+.delay-3 {
+    -webkit-animation-delay: 0.30s;
+    -moz-animation-delay: 0.30s;
+    -o-animation-delay: 0.30s;
+    animation-delay: 0.30s;
+}
+
+.delay-4 {
+    -webkit-animation-delay: 0.40s;
+    -moz-animation-delay: 0.40s;
+    -o-animation-delay: 0.40s;
+    animation-delay: 0.40s;
+}
+
+.delay-5 {
+    -webkit-animation-delay: 0.50s;
+    -moz-animation-delay: 0.50s;
+    -o-animation-delay: 0.50s;
+    animation-delay: 0.50s;
+}
+
+.delay-6 {
+    -webkit-animation-delay: 0.60s;
+    -moz-animation-delay: 0.60s;
+    -o-animation-delay: 0.60s;
+    animation-delay: 0.60s;
+}
+
+.delay-7 {
+    -webkit-animation-delay: 0.70s;
+    -moz-animation-delay: 0.70s;
+    -o-animation-delay: 0.70s;
+    animation-delay: 0.70s;
+}
+
+.delay-8 {
+    -webkit-animation-delay: 0.80s;
+    -moz-animation-delay: 0.80s;
+    -o-animation-delay: 0.80s;
+    animation-delay: 0.80s;
+}
+
+.delay-9 {
+    -webkit-animation-delay: 0.90s;
+    -moz-animation-delay: 0.90s;
+    -o-animation-delay: 0.90s;
+    animation-delay: 0.90s;
+}
+
+.delay-10 {
+    -webkit-animation-delay: 1.0s;
+    -moz-animation-delay: 1.0s;
+    -o-animation-delay: 1.0s;
+    animation-delay: 1.0s;
+}

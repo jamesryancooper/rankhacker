@@ -90,9 +90,13 @@ function createRankHackerProject(keyword,location)
     keyword = encodeURI(keyword);
     location = encodeURI(location);
     
-    /*alert("keyword: "+keyword);
-    alert("location: "+location);*/
+    //Show the progress bar and suppress the competitors box
+    document.getElementById("loadingDiv").style.display = "";
     
+    document.getElementById("googleHead").style.display = "none";
+    document.getElementById("competitorForm").style.display = "none";
+    document.getElementById("initiateButton").style.display = "none";
+        
     var targetURL = restURL + "command=createProject&username=guest&keyword="+keyword+"&location="+location+"&z=" + Math.random();
     if (window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -110,17 +114,16 @@ function createRankHackerProject(keyword,location)
             var response = xmlhttp.responseText;
             var responseData = JSON.parse(response);
             var projectID = responseData.projectid;
-            getGeoRankerCompetitors(projectID);
-            //var competitorsList = getGeoRankerCompetitors(projectID);
-            //document.getElementById('competitorsListAll').innerHTML = competitorsList;
+            document.getElementById("projectid").value = projectID;
+            checkGeoRankerDone(projectID);
         }
     }
     
-    xmlhttp.open("POST",targetURL,false);
+    xmlhttp.open("POST",targetURL,true);
     xmlhttp.send();
 }
 
-function getGeoRankerCompetitors(projectID)
+function getGeoRankerCompetitors(projectID, callback)
 {
     var targetURL = restURL + "command=getCompetitorsHTML&projectid="+projectID+"&z=" + Math.random();
     if (window.XMLHttpRequest)
@@ -141,11 +144,12 @@ function getGeoRankerCompetitors(projectID)
             var response = xmlhttp.responseText;
             var responseData = JSON.parse(response);
             htmlData = responseData.html;
-            document.getElementById('competitorsListAll').innerHTML = htmlData;
+            
+            callback(htmlData);
         }
     }
     
-    xmlhttp.open("POST",targetURL,false);
+    xmlhttp.open("POST",targetURL,true);
     xmlhttp.send();
     
 }
@@ -166,7 +170,9 @@ function validateGetStarted(e)
     {
         $('#intro-form').removeClass('has-error').addClass('has-success');
         var throttle = logUserIP();
+//-->        
         throttle = "false";
+//<--        
         if(throttle === 'true')
         {
             e.preventDefault();
@@ -176,15 +182,91 @@ function validateGetStarted(e)
         else
         {
             createRankHackerProject(keyword.val(),location.val());
-            //getGeoRankerCompetitors("10");
-            //var competitorsList = getGeoRankerCompetitors("10");
-            //alert("filling in: "+competitorsList);
-            //document.getElementById('competitorsListAll').innerHTML = competitorsList;
-            /*setTimeout(function()
-            {
-                alert("filling in: "+competitorsList);
-                document.getElementById('competitorsListAll').innerHTML = competitorsList;
-            }, 3500);*/
         }
     }
+}
+
+function checkGeoRankerDone(projectID)
+{
+    var targetURL = restURL + "command=checkGeoRankerDone&projectid="+projectID+"&z=" + Math.random();
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState===4 && xmlhttp.status===200)
+        {
+            var response = xmlhttp.responseText;
+            var responseData = JSON.parse(response);
+            var rsCount = responseData.records;
+            if(rsCount > 0)
+            {
+                document.getElementById('georankerdone').value = "1";
+                window.clearInterval(repeater);
+            }
+        }
+    }
+    
+    var repeater = window.setInterval(function(){
+        xmlhttp.open("POST",targetURL,true);
+        xmlhttp.send();
+    }, 2500);
+    
+}
+
+function getGeoRankerCompetitorsArray(projectID, callback)
+{
+    var targetURL = restURL + "command=getCompetitorsJSON&projectid="+projectID+"&z=" + Math.random();
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState===4 && xmlhttp.status===200)
+        {
+            var response = xmlhttp.responseText;
+            var responseData = JSON.parse(response);
+            var data = responseData.competitors;
+            
+            var competitorsObject = JSON.parse(data);
+            var competitors = [];
+            for(var i = 0; i < competitorsObject.length; i++)
+            {
+                competitors[i] = competitorsObject[i].url;
+            }
+            callback(competitors);
+        }
+    }
+
+    xmlhttp.open("POST",targetURL,true);
+    xmlhttp.send();
+
+}
+
+
+
+function test()
+{
+    //Show the progress bar and suppress the competitors box
+    document.getElementById("loadingDiv").style.display = "";
+    
+    document.getElementById("googleHead").style.display = "none";
+    document.getElementById("competitorForm").style.display = "none";
+    document.getElementById("initiateButton").style.display = "none";
+    
+    var projectID = "38";
+    document.getElementById("projectid").value = projectID;
+    checkGeoRankerDone(projectID);
 }

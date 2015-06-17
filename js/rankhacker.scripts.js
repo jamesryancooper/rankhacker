@@ -750,7 +750,7 @@ $(document).ready(function() {
 	//////////////////////////////////////////////////////  //
 	//    LOADER			  		            		    //
 	//////////////////////////////////////////////////////  //
-	$( "#data" ).on('shown.bs.modal', function(){
+	/*$( "#data" ).on('shown.bs.modal', function(){
 
 		//////////////////////////////////////////////////////  //
 		// Set loader color
@@ -945,8 +945,235 @@ $(document).ready(function() {
 
 		$(document).dequeue('competitors');
 
+	});*/
+
+        $( "#data" ).on('shown.bs.modal', function(){
+
+		//////////////////////////////////////////////////////  //
+		// Set loader color
+		//////////////////////////////////////////////////////  //
+		var color = "gray";
+
+		setSkin(color);
+
+		//////////////////////////////////////////////////////  //
+		// Set competitor array
+		//////////////////////////////////////////////////////  //
+		var competitors = [
+			'http://www.abacusplumbing.net',
+			'http://www.rotorooter.com/houston/',
+			'http://www.angieslist.com/companylist/houston/plumbing.htm',
+			'http://en.wikipedia.org/wiki/Plumbing',
+			'http://www.villageplumbing.com',
+			'http://www.yellowpages.com/houston-tx/plumbers',
+			'http://theplumbingsolution.net',
+			'http://www.happyplumber.com/services/',
+			'http://localplumbing.com',
+			'http://www.houstonplumbing.com'
+		];
+
+		var calcPercent;
+		var timeoutID;
+
+		var loading = $('#loading');
+		var progress = $('#loading .progress-bar');
+		var percent = $('#loading .percentage');
+
+		//////////////////////////////////////////////////////  //
+		// Call function to load array of competitors
+		//////////////////////////////////////////////////////  //
+		preload(competitors);
+
+		//////////////////////////////////////////////////////  //
+		// Loading
+		//////////////////////////////////////////////////////  //
+		function preload( competitors ) {
+
+		  var increment = Math.floor(100 / competitors.length);
+
+		  $(competitors).each( function( index ) {
+
+			  var competitor = this;
+			  var progressWidth = increment * (index + 1);
+
+			  $(document).queue('competitors', setWidth(progressWidth));
+
+		  });
+
+		}
+
+		//////////////////////////////////////////////////////  //
+		// Set width
+		//////////////////////////////////////////////////////  //
+		function setWidth( progressWidth ) {
+
+			return function(next){
+				doWidth(progressWidth, next);
+			}
+
+		}
+
+		//////////////////////////////////////////////////////  //
+		// Make width adjustment
+		//////////////////////////////////////////////////////  //
+		function doWidth( progressWidth, next ) {
+
+			var minTime = 100;
+			var maxTime = 200;
+			var time = Math.floor(Math.random()*(maxTime-minTime+1)+maxTime);
+
+			//////////////////////////////////////////////////////  //
+			// Time the width adjustments
+			//////////////////////////////////////////////////////  //
+			timeoutID = setTimeout( function(){
+
+				progress.animate({
+
+					//////////////////////////////////////////////////////  //
+					// Change width. Correct for 10% progress number
+					// being hidden
+					//////////////////////////////////////////////////////  //
+					width: ((progressWidth == 10) ? 12 : progressWidth) + "%"
+
+				}, 100, function() {
+
+					if ((progressWidth / 10) <= 5 ) {
+
+						$('#competitor-list-1 li:nth-child(' + progressWidth / 10 + ')').removeClass('noopacity').addClass('animated fadeInLeft');
+
+					} else {
+
+						$('#competitor-list-2 li:nth-child(' + ((progressWidth / 10) - 5) + ')').removeClass('noopacity').addClass('animated fadeInRight');
+
+					}
+
+				});
+
+				$({countNum: percent.text().slice(0,-1)}).animate({countNum: Math.floor(progressWidth)}, {
+
+					duration: minTime,
+					easing:'linear',
+					step: function() {
+
+					  percent.text(Math.floor(this.countNum) + "%");
+
+					},
+					complete: function() {
+
+					  percent.text(this.countNum + "%");
+
+					}
+
+				});
+
+				//////////////////////////////////////////////////////  //
+				// Loop through the items
+				//////////////////////////////////////////////////////  //
+				next();
+
+			}, time )
+
+		}
+
+		//////////////////////////////////////////////////////  //
+		// Set skin
+		//////////////////////////////////////////////////////  //
+		function setSkin(skin){
+
+			$('.loader').attr('class', 'loader '+ skin);
+			$('#loading h6').hasClass('loaded') ? $('#loading h6').attr('class', 'loaded ' + skin) : $('#loading h6').attr('class', skin);
+
+		}
+
+		//////////////////////////////////////////////////////  //
+		// Finish
+		//////////////////////////////////////////////////////  //
+		function completeLoad () {
+
+			progress.animate({
+				width: "100%"
+				}, 100, function() {
+
+					$('#loading h6').text('Complete!').addClass('loaded');
+					percent.text('100%');
+					clearInterval(calcPercent);
+
+				}
+			);
+
+			$('#data .loading').delay(300).animate({
+				opacity: 0
+				}, 1000, function() {
+
+					$('#data .loading').addClass('animated fadeOut noopacity nodisplay');
+
+				}
+			);
+
+			loading.delay(300).animate({
+				opacity: 0,
+				height: 0
+				}, 1000, function() {
+
+					$('#loading').attr('class', 'animated fadeOut noopacity nodisplay');
+
+				}
+			);
+
+			$('#legend, #data-attribution').delay(300).animate({
+				opacity: 100
+				}, 1000, function() {
+
+					$('#legend, #data-attribution').removeClass('noopacity nodisplay').addClass('animated fadeIn');
+					$('#data .modal-header .competitor').removeClass('noopacity nodisplay').addClass('animated fadeIn');
+					$('#gotoInventory').removeClass('noopacity nodisplay').addClass('animated fadeIn');
+
+				}
+			);
+
+		}
+                
+                //Wait until the GeoRanker data is ready
+                    var holdOn = window.setInterval(function(){
+
+                        var geoRankerDone = document.getElementById("georankerdone").value;
+                        if(geoRankerDone === "1")
+                        {
+                            //Clear the interval and load the competitors
+                            window.clearInterval(holdOn);
+
+                            var projectID = document.getElementById('projectid').value;
+
+                            getGeoRankerCompetitors(projectID, function(result){
+                                document.getElementById('competitorsListAll').innerHTML = result;
+                                
+                                //Suppress the progress bar and show the competitors box
+                                document.getElementById("loadingDiv").style.display = "none";
+
+                                document.getElementById("googleHead").style.display = "block";
+                                document.getElementById("competitorForm").style.display = "block";
+                                document.getElementById("initiateButton").style.display = "block";
+
+                                
+                            });
+                        }
+                        else
+                        {
+                            //Do nothing
+                        }
+                    },2500);
+
+		$(document).queue('competitors', function(){
+                    completeLoad();
+                    clearTimeout(timeoutID);
+                });
+
+		$(document).dequeue('competitors');
+
 	});
 
+        
+        
 	//////////////////////////////////////////////////////  //
 	//    HEADER + MODAL ANIMATIONS				            //
 	//////////////////////////////////////////////////////  //

@@ -357,33 +357,41 @@
 
             <!-- CLOSE MODAL BUTTON -->
             <div class="row">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="window.location.reload();"><span aria-hidden="true">&times;</span></button>
             </div>
 
             <!--COMPETITORS -->
             <div id="competitor" class="modal-body row competitor">
+                <input type="hidden" id="georankerdone" value="0"/>
+                <input type="hidden" id="projectid" value="0"/>
 
                 <div class="col-xs-12">
 
                     <div class="modal-header form-group text-center row">
+                        <div id="loadingDiv" style="display:none;">
                         <!-- LOADING TITLE -->
                         <h1 class="loading"><span class="header-txt-color">Finding Your Competitors</span></h1>
                         <!-- LOADING SUBTITLE -->
                         <h6 class="loading">We are currently finding your competitors.</h6>
+                        </div>
 
                         <!-- COMPETITOR TITLE -->
+                        <div id="googleHead" style="display:none;">
                         <h1 class="competitor noopacity nodisplay"><span class="header-txt-color">Top Ten Google Competitors</span></h1>
                         <!-- COMPETITOR SUBTITLE -->
                         <h6 class="competitor text-glow noopacity nodisplay">Choose one or more competitors to hack their content strategy.</h6>
+                        </div>
                     </div>
 
-                    <form class="form-horizontal form-group row" role="form" autocomplete="off" data-toggle="validator">
+                    <form id="competitorForm" style="display:none;" class="form-horizontal form-group row" role="form" autocomplete="off" data-toggle="validator">
 
                     <div id="competitorsListAll">
                         <!-- COMPETITOR LIST WILL BE POPULATED BY AJAX CALL -->
                     </div>
+                        
+                        
                         <!-- MESSAGES -->
-                        <div class="help-block with-errors"></div>
+                        <div id="data-error" class="help-block with-errors"></div>
                         <div id="data-attribution" class="col-xs-12 text-right noopacity nodisplay"><p><sup>*</sup> Competitor data based on page 1 listing from Google.</p></div>
 
                     </form>
@@ -391,11 +399,11 @@
                     <!--LOADING -->
                     <div id="loading" class="loading modal-body row">
                         <div class="input-group col-xs-12 text-center">
-                            <div class="loader">
+                            <!--<div class="loader">
                                 <div class="progress-bar">
                                     <div class="percentage">0%</div>
                                 </div>
-                            </div>
+                            </div>-->
 
                             <h6>
                                 <span class="loading-text text-center">
@@ -427,7 +435,7 @@
                     </div>
 
                     <!--INITIATE -->
-                    <div class="row">
+                    <div id="initiateButton" style="display:none;" class="row">
                         <div class="input-group col-xs-12 col-md-4 col-md-offset-4">
                             <!-- SUBMIT BUTTON -->
                             <button id="gotoInventory" type="button" class="btn btn-success btn-black col-xs-12 noopacity nodisplay">
