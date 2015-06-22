@@ -154,6 +154,8 @@ function getGeoRankerCompetitors(projectID, callback)
     
 }
 
+$('#gotoInventory').click(runAhrefsAnalysis);
+
 $('#get-started').click(validateGetStarted);
 function validateGetStarted(e)
 {
@@ -181,7 +183,8 @@ function validateGetStarted(e)
         }
         else
         {
-            createRankHackerProject(keyword.val(),location.val());
+            //createRankHackerProject(keyword.val(),location.val());
+            test();
         }
     }
 }
@@ -252,10 +255,59 @@ function getGeoRankerCompetitorsArray(projectID, callback)
 
     xmlhttp.open("POST",targetURL,true);
     xmlhttp.send();
-
 }
 
+function runAhrefsAnalysis(e)
+{
+    var projectID = document.getElementById('projectid').value;
+    var IDs = "";
+    var URLs = "";
+    var counter = 0;
+    $("input[name*='competitorURL']:checked").each(function() {
+        if(counter === 0)
+        {
+            URLs = $(this).val();
+            IDs = $("#linkID_"+counter).val();
+        }
+        else
+        {
+            URLs += "|"+$(this).val();
+            IDs += "|"+$("#linkID_"+counter).val();
+        }
+        counter++;
+     });
+    
+    alert(IDs);
+    alert(URLs);
+    
+    /*var targetURL = restURL + "command=processAhrefs&projectid="+projectID+"&linkids="+IDs+"&sites="+URLs+"&z=" + Math.random();
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
 
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState===4 && xmlhttp.status===200)
+        {
+            var response = xmlhttp.responseText;
+            var responseData = JSON.parse(response);
+            var status = responseData.status;
+            
+            if(status === "complete")
+            {
+                callback();
+            }
+        }
+    }
+
+    xmlhttp.open("POST",targetURL,true);
+    xmlhttp.send();*/
+}
 
 function test()
 {
