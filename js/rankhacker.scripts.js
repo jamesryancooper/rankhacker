@@ -721,7 +721,7 @@ $(document).ready(function() {
 	//////////////////////////////////////////////////////  //
 	$(".btn, #navbar .navbar-nav *").mouseup(function(){$(this).blur();});
 
-	//////////////////////////////////////////////////////  //
+	/*//////////////////////////////////////////////////////  //
 	//    COUNTUP			  		            		    //
 	//////////////////////////////////////////////////////  //
 	var options = {
@@ -745,7 +745,7 @@ $(document).ready(function() {
 	$('#inventory-count03').on('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {inventoryCount03.start();} return false;});
 	$('#count01').on('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {count01.start();} return false;});
 	$('#count02').on('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {count02.start();} return false;});
-	$('#count03').on('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {count03.start();} return false;});
+	$('#count03').on('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {count03.start();} return false;});*/
 
 	//////////////////////////////////////////////////////  //
 	//    LOADER			  		            		    //
@@ -1523,9 +1523,8 @@ $(document).ready(function() {
 		var user = $("#user");
 
 		$(gotoCompetitor).on("click", function() {
-
-			$(document)
-
+                    
+                    	$(document)
 				.queue('competitor', function(next) {
 
 					$(user).addClass("animated fadeOut");
@@ -1574,64 +1573,126 @@ $(document).ready(function() {
 		var competitorAnalyzer = $("#competitor-analyzer");
 
 		$(gotoInventory).on("click", function() {
+                    
+                    $(document)
+                        .queue('inventory', function(next) {
 
-		   $(document)
+                                $(competitor).addClass("animated fadeOut");
+                                clearMe1 = setTimeout(next, 300); // delay
 
-				.queue('inventory', function(next) {
+                        })
 
-					$(competitor).addClass("animated fadeOut");
-					clearMe1 = setTimeout(next, 300); // delay
+                        .queue('inventory', function(next) {
 
-				})
+                                $(competitor).addClass("noopacity nodisplay");
+                                $(competitorAnalyzer).addClass("animated fadeIn");
+                                clearMe2 = setTimeout(next, 300); // delay
 
-				.queue('inventory', function(next) {
+                        })
 
-					$(competitor).addClass("noopacity nodisplay");
-					$(competitorAnalyzer).addClass("animated fadeIn");
-					clearMe2 = setTimeout(next, 300); // delay
+                        .queue('inventory', function(next) {
 
-				})
+                                $(competitorAnalyzer).removeClass("noopacity nodisplay");
+                                //Wait until the Ahrefs data is ready
+                                var holdOn2 = window.setInterval(function(){
 
-				.queue('inventory', function(next) {
+                                    var ahrefsDone = document.getElementById("ahrefsdone").value;
+                                    if(ahrefsDone === "1")
+                                    {
+                                        //Clear the interval and load the competitors
+                                        window.clearInterval(holdOn2);
 
-					$(competitorAnalyzer).removeClass("noopacity nodisplay");
-					clearMe3 = setTimeout(next, 6000); // delay
+                                        //var projectID = document.getElementById('projectid').value;
 
-				})
+                                        runAhrefsAnalysis(function(result){
 
-				.queue('inventory', function(next) {
+                                            var resultData = result.split("|");
 
-					$(competitorAnalyzer).removeClass("animated fadeIn");
-					$(competitorAnalyzer).addClass("animated fadeOut");
-					clearMe4 = setTimeout(next, 300); // delay
+                                            //Set the inventory count stuff
+                                            //////////////////////////////////////////////////////  //
+                                            //    COUNTUP			  		            		    //
+                                            //////////////////////////////////////////////////////  //
+                                            var options = {
+                                                    useEasing : true,
+                                                    useGrouping : true,
+                                                    separator : ',',
+                                                    decimal : '.',
+                                                    prefix : '',
+                                                    suffix : ''
+                                            };
 
-				})
+                                            //alert("setting funcs");
 
-				.queue('inventory', function(next) {
+                                            var inventoryCount01 = new countUp("inventory-count01", Math.round(resultData[0]*0.5), resultData[0], 0, 3, options);
+                                            var inventoryCount02 = new countUp("inventory-count02", Math.round(resultData[1]*0.5), resultData[1], 0, 3, options);
+                                            var inventoryCount03 = new countUp("inventory-count03", Math.round(resultData[2]*0.5), resultData[2], 0, 3, options);
 
-					$(competitorAnalyzer).addClass("noopacity nodisplay");
-					$(inventory).addClass("animated fadeIn");
-					$(user).addClass("animated fadeIn");
-					clearMe5 = setTimeout(next, 600); // delay
+                                            //alert("displaying divs");
+                                            //Show the analyzing spinner and suppress the inventory box
+                                            document.getElementById("analyzingDiv").style.display = "none";
 
-					console.log("this happened");
+                                            document.getElementById("inventory").style.display = "block";
+                                            document.getElementById("inventoryData").style.display = "block";
+                                            document.getElementById("user").style.display = "block";
 
-				})
+                                            //alert("starting funcs");
+                                            //inventoryCount01.start();
+                                            //inventoryCount02.start();
+                                            //inventoryCount03.start();
+                                            //var count01 = new countUp("count01", -3259, -3289, 0, 3, options);
+                                            //var count02 = new countUp("count02", -432, -486, 0, 3, options);
+                                            //var count03 = new countUp("count03", -12, -6, 0, 3, options);
 
-				.queue('inventory', function(next) {
+                                            $('#inventory-count01').bind('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {inventoryCount01.start();} return false;});
+                                            $('#inventory-count02').bind('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {inventoryCount02.start();} return false;});
+                                            $('#inventory-count03').bind('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {inventoryCount03.start();} return false;});
+                                            //$('#count01').on('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {count01.start();} return false;});
+                                            //$('#count02').on('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {count02.start();} return false;});
+                                            //$('#count03').on('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {count03.start();} return false;});
 
-					$(inventory).removeClass("noopacity nodisplay");
-					$(user).removeClass("noopacity nodisplay");
-					clearMe6 = setTimeout(next, 300); // delay
 
-				})
+                                        });
+                                    }
+                                    else
+                                    {
+                                        //Do nothing
+                                    }
+                                },2500);
+                                
+                                clearMe3 = setTimeout(next, 1000); // delay
+                        })
+                        
+                    .queue('inventory', function(next) {
 
-				.queue('inventory', function(){
-					  stopTimer();
-				 })
+                            $(competitorAnalyzer).removeClass("animated fadeIn");
+                            $(competitorAnalyzer).addClass("animated fadeOut");
+                            clearMe4 = setTimeout(next, 300); // delay
 
-				.dequeue('inventory');
+                    })
 
+                    .queue('inventory', function(next) {
+
+                            $(competitorAnalyzer).addClass("noopacity nodisplay");
+                            $(inventory).addClass("animated fadeIn");
+                            $(user).addClass("animated fadeIn");
+                            clearMe5 = setTimeout(next, 600); // delay
+
+                    })
+
+                    .queue('inventory', function(next) {
+
+                            $(inventory).removeClass("noopacity nodisplay");
+                            $(user).removeClass("noopacity nodisplay");
+                            clearMe6 = setTimeout(next, 300); // delay
+
+                    })
+
+                    .queue('inventory', function(){
+                              stopTimer();
+                     })
+
+                    .dequeue('inventory');
+                    
 		});
 
 		//////////////////////////////////////////////////////  //

@@ -154,41 +154,6 @@ function getGeoRankerCompetitors(projectID, callback)
     
 }
 
-$('#gotoInventory').click(runAhrefsAnalysis);
-
-$('#get-started').click(validateGetStarted);
-function validateGetStarted(e)
-{
-    var keyword = $('#keyword');
-    var location = $('#location');
-
-    if(!keyword.val() || !location.val())
-    {
-        e.preventDefault();
-        $('#intro-form').addClass('has-error');
-        return false;
-    }
-    else
-    {
-        $('#intro-form').removeClass('has-error').addClass('has-success');
-        var throttle = logUserIP();
-//-->        
-        throttle = "false";
-//<--        
-        if(throttle === 'true')
-        {
-            e.preventDefault();
-            alert("It appears that you have run this tool several times already. Please create an account in order to continue with additional hacks.");
-            return false;
-        }
-        else
-        {
-            //createRankHackerProject(keyword.val(),location.val());
-            test();
-        }
-    }
-}
-
 function checkGeoRankerDone(projectID)
 {
     var targetURL = restURL + "command=checkGeoRankerDone&projectid="+projectID+"&z=" + Math.random();
@@ -257,7 +222,7 @@ function getGeoRankerCompetitorsArray(projectID, callback)
     xmlhttp.send();
 }
 
-function runAhrefsAnalysis(e)
+function runAhrefsAnalysis(callback)
 {
     var projectID = document.getElementById('projectid').value;
     var IDs = "";
@@ -277,10 +242,16 @@ function runAhrefsAnalysis(e)
         counter++;
      });
     
-    alert(IDs);
-    alert(URLs);
+    //alert(IDs);
+    //alert(URLs);
     
-    /*var targetURL = restURL + "command=processAhrefs&projectid="+projectID+"&linkids="+IDs+"&sites="+URLs+"&z=" + Math.random();
+    //Show the analyzing spinner and suppress the inventory box
+    document.getElementById("analyzingDiv").style.display = "";
+    
+    document.getElementById("inventory").style.display = "none";
+    document.getElementById("user").style.display = "none";
+    
+    var targetURL = restURL + "command=processAhrefs&projectid="+projectID+"&linkids="+IDs+"&sites="+URLs+"&z=" + Math.random();
     if (window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
         xmlhttp=new XMLHttpRequest();
@@ -297,16 +268,18 @@ function runAhrefsAnalysis(e)
             var response = xmlhttp.responseText;
             var responseData = JSON.parse(response);
             var status = responseData.status;
+            var countInfo = responseData.counts;
             
             if(status === "complete")
             {
-                callback();
+                document.getElementById('ahrefsdone').value = "1";
+                callback(countInfo);
             }
         }
     }
 
     xmlhttp.open("POST",targetURL,true);
-    xmlhttp.send();*/
+    xmlhttp.send();
 }
 
 function test()
@@ -321,4 +294,42 @@ function test()
     var projectID = "38";
     document.getElementById("projectid").value = projectID;
     checkGeoRankerDone(projectID);
+}
+
+
+//jQuery action button overrides
+//
+$('#gotoInventory').click(runAhrefsAnalysis);
+
+$('#get-started').click(validateGetStarted);
+function validateGetStarted(e)
+{
+    var keyword = $('#keyword');
+    var location = $('#location');
+
+    if(!keyword.val() || !location.val())
+    {
+        e.preventDefault();
+        $('#intro-form').addClass('has-error');
+        return false;
+    }
+    else
+    {
+        $('#intro-form').removeClass('has-error').addClass('has-success');
+        var throttle = logUserIP();
+//-->        
+        throttle = "false";
+//<--        
+        if(throttle === 'true')
+        {
+            e.preventDefault();
+            alert("It appears that you have run this tool several times already. Please create an account in order to continue with additional hacks.");
+            return false;
+        }
+        else
+        {
+            //createRankHackerProject(keyword.val(),location.val());
+            test();
+        }
+    }
 }
