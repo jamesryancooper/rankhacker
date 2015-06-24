@@ -144,7 +144,6 @@ function getGeoRankerCompetitors(projectID, callback)
             var response = xmlhttp.responseText;
             var responseData = JSON.parse(response);
             htmlData = responseData.html;
-            
             callback(htmlData);
         }
     }
@@ -282,6 +281,47 @@ function runAhrefsAnalysis(callback)
     xmlhttp.send();
 }
 
+function runUserAhrefsAnalysis(callback)
+{
+    var projectID = document.getElementById('projectid').value;
+    var url = document.getElementById('userUrl').value;
+    
+    //Show the analyzing spinner and suppress the inventory box
+    document.getElementById("user-analyzer").style.display = "";
+    
+    document.getElementById("comparison").style.display = "none";
+    
+    var targetURL = restURL + "command=processUserAhrefs&projectid="+projectID+"&site="+url+"&z=" + Math.random();
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState===4 && xmlhttp.status===200)
+        {
+            var response = xmlhttp.responseText;
+            var responseData = JSON.parse(response);
+            var status = responseData.status;
+            var countInfo = responseData.counts;
+            
+            if(status === "complete")
+            {
+                document.getElementById('userahrefsdone').value = "1";
+                callback(countInfo);
+            }
+        }
+    }
+
+    xmlhttp.open("POST",targetURL,true);
+    xmlhttp.send();
+}
+
 function test()
 {
     //Show the progress bar and suppress the competitors box
@@ -298,7 +338,8 @@ function test()
 
 
 //jQuery action button overrides
-//
+$('#gotoComparison').click(runUserAhrefsAnalysis);
+
 $('#gotoInventory').click(runAhrefsAnalysis);
 
 $('#get-started').click(validateGetStarted);

@@ -542,7 +542,7 @@
 
             <!-- USER -->
             <div id="user" class="user modal-body noopacity nodisplay row">
-
+                <input type="hidden" id="userahrefsdone" value="0"/>
                 <div class="modal-header text-center form-group">
                     <!-- USER TITLE -->
                     <h1><span class="header-txt-color">How do you stack up?</span></h1>
@@ -643,14 +643,14 @@
                         </h5>-->
 
                         <div class="col-sm-4">
-                            <div id="box-annual" class="tile-stats tile-red">
+                            <div id="box-week" class="tile-stats tile-red">
                                 <div class="icon icon-flip"><i class="entypo-chart-line"></i></div>
                                 <div id="count01" class="num count"></div>
-                                <h3>Annual Deficiency</h3>
-                                <p>Pieces of offsite content you are deficient over the last 12 months.</p>
+                                <h3>Weekly Deficiency</h3>
+                                <p>Pieces of offsite content you are deficient each week.</p>
                             </div>
                         </div>
-
+                        
                         <div class="col-sm-4">
                             <div id="box-month" class="tile-stats tile-red">
                                 <div class="icon icon-flip"><i class="entypo-chart-line"></i></div>
@@ -661,22 +661,23 @@
                         </div>
 
                         <div class="col-sm-4">
-                            <div id="box-week" class="tile-stats tile-red">
+                            <div id="box-annual" class="tile-stats tile-red">
                                 <div class="icon icon-flip"><i class="entypo-chart-line"></i></div>
                                 <div id="count03" class="num count"></div>
-                                <h3>Weekly Deficiency</h3>
-                                <p>Pieces of offsite content you are deficient each week.</p>
+                                <h3>Annual Deficiency</h3>
+                                <p>Pieces of offsite content you are deficient over the last 12 months.</p>
                             </div>
                         </div>
 
                         <div class="col-xs-12">
                             <div class="tile-stats tile-white">
-                                <h6 class="text-center chart-title chart-annual">Average pieces of offsite content posted over the last 12 months</h6>
+                                <h6 class="text-center chart-title chart-week noopacity">Average pieces of offsite content posted over the last week</h6>
                                 <h6 class="text-center chart-title chart-month noopacity nodisplay">Average pieces of offsite content posted over the last month</h6>
-                                <h6 class="text-center chart-title chart-week noopacity nodisplay">Average pieces of offsite content posted over the last week</h6>
-                                <div id="chart-annual" class="chart chart-annual"></div>
+                                <h6 class="text-center chart-title chart-annual nodisplay">Average pieces of offsite content posted over the last 12 months</h6>
+                                <div id="chart-week" class="chart chart-week noopacity"></div>
                                 <div id="chart-month" class="chart chart-month noopacity nodisplay"></div>
-                                <div id="chart-week" class="chart chart-week noopacity nodisplay"></div>
+                                <div id="chart-annual" class="chart chart-annual nodisplay"></div>
+                                
                             </div>
                         </div>
 

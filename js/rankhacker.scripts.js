@@ -1727,7 +1727,77 @@ $(document).ready(function() {
 				.queue('comparison', function(next) {
 
 					$(userAnalyzer).removeClass("noopacity nodisplay");
-					clearMe3 = setTimeout(next, 6000); // delay
+                                        
+                                        //Wait until the Ahrefs data is ready
+                                        var holdOn3 = window.setInterval(function(){
+
+                                            var userAhrefsDone = document.getElementById("userahrefsdone").value;
+                                            if(userAhrefsDone === "1")
+                                            {
+                                                //Clear the interval and load the competitors
+                                                window.clearInterval(holdOn3);
+
+                                                //var projectID = document.getElementById('projectid').value;
+
+                                                runUserAhrefsAnalysis(function(result){
+
+                                                    var resultData = result.split("|");
+
+                                                    //Set the inventory count stuff
+                                                    //////////////////////////////////////////////////////  //
+                                                    //    COUNTUP			  		            		    //
+                                                    //////////////////////////////////////////////////////  //
+                                                    var options = {
+                                                            useEasing : true,
+                                                            useGrouping : true,
+                                                            separator : ',',
+                                                            decimal : '.',
+                                                            prefix : '',
+                                                            suffix : ''
+                                                    };
+
+                                                    //alert("setting funcs");
+
+                                                    //var inventoryCount01 = new countUp("inventory-count01", Math.round(resultData[0]*0.5), resultData[0], 0, 3, options);
+                                                    //var inventoryCount02 = new countUp("inventory-count02", Math.round(resultData[1]*0.5), resultData[1], 0, 3, options);
+                                                    //var inventoryCount03 = new countUp("inventory-count03", Math.round(resultData[2]*0.5), resultData[2], 0, 3, options);
+
+                                                    var count01 = new countUp("count01", Math.round(resultData[0]*0.5), resultData[0]-document.getElementById('inventory-count01').innerHTML, 0, 3, options);
+                                                    var count02 = new countUp("count02", Math.round(resultData[1]*0.5), resultData[1]-document.getElementById('inventory-count02').innerHTML, 0, 3, options);
+                                                    var count03 = new countUp("count03", Math.round(resultData[2]*0.5), resultData[2]-document.getElementById('inventory-count03').innerHTML, 0, 3, options);
+
+                                                    //alert("displaying divs");
+                                                    //Show the analyzing spinner and suppress the inventory box
+                                                    document.getElementById("user-analyzer").style.display = "none";
+
+                                                    document.getElementById("comparison").style.display = "block";
+                                                    
+                                                    //alert("starting funcs");
+                                                    //inventoryCount01.start();
+                                                    //inventoryCount02.start();
+                                                    //inventoryCount03.start();
+                                                    //var count01 = new countUp("count01", -3259, -3289, 0, 3, options);
+                                                    //var count02 = new countUp("count02", -432, -486, 0, 3, options);
+                                                    //var count03 = new countUp("count03", -12, -6, 0, 3, options);
+
+                                                    //$('#inventory-count01').bind('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {inventoryCount01.start();} return false;});
+                                                    //$('#inventory-count02').bind('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {inventoryCount02.start();} return false;});
+                                                    //$('#inventory-count03').bind('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {inventoryCount03.start();} return false;});
+                                                    $('#count01').on('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {count01.start();} return false;});
+                                                    $('#count02').on('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {count02.start();} return false;});
+                                                    $('#count03').on('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {count03.start();} return false;});
+
+
+                                                });
+                                            }
+                                            else
+                                            {
+                                                //Do nothing
+                                            }
+                                        },2500);
+                                
+                                
+					clearMe3 = setTimeout(next, 1000); // delay
 
 				})
 
@@ -1756,7 +1826,7 @@ $(document).ready(function() {
 
 				.queue('comparison', function(){
 					  stopTimer();
-					  console.log("comparison queue is done");
+					  //console.log("comparison queue is done");
 				 })
 
 				.dequeue('comparison');
