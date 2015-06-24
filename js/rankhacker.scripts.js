@@ -40,117 +40,134 @@ function glitch() {
 //////////////////////////////////////////////////////  //
 //    BAR CHART                                         //
 //////////////////////////////////////////////////////  //
-(function () {
-	"use strict";
+function drawCharts(annualData, monthlyData, weeklyData) {
+    
+        var userData1 = new Array(12);
+        var competitorData1 = new Array(12);
+        var datesData = new Array(12);
 
-	// Load the Visualization API and the piechart package.
-	google.load('visualization', '1.0', {'packages': ['corechart']});
+        var currentDate = new Date();
+        currentDate.setDate(1);
+        
+        for(var e=0; e<annualData.length; e++)
+        {
+            var tempData = annualData[e].split(":");
+            userData1[e] = parseInt(tempData[0]);
+            competitorData1[e] = parseInt(tempData[1]);
+            
+            var newdate = new Date(currentDate);
+            newdate.setMonth(newdate.getMonth() - (11-e));
+            datesData[e] = $.datepicker.formatDate("M y", new Date(newdate));
+        }
 
-	// Set a callback to run when the Google Visualization API is loaded.
-	google.setOnLoadCallback(drawAnnualChart);
-	google.setOnLoadCallback(drawMonthlyChart);
-	google.setOnLoadCallback(drawWeeklyChart);
+        var data1 = google.visualization.arrayToDataTable([
+                ['Month', 'You', 'Competitors'],
+                [datesData[0], userData1[0], competitorData1[0]],
+                [datesData[1], userData1[1], competitorData1[1]],
+                [datesData[2], userData1[2], competitorData1[2]],
+                [datesData[3], userData1[3], competitorData1[3]],
+                [datesData[4], userData1[4], competitorData1[4]],
+                [datesData[5], userData1[5], competitorData1[5]],
+                [datesData[6], userData1[6], competitorData1[6]],
+                [datesData[7], userData1[7], competitorData1[7]],
+                [datesData[8], userData1[8], competitorData1[8]],
+                [datesData[9], userData1[9], competitorData1[9]],
+                [datesData[10], userData1[10], competitorData1[10]],
+                [datesData[11], userData1[11], competitorData1[11]]
+        ]);
+        var options1 = {
+                vAxis: {title: "Pieces of Content"},
+                hAxis: {title: "Month"},
+                width: '1050',
+                height: '300',
+                colors: ['#14fdce', '#CBC7C7'],
+                backgroundColor: {fill: 'transparent'},
+                seriesType: "area",
+                series: {
+                        0: {type: "area"},
+                        1: {type: "area"}
+                }
+        };
 
-	function drawAnnualChart() {
-		// Some raw data (not necessarily accurate)
-		var data = google.visualization.arrayToDataTable([
-			['Month', 'You', 'Competitors'],
-			['Jun 14', 233, 1222],
-			['Jul 14', 444, 1234],
-			['Aug 14', 117, 876],
-			['Sep 14', 43, 976],
-			['Oct 14', 136, 1053],
-			['Nov 14', 122, 1210],
-			['Dec 14', 212, 938],
-			['Jan 15', 135, 1120],
-			['Feb 15', 157, 1167],
-			['Mar 15', 139, 1110],
-			['Apr 15', 136, 691],
-			['May 15', 110, 345]
-		]);
-		var options = {
-			vAxis: {title: "Pieces of Content"},
-			hAxis: {title: "Month"},
-			width: '1050',
-			height: '300',
-			colors: ['#14fdce', '#CBC7C7'],
-			backgroundColor: {fill: 'transparent'},
-			seriesType: "area",
-			series: {
-				0: {type: "area"},
-				1: {type: "area"}
-			}
-		};
-
-		var chartAnnual = new google.visualization.ComboChart(document.getElementById('chart-annual'));
-
-		chartAnnual.draw(data, options);
-
-	}
-
-	function drawMonthlyChart() {
-		// Some raw data (not necessarily accurate)
-		var data = google.visualization.arrayToDataTable([
-			['Week', 'You', 'Competitors'],
-			['Week 1', 123, 345],
-			['Week 2', 213, 345],
-			['Week 3', 117, 324],
-			['Week 4', 145, 435]
-		]);
-		var options = {
-			vAxis: {title: "Pieces of Content"},
-			hAxis: {title: "Week"},
-			width: '1050',
-			height: '300',
-			colors: ['#14fdce', '#CBC7C7'],
-			backgroundColor: {fill: 'transparent'},
-			seriesType: "area",
-			series: {
-				0: {type: "area"},
-				1: {type: "area"}
-			}
-		};
-
-		var chartMonthly = new google.visualization.ComboChart(document.getElementById('chart-month'));
-
-		chartMonthly.draw(data, options);
-
-	}
-
-	function drawWeeklyChart() {
-		// Some raw data (not necessarily accurate)
-		var data = google.visualization.arrayToDataTable([
-			['Day', 'You', 'Competitors'],
-			['Day 1', 7, 12],
-			['Day 2', 8, 20],
-			['Day 3', 4, 17],
-			['Day 4', 10, 18],
-			['Day 5', 3, 25],
-			['Day 6', 13, 16],
-			['Day 7', 8, 16]
-		]);
-		var options = {
-			vAxis: {title: "Pieces of Content"},
-			hAxis: {title: "Day"},
-			width: '1050',
-			height: '300',
-			colors: ['#14fdce', '#CBC7C7'],
-			backgroundColor: {fill: 'transparent'},
-			seriesType: "area",
-			series: {
-				0: {type: "area"},
-				1: {type: "area"}
-			}
-		};
-
-		var chartWeekly = new google.visualization.ComboChart(document.getElementById('chart-week'));
-
-		chartWeekly.draw(data, options);
-
-	}
+        var chartAnnual = new google.visualization.ComboChart(document.getElementById('chart-annual'));
+        chartAnnual.draw(data1, options1);
 
 
-	//////////////////////////////////////////////////////  //
+        // Some raw data (not necessarily accurate)
+        var userData2 = new Array(4);
+        var competitorData2 = new Array(4);
+        for(var e=0; e<monthlyData.length; e++)
+        {
+            var tempData = monthlyData[e].split(":");
+            userData2[e] = parseInt(tempData[0]);
+            competitorData2[e] = parseInt(tempData[1]);
+        }
+
+        var data2 = google.visualization.arrayToDataTable([
+                ['Week', 'You', 'Competitors'],
+                ['Week 1', userData2[0], competitorData2[0]],
+                ['Week 2', userData2[1], competitorData2[1]],
+                ['Week 3', userData2[2], competitorData2[2]],
+                ['Week 4', userData2[3], competitorData2[3]]
+        ]);
+        var options2 = {
+                vAxis: {title: "Pieces of Content"},
+                hAxis: {title: "Week"},
+                width: '1050',
+                height: '300',
+                colors: ['#14fdce', '#CBC7C7'],
+                backgroundColor: {fill: 'transparent'},
+                seriesType: "area",
+                series: {
+                        0: {type: "area"},
+                        1: {type: "area"}
+                }
+        };
+
+        var chartMonthly = new google.visualization.ComboChart(document.getElementById('chart-month'));
+        chartMonthly.draw(data2, options2);
+
+
+        // Some raw data (not necessarily accurate)
+        var userData3 = new Array(7);
+        var competitorData3 = new Array(7);
+        for(var e=0; e<weeklyData.length; e++)
+        {
+            var tempData = weeklyData[e].split(":");
+            userData3[e] = parseInt(tempData[0]);
+            competitorData3[e] = parseInt(tempData[1]);
+        }
+
+        var data3 = google.visualization.arrayToDataTable([
+                ['Day', 'You', 'Competitors'],
+                ['Day 1', userData3[0], competitorData3[0]],
+                ['Day 2', userData3[1], competitorData3[1]],
+                ['Day 3', userData3[2], competitorData3[2]],
+                ['Day 4', userData3[3], competitorData3[3]],
+                ['Day 5', userData3[4], competitorData3[4]],
+                ['Day 6', userData3[5], competitorData3[5]],
+                ['Day 7', userData3[6], competitorData3[6]]
+        ]);
+        var options3 = {
+                vAxis: {title: "Pieces of Content"},
+                hAxis: {title: "Day"},
+                width: '1050',
+                height: '300',
+                colors: ['#14fdce', '#CBC7C7'],
+                backgroundColor: {fill: 'transparent'},
+                seriesType: "area",
+                series: {
+                        0: {type: "area"},
+                        1: {type: "area"}
+                }
+        };
+
+        var chartWeekly = new google.visualization.ComboChart(document.getElementById('chart-week'));
+        chartWeekly.draw(data3, options3);
+}
+
+(function() {
+        //////////////////////////////////////////////////////  //
 	//    DYNAMIC CHART SWAP                                //
 	//////////////////////////////////////////////////////  //
 
@@ -176,6 +193,13 @@ function glitch() {
 		var annualChart = $(".chart-annual");
 		var monthChart = $(".chart-month");
 		var weekChart = $(".chart-week");
+                
+                /*var annualBox = document.getElementById('box-annual');
+                var monthBox = document.getElementById('box-month');
+                var weekBox = document.getElementById('box-week');
+                var annualChart = document.getElementById('chart-annual');
+                var monthChart = document.getElementById('chart-month');
+                var weekChart = document.getElementById('chart-week');*/
 
 		//////////////////////////////////////////////////////  //
 		//    ANNUAL			  		            		    //
@@ -185,10 +209,10 @@ function glitch() {
 			$(document)
 
 				.queue('annualSwap', function(next) {
-					console.log("annual hover");
+					//console.log("annual hover");
 					$(monthChart).addClass("noopacity");
 					$(weekChart).addClass("noopacity");
-					clearChart1 = setTimeout(next, 50); // delay
+					//clearChart1 = setTimeout(next, 50); // delay
 
 				})
 
@@ -197,14 +221,14 @@ function glitch() {
 					$(monthChart).addClass("nodisplay");
 					$(weekChart).addClass("nodisplay");
 					$(annualChart).removeClass("nodisplay");
-					clearChart2 = setTimeout(next, 50); // delay
+					//clearChart2 = setTimeout(next, 50); // delay
 
 				})
 
 				.queue('annualSwap', function(next) {
 
 					$(annualChart).removeClass("noopacity");
-					clearChart3 = setTimeout(next, 50); // delay
+					//clearChart3 = setTimeout(next, 50); // delay
 
 				})
 
@@ -224,10 +248,10 @@ function glitch() {
 			$(document)
 
 				.queue('monthSwap', function(next) {
-					console.log("month hover");
+					//console.log("month hover");
 					$(annualChart).addClass("noopacity");
 					$(weekChart).addClass("noopacity");
-					clearChart1 = setTimeout(next, 50); // delay
+					//clearChart1 = setTimeout(next, 50); // delay
 
 				})
 
@@ -236,14 +260,14 @@ function glitch() {
 					$(annualChart).addClass("nodisplay");
 					$(weekChart).addClass("nodisplay");
 					$(monthChart).removeClass("nodisplay");
-					clearChart2 = setTimeout(next, 50); // delay
+					//clearChart2 = setTimeout(next, 50); // delay
 
 				})
 
 				.queue('monthSwap', function(next) {
 
 					$(monthChart).removeClass("noopacity");
-					clearChart3 = setTimeout(next, 50); // delay
+					//clearChart3 = setTimeout(next, 50); // delay
 
 				})
 
@@ -263,10 +287,10 @@ function glitch() {
 			$(document)
 
 				.queue('weekSwap', function(next) {
-					console.log("week hover");
+					//console.log("week hover");
 					$(monthChart).addClass("noopacity");
 					$(annualChart).addClass("noopacity");
-					clearChart1 = setTimeout(next, 50); // delay
+					//clearChart1 = setTimeout(next, 50); // delay
 				})
 
 				.queue('weekSwap', function(next) {
@@ -274,14 +298,14 @@ function glitch() {
 					$(monthChart).addClass("nodisplay");
 					$(annualChart).addClass("nodisplay");
 					$(weekChart).removeClass("nodisplay");
-					clearChart2 = setTimeout(next, 50); // delay
+					//clearChart2 = setTimeout(next, 50); // delay
 
 				})
 
 				.queue('weekSwap', function(next) {
 
 					$(weekChart).removeClass("noopacity");
-					clearChart3 = setTimeout(next, 50); // delay
+					//clearChart3 = setTimeout(next, 50); // delay
 				})
 
 				.queue('weekSwap', function(){
@@ -291,7 +315,6 @@ function glitch() {
 				.dequeue('weekSwap');
 
 		});
-
 })();
 
 //////////////////////////////////////////////////////  //
@@ -1732,6 +1755,11 @@ $(document).ready(function() {
                                         var holdOn3 = window.setInterval(function(){
 
                                             var userAhrefsDone = document.getElementById("userahrefsdone").value;
+                                            
+                                            var inventoryCount01 = document.getElementById('inventory-count01').innerHTML;
+                                            var inventoryCount02 = document.getElementById('inventory-count02').innerHTML;
+                                            var inventoryCount03 = document.getElementById('inventory-count03').innerHTML;
+                                            
                                             if(userAhrefsDone === "1")
                                             {
                                                 //Clear the interval and load the competitors
@@ -1739,9 +1767,21 @@ $(document).ready(function() {
 
                                                 //var projectID = document.getElementById('projectid').value;
 
-                                                runUserAhrefsAnalysis(function(result){
+                                                runUserAhrefsAnalysis(function(countResults,weeklyResults,monthlyResults,annualResults){
 
-                                                    var resultData = result.split("|");
+                                                var resultData = countResults.split("|");
+                                                var weeklyData = weeklyResults.split("|");
+                                                var monthlyData = monthlyResults.split("|");
+                                                var annualData = annualResults.split("|");
+
+                                                //Set the chart data
+                                                /*document.getElementById('annualdata').value = annualData;
+                                                document.getElementById('monthlydata').value = monthlyData;
+                                                document.getElementById('weeklydata').value = weeklyData;*/
+                                                //drawCharts();
+                                                
+                                                //Now let's draw the charts
+                                                drawCharts(annualData, monthlyData, weeklyData);
 
                                                     //Set the inventory count stuff
                                                     //////////////////////////////////////////////////////  //
@@ -1762,15 +1802,12 @@ $(document).ready(function() {
                                                     //var inventoryCount02 = new countUp("inventory-count02", Math.round(resultData[1]*0.5), resultData[1], 0, 3, options);
                                                     //var inventoryCount03 = new countUp("inventory-count03", Math.round(resultData[2]*0.5), resultData[2], 0, 3, options);
 
-                                                    var count01 = new countUp("count01", Math.round(resultData[0]*0.5), resultData[0]-document.getElementById('inventory-count01').innerHTML, 0, 3, options);
-                                                    var count02 = new countUp("count02", Math.round(resultData[1]*0.5), resultData[1]-document.getElementById('inventory-count02').innerHTML, 0, 3, options);
-                                                    var count03 = new countUp("count03", Math.round(resultData[2]*0.5), resultData[2]-document.getElementById('inventory-count03').innerHTML, 0, 3, options);
+                                                    var count01 = new countUp("count01", Math.round(resultData[0]*0.5), resultData[0]-inventoryCount01, 0, 3, options);
+                                                    var count02 = new countUp("count02", Math.round(resultData[1]*0.5), resultData[1]-inventoryCount02, 0, 3, options);
+                                                    var count03 = new countUp("count03", Math.round(resultData[2]*0.5), resultData[2]-inventoryCount03, 0, 3, options);
 
                                                     //alert("displaying divs");
-                                                    //Show the analyzing spinner and suppress the inventory box
-                                                    document.getElementById("user-analyzer").style.display = "none";
-
-                                                    document.getElementById("comparison").style.display = "block";
+                                                    
                                                     
                                                     //alert("starting funcs");
                                                     //inventoryCount01.start();
@@ -1787,7 +1824,9 @@ $(document).ready(function() {
                                                     $('#count02').on('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {count02.start();} return false;});
                                                     $('#count03').on('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {count03.start();} return false;});
 
-
+                                                    //Show the charts and suppress the analyzing spinner
+                                                    document.getElementById('user-analyzer').style.display = "none";
+                                                    document.getElementById('comparison').style.display = "block";
                                                 });
                                             }
                                             else
@@ -1795,7 +1834,6 @@ $(document).ready(function() {
                                                 //Do nothing
                                             }
                                         },2500);
-                                
                                 
 					clearMe3 = setTimeout(next, 1000); // delay
 

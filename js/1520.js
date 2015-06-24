@@ -90,6 +90,12 @@ function createRankHackerProject(keyword,location)
     keyword = encodeURI(keyword);
     location = encodeURI(location);
     
+    var username = getCookie("username");
+    if(username == "")
+    {
+        username = "guest";
+    }
+    
     //Show the progress bar and suppress the competitors box
     document.getElementById("loadingDiv").style.display = "";
     
@@ -97,7 +103,7 @@ function createRankHackerProject(keyword,location)
     document.getElementById("competitorForm").style.display = "none";
     document.getElementById("initiateButton").style.display = "none";
         
-    var targetURL = restURL + "command=createProject&username=guest&keyword="+keyword+"&location="+location+"&z=" + Math.random();
+    var targetURL = restURL + "command=createProject&username="+username+"&keyword="+keyword+"&location="+location+"&z=" + Math.random();
     if (window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
         xmlhttp=new XMLHttpRequest();
@@ -309,15 +315,128 @@ function runUserAhrefsAnalysis(callback)
             var responseData = JSON.parse(response);
             var status = responseData.status;
             var countInfo = responseData.counts;
+            var weeklyInfo = responseData.weeklyData;
+            var monthlyInfo = responseData.monthlyData;
+            var annualInfo = responseData.annualData;
             
             if(status === "complete")
             {
                 document.getElementById('userahrefsdone').value = "1";
-                callback(countInfo);
+                callback(countInfo,weeklyInfo,monthlyInfo,annualInfo);
             }
         }
     }
 
+    xmlhttp.open("POST",targetURL,true);
+    xmlhttp.send();
+}
+
+function createAccount()
+{
+    var email = document.getElementById('register-email').value;
+    var password = document.getElementById('register-password').value;
+    
+    var targetURL = restURL + "command=createAccount&username="+email+"&password="+password+"&z=" + Math.random();
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState===4 && xmlhttp.status===200)
+        {
+            var response = xmlhttp.responseText;
+            var responseData = JSON.parse(response);
+            if(responseData.status == "Success")
+            {
+                document.cookie = "username="+email;
+                document.getElementById("register").style.display = "none";
+            }
+            else
+            {
+                alert("Error: The email address you entered already exists in our system.");
+            }
+        }
+    }
+    
+    xmlhttp.open("POST",targetURL,true);
+    xmlhttp.send();
+}
+
+function loginAccount()
+{
+    var email = document.getElementById('login-email').value;
+    var password = document.getElementById('login-password').value;
+    
+    var targetURL = restURL + "command=loginAccount&username="+email+"&password="+password+"&z=" + Math.random();
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState===4 && xmlhttp.status===200)
+        {
+            var response = xmlhttp.responseText;
+            var responseData = JSON.parse(response);
+            if(responseData.status == "Success")
+            {
+                document.cookie = "username="+email;
+                document.getElementById("login").style.display = "none";
+            }
+            else
+            {
+                alert("Error: The email address and password you provided do not match our records.");
+            }
+        }
+    }
+    
+    xmlhttp.open("POST",targetURL,true);
+    xmlhttp.send();
+}
+
+function remindPassword()
+{
+    var email = document.getElementById('remind-email').value;
+    
+    var targetURL = restURL + "command=remindPassword&username="+email+"&z=" + Math.random();
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState===4 && xmlhttp.status===200)
+        {
+            var response = xmlhttp.responseText;
+            var responseData = JSON.parse(response);
+            if(responseData.status == "Success")
+            {
+                alert("Please check your email for a message from SSD Fair Marketing containing a new password for your account.");
+                document.getElementById("remind").style.display = "none";
+            }
+            else
+            {
+                alert("Error: We were unable to find an account under that email address.");
+            }
+        }
+    }
+    
     xmlhttp.open("POST",targetURL,true);
     xmlhttp.send();
 }
@@ -336,11 +455,16 @@ function test()
     checkGeoRankerDone(projectID);
 }
 
-
 //jQuery action button overrides
 $('#gotoComparison').click(runUserAhrefsAnalysis);
 
 $('#gotoInventory').click(runAhrefsAnalysis);
+
+$('#createAccountButton').click(createAccount);
+
+$('#loginButton').click(loginAccount);
+
+$('#recoverButton').click(remindPassword);
 
 $('#get-started').click(validateGetStarted);
 function validateGetStarted(e)
