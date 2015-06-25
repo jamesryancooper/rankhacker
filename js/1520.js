@@ -493,8 +493,8 @@ function validateGetStarted(e)
         }
         else
         {
-            //createRankHackerProject(keyword.val(),location.val());
-            test();
+            createRankHackerProject(keyword.val(),location.val());
+            //test();
         }
     }
 }

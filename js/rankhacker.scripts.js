@@ -1322,7 +1322,7 @@ $(document).ready(function() {
 					$(remind).addClass("noopacity");
 					$(".remind").addClass("noopacity");
 					clearMe1 = setTimeout(next, 300); // delay
-					console.log("step 2");
+					//console.log("step 2");
 				})
 
 				.queue('register', function(next) {
@@ -1336,7 +1336,7 @@ $(document).ready(function() {
 					$(".login-register").removeClass("nodisplay");
 					$("p.gotoRegister").addClass("noopacity");
 					clearMe2 = setTimeout(next, 300); // delay
-					console.log("step 3");
+					//console.log("step 3");
 
 				})
 
@@ -1347,19 +1347,19 @@ $(document).ready(function() {
 					$("p.gotoRegister").addClass("nodisplay");
 					$("p.gotoLogin").removeClass("nodisplay");
 					clearMe3 = setTimeout(next, 300); // delay
-					console.log("step 4");
+					//console.log("step 4");
 				})
 
 				.queue('register', function(next) {
 
 					$("p.gotoLogin").removeClass("noopacity");
 					clearMe4 = setTimeout(next, 300); // delay
-					console.log("step 5");
+					//console.log("step 5");
 				})
 
 				.queue('register', function(){
 					stopTimer();
-					console.log("step 6");
+					//console.log("step 6");
 				})
 
 				.dequeue('register');
