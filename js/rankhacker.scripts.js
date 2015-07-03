@@ -969,17 +969,36 @@ $(document).ready(function() {
 		$(document).dequeue('competitors');
 
 	});*/
-
+        
         $( "#data" ).on('shown.bs.modal', function(){
 
-		//////////////////////////////////////////////////////  //
+                //////////////////////////////////////////////////////  //
 		// Set loader color
 		//////////////////////////////////////////////////////  //
 		var color = "gray";
 
+                //Reset the loading style
+                /*$('#data .loading').removeClass('animated fadeIn noopacity nodisplay');
+                $('#loading').attr('class', 'loading modal-body row');
+                $('#data .loading').attr('class', 'loading modal-body row');
+                $('#data .loading').removeClass('animated fadeOut noopacity nodisplay');*/
+                //$('.loader').attr('class', 'loader '+ color);
+                $('#loading h6').removeClass('loaded noopacity nodisplay').addClass('loading animated fadeIn');
+                $('#loading h1').removeClass('loaded noopacity nodisplay').addClass('loading animated fadeIn');
+                $('#loading').removeClass('noopacity nodisplay').addClass('animated fadeIn');
+                $('#loadingDiv').removeClass('noopacity nodisplay').addClass('animated fadeIn');
+                
+                $('#inventory').addClass('noopacity nodisplay');
+                $('#user').addClass('noopacity nodisplay');
+                $('#user-analyzer').addClass('noopacity nodisplay');
+                $('#comparison').addClass('noopacity nodisplay');
+                /*document.getElementById('loadingDiv').style.display = "";
+                var loadingDivStyle = document.getElementById('loadingDiv').style.display;
+                console.log("loadingDiv style = "+loadingDivStyle);*/
+
 		setSkin(color);
 
-		//////////////////////////////////////////////////////  //
+                //////////////////////////////////////////////////////  //
 		// Set competitor array
 		//////////////////////////////////////////////////////  //
 		var competitors = [
@@ -1124,7 +1143,7 @@ $(document).ready(function() {
 				}
 			);
 
-			$('#data .loading').delay(300).animate({
+			$('#data .loading').delay(150).animate({
 				opacity: 0
 				}, 1000, function() {
 
@@ -1133,7 +1152,7 @@ $(document).ready(function() {
 				}
 			);
 
-			loading.delay(300).animate({
+			loading.delay(150).animate({
 				opacity: 0,
 				height: 0
 				}, 1000, function() {
@@ -1143,7 +1162,7 @@ $(document).ready(function() {
 				}
 			);
 
-			$('#legend, #data-attribution').delay(300).animate({
+			$('#legend, #data-attribution').delay(150).animate({
 				opacity: 100
 				}, 1000, function() {
 
@@ -1256,6 +1275,14 @@ $(document).ready(function() {
 	//////////////////////////////////////////////////////  //
 	$('#data.modal').on('hide.bs.modal', function () {
 
+                document.getElementById('competitorsListAll').innerHTML = "";
+                document.getElementById('keyword').value = "";
+                document.getElementById('location').value = "";
+                document.getElementById("loadingDiv").style.display = "";
+                document.getElementById("loading").style.display = "";
+                
+                $('#intro-form').removeClass('has-success');
+
 		$('.modal.fadeable')
 			.removeClass('animated fadeIn')
 			.addClass('animated fadeOut');
@@ -1279,6 +1306,7 @@ $(document).ready(function() {
 		//////////////////////////////////////////////////////  //
 		//    CLEAR TIMEOUTS	  		            		    //
 		//////////////////////////////////////////////////////  //
+                var clearMe0;
 		var clearMe1;
 		var clearMe2;
 		var clearMe3;
@@ -1287,6 +1315,7 @@ $(document).ready(function() {
 		var clearMe6;
 
 		function stopTimer() {
+                        clearTimeout(clearMe0);
 			clearTimeout(clearMe1);
 			clearTimeout(clearMe2);
 			clearTimeout(clearMe3);
@@ -1542,12 +1571,28 @@ $(document).ready(function() {
 		//////////////////////////////////////////////////////  //
 		var competitor = $("#competitor");
 		var gotoCompetitor = $("#gotoCompetitor");
+                var competitorAnalyzer = $("#competitor-analyzer");
 		var inventory = $("#inventory");
+                var gotoInventory= $("#gotoInventory");
 		var user = $("#user");
 
 		$(gotoCompetitor).on("click", function() {
                     
                     	$(document)
+                                .queue('competitor', function(next) {
+                                    $(inventory).addClass("noopacity nodisplay");
+                                    //$(gotoInventory).addClass("noopacity nodisplay");
+                                    $(user).addClass("noopacity nodisplay");
+                                    $(competitor).addClass("noopacity nodisplay");
+                                    $(competitorAnalyzer).addClass("noopacity nodisplay");
+                                    
+                                    
+                                    document.getElementById('inventory').style.display = 'none';
+                                    document.getElementById('user').style.display = 'none';
+                                    
+                                    clearMe0 = setTimeout(next, 1); // delay
+                                })
+                        
 				.queue('competitor', function(next) {
 
 					$(user).addClass("animated fadeOut");

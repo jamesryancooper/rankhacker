@@ -98,6 +98,7 @@ function createRankHackerProject(keyword,location)
     
     //Show the progress bar and suppress the competitors box
     document.getElementById("loadingDiv").style.display = "";
+    document.getElementById('data').style.display = "";
     
     document.getElementById("googleHead").style.display = "none";
     document.getElementById("competitorForm").style.display = "none";
@@ -445,6 +446,7 @@ function test()
 {
     //Show the progress bar and suppress the competitors box
     document.getElementById("loadingDiv").style.display = "";
+    document.getElementById('data').style.display = "";
     
     document.getElementById("googleHead").style.display = "none";
     document.getElementById("competitorForm").style.display = "none";
@@ -471,7 +473,12 @@ function validateGetStarted(e)
 {
     var keyword = $('#keyword');
     var location = $('#location');
-
+    document.getElementById('georankerdone').value = "0";
+    document.getElementById('projectid').value = "0";
+    document.getElementById('ahrefsdone').value = "0";
+    document.getElementById('userahrefsdone').value = "0";
+    document.getElementById('chartdatareceived').value = "0";
+    
     if(!keyword.val() || !location.val())
     {
         e.preventDefault();
@@ -493,8 +500,8 @@ function validateGetStarted(e)
         }
         else
         {
-            createRankHackerProject(keyword.val(),location.val());
-            //test();
+            //createRankHackerProject(keyword.val(),location.val());
+            test();
         }
     }
 }
