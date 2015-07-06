@@ -633,7 +633,7 @@ $(document).ready(function() {
 			if (glitchCount > 30 ) {
 				clearInterval(myGlitch);
 				$('#crt-glitch,#crt-output').addClass('noopacity');
-				console.log('glitch done');
+				//console.log('glitch done');
 			}
 
 			glitch();
@@ -1292,6 +1292,11 @@ $(document).ready(function() {
                 document.getElementById('competitorsListAll').innerHTML = "";
                 document.getElementById('keyword').value = "";
                 document.getElementById('location').value = "";
+                document.getElementById('projectid').value = "0";
+                document.getElementById('georankerdone').value = "0";
+                document.getElementById('ahrefsdone').value = "0";
+                document.getElementById('userahrefsdone').value = "0";
+                document.getElementById('chartdatareceived').value = "0";
                 document.getElementById("loadingDiv").style.display = "";
                 document.getElementById("loading").style.display = "";
                 
@@ -1734,7 +1739,7 @@ $(document).ready(function() {
                                             //$('#count02').on('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {count02.start();} return false;});
                                             //$('#count03').on('inview', function(event, isInView, visiblePartX, visiblePartY) {if (isInView) {count03.start();} return false;});
 
-
+                                            clearMe3 = setTimeout(next, 300); // delay
                                         });
                                     }
                                     else
@@ -1743,9 +1748,9 @@ $(document).ready(function() {
                                     }
                                 },2500);
                                 
-                                clearMe3 = setTimeout(next, 1000); // delay
+                                //clearMe3 = setTimeout(next, 1000); // delay
                         })
-                        
+                    
                     .queue('inventory', function(next) {
 
                             $(competitorAnalyzer).removeClass("animated fadeIn");
@@ -1889,6 +1894,8 @@ $(document).ready(function() {
                                                     document.getElementById('user-analyzer').style.display = "none";
                                                     document.getElementById('comparison').style.display = "block";
                                                 });
+                                                
+                                                clearMe3 = setTimeout(next, 300); // delay
                                             }
                                             else
                                             {
@@ -1896,7 +1903,7 @@ $(document).ready(function() {
                                             }
                                         },2500);
                                 
-					clearMe3 = setTimeout(next, 1000); // delay
+					//clearMe3 = setTimeout(next, 1000); // delay
 
 				})
 

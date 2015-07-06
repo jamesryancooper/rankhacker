@@ -122,9 +122,10 @@ function createRankHackerProject(keyword,location)
             var responseData = JSON.parse(response);
             var projectID = responseData.projectid;
             
-            //projectID = "52";
+            projectID = "100";
             
             document.getElementById("projectid").value = projectID;
+            //console.log("projectid="+projectID);
             checkGeoRankerDone(projectID);
         }
     }
@@ -305,7 +306,7 @@ function runAhrefsAnalysis()
     var IDs = "";
     //var URLs = "";
     var counter = 0;
-    var safeURL = "";
+    //var safeURL = "";
     $("input[name*='competitorURL']:checked").each(function() {
         if(counter === 0)
         {
@@ -325,8 +326,8 @@ function runAhrefsAnalysis()
         counter++;
      });
     
-    alert(projectID);
-    alert(IDs);
+    //alert(projectID);
+    //alert(IDs);
     //alert(URLs);
     
     //Show the analyzing spinner and suppress the inventory box
