@@ -1131,8 +1131,8 @@ $(document).ready(function() {
 		// Finish
 		//////////////////////////////////////////////////////  //
 		function completeLoad () {
-
-			progress.animate({
+                    
+                        /*progress.animate({
 				width: "100%"
 				}, 100, function() {
 
@@ -1141,9 +1141,20 @@ $(document).ready(function() {
 					clearInterval(calcPercent);
 
 				}
-			);
+			);*/
+                    
+                        $('#legend, #data-attribution').delay(0).animate({
+				opacity: 100
+				}, 0, function() {
 
-			$('#data .loading').delay(150).animate({
+					$('#legend, #data-attribution').removeClass('noopacity nodisplay').addClass('animated fadeIn');
+					$('#data .modal-header .competitor').removeClass('noopacity nodisplay').addClass('animated fadeIn');
+					$('#gotoInventory').removeClass('noopacity nodisplay').addClass('animated fadeIn');
+
+				}
+			);
+                    
+			$('#data .loading').delay(300).animate({
 				opacity: 0
 				}, 1000, function() {
 
@@ -1152,7 +1163,7 @@ $(document).ready(function() {
 				}
 			);
 
-			loading.delay(150).animate({
+			loading.delay(300).animate({
 				opacity: 0,
 				height: 0
 				}, 1000, function() {
@@ -1161,33 +1172,31 @@ $(document).ready(function() {
 
 				}
 			);
-
-			$('#legend, #data-attribution').delay(150).animate({
-				opacity: 100
-				}, 1000, function() {
-
-					$('#legend, #data-attribution').removeClass('noopacity nodisplay').addClass('animated fadeIn');
-					$('#data .modal-header .competitor').removeClass('noopacity nodisplay').addClass('animated fadeIn');
-					$('#gotoInventory').removeClass('noopacity nodisplay').addClass('animated fadeIn');
-
-				}
-			);
-
+                
+                
 		}
                 
                 //Wait until the GeoRanker data is ready
-                    var holdOn = window.setInterval(function(){
+                var holdOn = window.setInterval(function(){
 
-                        var geoRankerDone = document.getElementById("georankerdone").value;
-                        if(geoRankerDone === "1")
-                        {
-                            //Clear the interval and load the competitors
-                            window.clearInterval(holdOn);
+                    var geoRankerDone = document.getElementById("georankerdone").value;
+                    if(geoRankerDone === "1")
+                    {
+                        //Clear the interval and load the competitors
+                        window.clearInterval(holdOn);
 
-                            var projectID = document.getElementById('projectid').value;
+                        var projectID = document.getElementById('projectid').value;
 
-                            getGeoRankerCompetitors(projectID, function(result){
+                        getGeoRankerCompetitors(projectID, function(result){
+                            if(result == "error")
+                            {
+                                alert("There was an error processing your request. Please re-enter your location and keyword and try again.");
+                                document.location.reload();
+                            }
+                            else
+                            {
                                 document.getElementById('competitorsListAll').innerHTML = result;
+
                                 
                                 //Suppress the progress bar and show the competitors box
                                 document.getElementById("loadingDiv").style.display = "none";
@@ -1196,19 +1205,24 @@ $(document).ready(function() {
                                 document.getElementById("competitorForm").style.display = "block";
                                 document.getElementById("initiateButton").style.display = "block";
 
-                                
-                            });
-                        }
-                        else
-                        {
-                            //Do nothing
-                        }
-                    },2500);
+                                //clearTimeout(timeoutID);
+                            }
+                            completeLoad();
+                            clearTimeout(timeoutID);
+                        });
+                        
+                        
+                    }
+                    else
+                    {
+                        //Do nothing
+                    }
+                },2500);
 
-		$(document).queue('competitors', function(){
+                /*$(document).queue('competitors', function(){
                     completeLoad();
                     clearTimeout(timeoutID);
-                });
+                });*/
 
 		$(document).dequeue('competitors');
 
@@ -1631,6 +1645,7 @@ $(document).ready(function() {
 
 		});
 
+
 		//////////////////////////////////////////////////////  //
 		//    INVENTORY         	  		            		//
 		//////////////////////////////////////////////////////  //
@@ -1640,7 +1655,7 @@ $(document).ready(function() {
 		var competitor = $(".competitor");
 		var competitorAnalyzer = $("#competitor-analyzer");
 
-		$(gotoInventory).on("click", function() {
+                $('#gotoInventory').click(function() {
                     
                     $(document)
                         .queue('inventory', function(next) {
@@ -1665,6 +1680,7 @@ $(document).ready(function() {
                                 var holdOn2 = window.setInterval(function(){
 
                                     var ahrefsDone = document.getElementById("ahrefsdone").value;
+                                    
                                     if(ahrefsDone === "1")
                                     {
                                         //Clear the interval and load the competitors
@@ -1672,7 +1688,7 @@ $(document).ready(function() {
 
                                         //var projectID = document.getElementById('projectid').value;
 
-                                        runAhrefsAnalysis(function(result){
+                                        getAhrefsData(function(result){
 
                                             var resultData = result.split("|");
 
@@ -1762,7 +1778,7 @@ $(document).ready(function() {
                     .dequeue('inventory');
                     
 		});
-
+                
 		//////////////////////////////////////////////////////  //
 		//    COMPARISON         	  		            		//
 		//////////////////////////////////////////////////////  //
@@ -1812,7 +1828,7 @@ $(document).ready(function() {
 
                                                 //var projectID = document.getElementById('projectid').value;
 
-                                                runUserAhrefsAnalysis(function(countResults,weeklyResults,monthlyResults,annualResults){
+                                                getUserAhrefsData(function(countResults,weeklyResults,monthlyResults,annualResults){
 
                                                 var resultData = countResults.split("|");
                                                 var weeklyData = weeklyResults.split("|");

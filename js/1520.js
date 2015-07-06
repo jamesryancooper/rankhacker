@@ -98,7 +98,7 @@ function createRankHackerProject(keyword,location)
     
     //Show the progress bar and suppress the competitors box
     document.getElementById("loadingDiv").style.display = "";
-    document.getElementById('data').style.display = "";
+    //document.getElementById('data').style.display = "";
     
     document.getElementById("googleHead").style.display = "none";
     document.getElementById("competitorForm").style.display = "none";
@@ -121,6 +121,9 @@ function createRankHackerProject(keyword,location)
             var response = xmlhttp.responseText;
             var responseData = JSON.parse(response);
             var projectID = responseData.projectid;
+            
+            //projectID = "52";
+            
             document.getElementById("projectid").value = projectID;
             checkGeoRankerDone(projectID);
         }
@@ -194,6 +197,74 @@ function checkGeoRankerDone(projectID)
     
 }
 
+function checkAhrefsDone(projectID)
+{
+    var targetURL = restURL + "command=checkAhrefsDone&projectid="+projectID+"&z=" + Math.random();
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState===4 && xmlhttp.status===200)
+        {
+            var response = xmlhttp.responseText;
+            var responseData = JSON.parse(response);
+            var rsCount = responseData.status;
+            if(rsCount > 0)
+            {
+                document.getElementById('ahrefsdone').value = "1";
+                window.clearInterval(repeater);
+            }
+        }
+    }
+    
+    var repeater = window.setInterval(function(){
+        xmlhttp.open("POST",targetURL,true);
+        xmlhttp.send();
+    }, 2500);
+    
+}
+
+function checkUserAhrefsDone(projectID)
+{
+    var targetURL = restURL + "command=checkUserAhrefsDone&projectid="+projectID+"&z=" + Math.random();
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState===4 && xmlhttp.status===200)
+        {
+            var response = xmlhttp.responseText;
+            var responseData = JSON.parse(response);
+            var rsCount = responseData.status;
+            if(rsCount > 0)
+            {
+                document.getElementById('userahrefsdone').value = "1";
+                window.clearInterval(repeater);
+            }
+        }
+    }
+    
+    var repeater = window.setInterval(function(){
+        xmlhttp.open("POST",targetURL,true);
+        xmlhttp.send();
+    }, 2500);
+    
+}
+
 function getGeoRankerCompetitorsArray(projectID, callback)
 {
     var targetURL = restURL + "command=getCompetitorsJSON&projectid="+projectID+"&z=" + Math.random();
@@ -228,27 +299,34 @@ function getGeoRankerCompetitorsArray(projectID, callback)
     xmlhttp.send();
 }
 
-function runAhrefsAnalysis(callback)
+function runAhrefsAnalysis()
 {
     var projectID = document.getElementById('projectid').value;
     var IDs = "";
-    var URLs = "";
+    //var URLs = "";
     var counter = 0;
+    var safeURL = "";
     $("input[name*='competitorURL']:checked").each(function() {
         if(counter === 0)
         {
-            URLs = $(this).val();
+            //safeURL = $(this).val();
+            //safeURL = safeURL.replace("&","%26")
+            //URLs = $(this).val();
+            //URLs = safeURL;
             IDs = $("#linkID_"+counter).val();
         }
         else
         {
-            URLs += "|"+$(this).val();
+            //safeURL = $(this).val();
+            //safeURL = safeURL.replace("&","%26")
+            //URLs += "|"+safeURL;
             IDs += "|"+$("#linkID_"+counter).val();
         }
         counter++;
      });
     
-    //alert(IDs);
+    alert(projectID);
+    alert(IDs);
     //alert(URLs);
     
     //Show the analyzing spinner and suppress the inventory box
@@ -257,7 +335,42 @@ function runAhrefsAnalysis(callback)
     document.getElementById("inventory").style.display = "none";
     document.getElementById("user").style.display = "none";
     
-    var targetURL = restURL + "command=processAhrefs&projectid="+projectID+"&linkids="+IDs+"&sites="+URLs+"&z=" + Math.random();
+    var targetURL = restURL + "command=processAhrefs&projectid="+projectID+"&linkids="+IDs+"&z=" + Math.random();
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState===4 && xmlhttp.status===200)
+        {
+            /*var response = xmlhttp.responseText;
+            var responseData = JSON.parse(response);
+            var status = responseData.status;
+            var countInfo = responseData.counts;
+            
+            if(status === "complete")
+            {
+                document.getElementById('ahrefsdone').value = "1";
+                callback(countInfo);
+            }*/
+            checkAhrefsDone(projectID);
+        }
+    }
+
+    xmlhttp.open("POST",targetURL,true);
+    xmlhttp.send();
+}
+
+function getAhrefsData(callback)
+{
+    var projectID = document.getElementById('projectid').value;
+    var targetURL = restURL + "command=getAhrefsData&projectid="+projectID+"&z=" + Math.random();
     if (window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
         xmlhttp=new XMLHttpRequest();
@@ -273,14 +386,8 @@ function runAhrefsAnalysis(callback)
         {
             var response = xmlhttp.responseText;
             var responseData = JSON.parse(response);
-            var status = responseData.status;
             var countInfo = responseData.counts;
-            
-            if(status === "complete")
-            {
-                document.getElementById('ahrefsdone').value = "1";
-                callback(countInfo);
-            }
+            callback(countInfo);
         }
     }
 
@@ -288,7 +395,7 @@ function runAhrefsAnalysis(callback)
     xmlhttp.send();
 }
 
-function runUserAhrefsAnalysis(callback)
+function runUserAhrefsAnalysis()
 {
     var projectID = document.getElementById('projectid').value;
     var url = document.getElementById('userUrl').value;
@@ -312,7 +419,7 @@ function runUserAhrefsAnalysis(callback)
     {
         if (xmlhttp.readyState===4 && xmlhttp.status===200)
         {
-            var response = xmlhttp.responseText;
+            /*var response = xmlhttp.responseText;
             var responseData = JSON.parse(response);
             var status = responseData.status;
             var countInfo = responseData.counts;
@@ -324,7 +431,48 @@ function runUserAhrefsAnalysis(callback)
             {
                 document.getElementById('userahrefsdone').value = "1";
                 callback(countInfo,weeklyInfo,monthlyInfo,annualInfo);
-            }
+            }*/
+            checkUserAhrefsDone(projectID);
+        }
+    }
+
+    xmlhttp.open("POST",targetURL,true);
+    xmlhttp.send();
+}
+
+function getUserAhrefsData(callback)
+{
+    var projectID = document.getElementById('projectid').value;
+    var url = document.getElementById('userUrl').value;
+    
+    //Show the analyzing spinner and suppress the inventory box
+    document.getElementById("user-analyzer").style.display = "";
+    
+    document.getElementById("comparison").style.display = "none";
+    
+    var targetURL = restURL + "command=getUserAhrefsData&projectid="+projectID+"&z=" + Math.random();
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState===4 && xmlhttp.status===200)
+        {
+            var response = xmlhttp.responseText;
+            var responseData = JSON.parse(response);
+            //var status = responseData.status;
+            var countInfo = responseData.counts;
+            var weeklyInfo = responseData.weeklyData;
+            var monthlyInfo = responseData.monthlyData;
+            var annualInfo = responseData.annualData;
+            
+            callback(countInfo,weeklyInfo,monthlyInfo,annualInfo);
         }
     }
 
@@ -490,7 +638,7 @@ function validateGetStarted(e)
         $('#intro-form').removeClass('has-error').addClass('has-success');
         var throttle = logUserIP();
 //-->        
-        throttle = "false";
+//        throttle = "false";
 //<--        
         if(throttle === 'true')
         {
@@ -500,8 +648,8 @@ function validateGetStarted(e)
         }
         else
         {
-            //createRankHackerProject(keyword.val(),location.val());
-            test();
+            createRankHackerProject(keyword.val(),location.val());
+            //test();
         }
     }
 }
