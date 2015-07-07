@@ -204,7 +204,7 @@ function drawCharts(annualData, monthlyData, weeklyData) {
 		//////////////////////////////////////////////////////  //
 		//    ANNUAL			  		            		    //
 		//////////////////////////////////////////////////////  //
-		$(annualBox).on("click", function() {
+		$(annualBox).on("hover", function() {
 
 			$(document)
 
@@ -243,7 +243,7 @@ function drawCharts(annualData, monthlyData, weeklyData) {
 		//////////////////////////////////////////////////////  //
 		//    MONTHLY			  		            		    //
 		//////////////////////////////////////////////////////  //
-		$(monthBox).on("click", function() {
+		$(monthBox).on("hover", function() {
 
 			$(document)
 
@@ -282,7 +282,7 @@ function drawCharts(annualData, monthlyData, weeklyData) {
 		//////////////////////////////////////////////////////  //
 		//    WEEKLY			  		            		    //
 		//////////////////////////////////////////////////////  //
-		$(weekBox).on("click", function() {
+		$(weekBox).on("hover", function() {
 
 			$(document)
 
