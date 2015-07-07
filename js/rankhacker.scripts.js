@@ -204,7 +204,7 @@ function drawCharts(annualData, monthlyData, weeklyData) {
 		//////////////////////////////////////////////////////  //
 		//    ANNUAL			  		            		    //
 		//////////////////////////////////////////////////////  //
-		$(annualBox).on("mouseover", function() {
+		$(annualBox).on("click", function() {
 
 			$(document)
 
@@ -243,7 +243,7 @@ function drawCharts(annualData, monthlyData, weeklyData) {
 		//////////////////////////////////////////////////////  //
 		//    MONTHLY			  		            		    //
 		//////////////////////////////////////////////////////  //
-		$(monthBox).on("mouseover", function() {
+		$(monthBox).on("click", function() {
 
 			$(document)
 
@@ -282,7 +282,7 @@ function drawCharts(annualData, monthlyData, weeklyData) {
 		//////////////////////////////////////////////////////  //
 		//    WEEKLY			  		            		    //
 		//////////////////////////////////////////////////////  //
-		$(weekBox).on("mouseover", function() {
+		$(weekBox).on("click", function() {
 
 			$(document)
 
@@ -1816,6 +1816,12 @@ $(document).ready(function() {
 				.queue('comparison', function(next) {
 
 					$(userAnalyzer).removeClass("noopacity nodisplay");
+                                        $('html, body').animate({
+                                            scrollTop: $(userAnalyzer).offset().top
+                                            }, 300);
+                                        //var position = $(userAnalyzer).position();
+                                        //scroll(0,position.top);
+                                        //$(userAnalyzer).scrollTop($(userAnalyzer)[0].scrollHeight);
                                         
                                         //Wait until the Ahrefs data is ready
                                         var holdOn3 = window.setInterval(function(){
@@ -1902,7 +1908,7 @@ $(document).ready(function() {
                                                 //Do nothing
                                             }
                                         },2500);
-                                
+
 					//clearMe3 = setTimeout(next, 1000); // delay
 
 				})

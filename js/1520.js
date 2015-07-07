@@ -1,5 +1,5 @@
-//var restURL = "http://fairmarketing.cloudapp.net/rest1.0/endpoint.jsp?"
-var restURL = "http://localhost:8084/rest1.0/endpoint.jsp?"
+var restURL = "http://fairmarketing.cloudapp.net/rest1.0/endpoint.jsp?"
+//var restURL = "http://localhost:8084/rest1.0/endpoint.jsp?"
 
 function userInfoCallback(data)
 {
@@ -122,7 +122,7 @@ function createRankHackerProject(keyword,location)
             var responseData = JSON.parse(response);
             var projectID = responseData.projectid;
             
-            projectID = "100";
+            //projectID = "100";
             
             document.getElementById("projectid").value = projectID;
             //console.log("projectid="+projectID);
@@ -307,21 +307,24 @@ function runAhrefsAnalysis()
     //var URLs = "";
     var counter = 0;
     //var safeURL = "";
-    $("input[name*='competitorURL']:checked").each(function() {
+    //$("input[name*='competitorURL']:checked").each(function() {
+    $('#competitorsListAll input:checked').each(function() {
         if(counter === 0)
         {
             //safeURL = $(this).val();
             //safeURL = safeURL.replace("&","%26")
             //URLs = $(this).val();
             //URLs = safeURL;
-            IDs = $("#linkID_"+counter).val();
+            //IDs = $("#linkID_"+counter).val();
+            IDs = $(this).attr('value');
         }
         else
         {
             //safeURL = $(this).val();
             //safeURL = safeURL.replace("&","%26")
             //URLs += "|"+safeURL;
-            IDs += "|"+$("#linkID_"+counter).val();
+            //IDs += "|"+$("#linkID_"+counter).val();
+            IDs += "|" + $(this).attr('value');
         }
         counter++;
      });
