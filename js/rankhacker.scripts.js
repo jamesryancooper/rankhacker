@@ -204,7 +204,7 @@ function drawCharts(annualData, monthlyData, weeklyData) {
 		//////////////////////////////////////////////////////  //
 		//    ANNUAL			  		            		    //
 		//////////////////////////////////////////////////////  //
-		$(annualBox).on("hover", function() {
+		$(annualBox).on("mouseenter", function() {
 
 			$(document)
 
@@ -212,7 +212,7 @@ function drawCharts(annualData, monthlyData, weeklyData) {
 					//console.log("annual hover");
 					$(monthChart).addClass("noopacity");
 					$(weekChart).addClass("noopacity");
-					//clearChart1 = setTimeout(next, 50); // delay
+					clearChart1 = setTimeout(next, 50); // delay
 
 				})
 
@@ -221,14 +221,14 @@ function drawCharts(annualData, monthlyData, weeklyData) {
 					$(monthChart).addClass("nodisplay");
 					$(weekChart).addClass("nodisplay");
 					$(annualChart).removeClass("nodisplay");
-					//clearChart2 = setTimeout(next, 50); // delay
+					clearChart2 = setTimeout(next, 50); // delay
 
 				})
 
 				.queue('annualSwap', function(next) {
 
 					$(annualChart).removeClass("noopacity");
-					//clearChart3 = setTimeout(next, 50); // delay
+					clearChart3 = setTimeout(next, 50); // delay
 
 				})
 
@@ -243,7 +243,7 @@ function drawCharts(annualData, monthlyData, weeklyData) {
 		//////////////////////////////////////////////////////  //
 		//    MONTHLY			  		            		    //
 		//////////////////////////////////////////////////////  //
-		$(monthBox).on("hover", function() {
+		$(monthBox).on("mouseenter", function() {
 
 			$(document)
 
@@ -251,7 +251,7 @@ function drawCharts(annualData, monthlyData, weeklyData) {
 					//console.log("month hover");
 					$(annualChart).addClass("noopacity");
 					$(weekChart).addClass("noopacity");
-					//clearChart1 = setTimeout(next, 50); // delay
+					clearChart1 = setTimeout(next, 50); // delay
 
 				})
 
@@ -260,14 +260,14 @@ function drawCharts(annualData, monthlyData, weeklyData) {
 					$(annualChart).addClass("nodisplay");
 					$(weekChart).addClass("nodisplay");
 					$(monthChart).removeClass("nodisplay");
-					//clearChart2 = setTimeout(next, 50); // delay
+					clearChart2 = setTimeout(next, 50); // delay
 
 				})
 
 				.queue('monthSwap', function(next) {
 
 					$(monthChart).removeClass("noopacity");
-					//clearChart3 = setTimeout(next, 50); // delay
+					clearChart3 = setTimeout(next, 50); // delay
 
 				})
 
@@ -282,7 +282,7 @@ function drawCharts(annualData, monthlyData, weeklyData) {
 		//////////////////////////////////////////////////////  //
 		//    WEEKLY			  		            		    //
 		//////////////////////////////////////////////////////  //
-		$(weekBox).on("hover", function() {
+		$(weekBox).on("mouseenter", function() {
 
 			$(document)
 
@@ -290,7 +290,7 @@ function drawCharts(annualData, monthlyData, weeklyData) {
 					//console.log("week hover");
 					$(monthChart).addClass("noopacity");
 					$(annualChart).addClass("noopacity");
-					//clearChart1 = setTimeout(next, 50); // delay
+					clearChart1 = setTimeout(next, 50); // delay
 				})
 
 				.queue('weekSwap', function(next) {
@@ -298,14 +298,14 @@ function drawCharts(annualData, monthlyData, weeklyData) {
 					$(monthChart).addClass("nodisplay");
 					$(annualChart).addClass("nodisplay");
 					$(weekChart).removeClass("nodisplay");
-					//clearChart2 = setTimeout(next, 50); // delay
+					clearChart2 = setTimeout(next, 50); // delay
 
 				})
 
 				.queue('weekSwap', function(next) {
 
 					$(weekChart).removeClass("noopacity");
-					//clearChart3 = setTimeout(next, 50); // delay
+					clearChart3 = setTimeout(next, 50); // delay
 				})
 
 				.queue('weekSwap', function(){

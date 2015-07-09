@@ -309,7 +309,7 @@ function runAhrefsAnalysis()
     //var safeURL = "";
     //$("input[name*='competitorURL']:checked").each(function() {
     $('#competitorsListAll input:checked').each(function() {
-        if(counter === 0)
+        if(counter == 0)
         {
             //safeURL = $(this).val();
             //safeURL = safeURL.replace("&","%26")
@@ -408,6 +408,8 @@ function runUserAhrefsAnalysis()
     document.getElementById("user-analyzer").style.display = "";
     
     document.getElementById("comparison").style.display = "none";
+    document.getElementById("inventory").style.display = "none";
+    document.getElementById("user").style.display = "none";
     
     var targetURL = restURL + "command=processUserAhrefs&projectid="+projectID+"&site="+url+"&z=" + Math.random();
     if (window.XMLHttpRequest)
@@ -604,7 +606,7 @@ function test()
     document.getElementById("competitorForm").style.display = "none";
     document.getElementById("initiateButton").style.display = "none";
     
-    var projectID = "38";
+    var projectID = "117";
     document.getElementById("projectid").value = projectID;
     checkGeoRankerDone(projectID);
 }
@@ -644,7 +646,7 @@ function validateGetStarted(e)
 //-->        
 //        throttle = "false";
 //<--        
-        if(throttle === 'true')
+        if(throttle == 'true')
         {
             e.preventDefault();
             alert("It appears that you have run this tool several times already. Please create an account in order to continue with additional hacks.");
