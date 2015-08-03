@@ -1,5 +1,5 @@
-var restURL = "http://fairmarketing.cloudapp.net/rest1.0/endpoint.jsp?"
-//var restURL = "http://localhost:8084/rest1.0/endpoint.jsp?"
+var restURL = "http://fairmarketing.cloudapp.net/rest1.0/endpoint.jsp?";
+//var restURL = "http://localhost:8084/rest1.0/endpoint.jsp?";
 
 function userInfoCallback(data)
 {
@@ -596,6 +596,47 @@ function remindPassword()
     xmlhttp.send();
 }
 
+function switchCompetitorSelection(item)
+{
+    var itemNo = parseInt(item);
+    var pairedItemNo = 0;
+    var labelString = "#competitor_label_"+item;
+    //var itemString = "#competitor_"+item;
+    if(itemNo < 6)
+    {
+        pairedItemNo = itemNo+5;
+    }
+    else
+    {
+        pairedItemNo = itemNo-5;
+    }
+    var pairedLabelString = "#competitor_label_"+pairedItemNo;
+    var pairedItemString = "#competitor_"+pairedItemNo;
+    
+    
+    //Add the checked class to the label if it's checked; shade it out if it's not
+    if(document.getElementById('competitor_'+itemNo).checked === false)
+    {
+        //Go ahead and shade the unchecked item
+        $(labelString).removeClass('checked');
+    }
+    else
+    {
+        $(labelString).addClass('checked');
+    }
+    
+    //console.log("bool evals to "+document.getElementById('competitor_'+pairedItemNo).checked);
+    
+    //Deselect the corresponding checkbox if it's checked
+    if(document.getElementById('competitor_'+pairedItemNo).checked === true)
+    {
+        //console.log("doing the unchecking");
+        $(pairedItemString).prop('checked',false);
+        $(pairedLabelString).removeClass('checked');
+    }
+    
+}
+
 function test()
 {
     //Show the progress bar and suppress the competitors box
@@ -644,7 +685,7 @@ function validateGetStarted(e)
         $('#intro-form').removeClass('has-error').addClass('has-success');
         var throttle = logUserIP();
 //-->        
-//        throttle = "false";
+        throttle = "false";
 //<--        
         if(throttle == 'true')
         {
