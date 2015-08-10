@@ -602,16 +602,49 @@ function switchCompetitorSelection(item)
     var pairedItemNo = 0;
     var labelString = "#competitor_label_"+item;
     //var itemString = "#competitor_"+item;
-    if(itemNo < 6)
+    
+    //Get the last checked item
+    for(var c=10; c>0; c--)
+    {
+        if(document.getElementById('competitor_'+c).checked === true)
+        {
+            pairedItemNo = c;
+            break;
+        }
+    }
+    
+    //Override in case the one that's checked is already the last in the list
+    if(pairedItemNo == itemNo)
+    {
+        pairedItemNo--;
+    }
+    
+    /*if(itemNo < 6)
     {
         pairedItemNo = itemNo+5;
     }
     else
     {
         pairedItemNo = itemNo-5;
-    }
+    }*/
     var pairedLabelString = "#competitor_label_"+pairedItemNo;
     var pairedItemString = "#competitor_"+pairedItemNo;
+    
+    //Find out how many items have been checked; if less than 5, don't worry about unchecking the paired item
+    var checkedCount = 0;
+    for(var c=1; c<=10; c++)
+    {
+        if(document.getElementById('competitor_'+c).checked === true)
+        {
+            checkedCount++;
+        }
+    }
+    
+    var limitPair = false;
+    if(checkedCount > 5)
+    {
+        limitPair = true;
+    }
     
     
     //Add the checked class to the label if it's checked; shade it out if it's not
@@ -627,8 +660,8 @@ function switchCompetitorSelection(item)
     
     //console.log("bool evals to "+document.getElementById('competitor_'+pairedItemNo).checked);
     
-    //Deselect the corresponding checkbox if it's checked
-    if(document.getElementById('competitor_'+pairedItemNo).checked === true)
+    //Deselect the corresponding checkbox if it's checked and if limitPair is true
+    if(document.getElementById('competitor_'+pairedItemNo).checked === true && limitPair === true)
     {
         //console.log("doing the unchecking");
         $(pairedItemString).prop('checked',false);
