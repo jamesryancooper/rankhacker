@@ -5,6 +5,13 @@
 $(window).load(function () { // makes sure the whole site is loaded
 	"use strict";
 
+        //Disable the close action when clicking outside of the data modal
+        $('#data').modal({
+            backdrop: 'static',
+            keyboard: false,
+            show: false
+          })
+
 	//$('#loading').fadeOut(); // will first fade out the loading animation
 	//$('#preloader').delay(100).fadeOut('slow'); // will fade out the white DIV that covers the website.
 	//$("body").removeClass("page-loading");
