@@ -1,5 +1,5 @@
-var restURL = "http://fairmarketing.cloudapp.net/rest1.0/endpoint.jsp?";
-//var restURL = "http://localhost:8084/rest1.0/endpoint.jsp?";
+//var restURL = "http://fairmarketing.cloudapp.net/rest1.0/endpoint.jsp?";
+var restURL = "http://localhost:8084/rest1.0/endpoint.jsp?";
 
 function userInfoCallback(data)
 {
